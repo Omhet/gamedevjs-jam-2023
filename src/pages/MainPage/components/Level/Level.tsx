@@ -1,3 +1,4 @@
+import { levelDataManager } from '@lib/levels/LevelDataManager'
 import classnames from 'classnames'
 import { motion } from 'framer-motion'
 import { button2Variants, levelContainerVariants, levelVariants } from 'motions/motions'
@@ -5,15 +6,17 @@ import { FC } from 'react'
 import s from './Level.module.scss'
 
 export type LevelProps = {
-    title: string
-    imgSrc: string
+    number: number
     score: number
     maxLevelScore: number
     isOpen: boolean
     onClick: () => void
 }
 
-export const Level: FC<LevelProps> = ({ title, imgSrc, score, maxLevelScore, isOpen, onClick }) => {
+export const Level: FC<LevelProps> = ({ number, score, maxLevelScore, isOpen, onClick }) => {
+    const { title } = levelDataManager.getLevelData(number)
+    const imgSrc = ''
+
     return (
         <motion.div
             style={{

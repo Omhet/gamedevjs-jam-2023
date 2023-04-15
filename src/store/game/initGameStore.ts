@@ -29,6 +29,7 @@ loadGame.use(async (levelNumber: number) => {
     setIsLoading(true)
     resetGameData()
     setCurrentLevelNumber(levelNumber)
+    const data = await levelDataManager.loadLevelData(levelNumber)
     setIsLoading(false)
     openGameStartModal()
 })

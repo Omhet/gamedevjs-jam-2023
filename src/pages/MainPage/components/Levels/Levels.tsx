@@ -1,12 +1,8 @@
-import { levelDataManager } from '@lib/levels/LevelDataManager'
 import { useLevels } from '@store/levels/levelsStore'
 import { FC } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Level } from '../Level/Level'
 import s from './Levels.module.scss'
-
-// TODO
-const LevelImages = ['/pics/japanCard.png', '/pics/mexicaCard.png', '/pics/russiaCard.png', '/pics/grandmaCard.png']
 
 export const Levels: FC = () => {
     const { levels } = useLevels()
@@ -20,11 +16,10 @@ export const Levels: FC = () => {
         <section id="levels" className={s.sectionContainer}>
             <h2 className={s.levelsTitle}>Levels</h2>
             <div className={s.levelsContainer}>
-                {levels.map((level, index) => (
+                {levels.map((level) => (
                     <Level
                         key={level.number}
-                        title={levelDataManager.getLevelData(level.number).title}
-                        imgSrc={LevelImages[index]}
+                        number={level.number}
                         score={level.score}
                         maxLevelScore={level.maxScore}
                         isOpen={level.isOpen}

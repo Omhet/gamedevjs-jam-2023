@@ -13,6 +13,12 @@ type LevelType = {
     audio: HTMLAudioElement
     images: LevelImages
     imgUrls: LevelImageUrls
+    powerups?: string[]
+    challenges?: string[]
+    miniBoss?: {
+        name: string
+        description: string
+    }
 }
 
 class LevelDataManager {
@@ -32,20 +38,23 @@ class LevelDataManager {
             this.imagesManager.loadLevelImages(levelNumber),
         ]
 
-        const [audio, images] = await Promise.all(requests)
-        const data = {
-            audio,
-            images,
+        try {
+            const [audio, images] = await Promise.all(requests)
+            const data = {
+                audio,
+                images,
+            }
+            const index = levelNumber - 1
+
+            this.levels[levelNumber - 1] = {
+                ...LEVELS[index],
+                ...data,
+            }
+
+            return data
+        } catch (error) {
+            console.error(error)
         }
-
-        const index = levelNumber - 1
-
-        this.levels[levelNumber - 1] = {
-            ...LEVELS[index],
-            ...data,
-        }
-
-        return data
     }
 
     getLevelMusic() {
@@ -74,10 +83,10 @@ class LevelDataManager {
 }
 
 const musicUrls = LEVELS.map(({ musicUrl }) => musicUrl)
-const audioManager = new AudioManager(musicUrls)
+const audioManager = new AudioManager([])
 
 const imageUrls = LEVELS.map(({ imgUrls }) => imgUrls)
-const imagesManager = new ImagesManager(imageUrls)
+const imagesManager = new ImagesManager([])
 
 export const levelDataManager = new LevelDataManager(audioManager, imagesManager)
 // @ts-ignore
