@@ -77,20 +77,20 @@ export class Clock {
         const handAngleRad = Phaser.Math.DegToRad(handAngle)
 
         const minDistanceRad = Phaser.Math.DegToRad(45)
-        let validTargetZone = false
 
-        while (!validTargetZone) {
-            this.targetZoneStartAngle = Phaser.Math.FloatBetween(0, Math.PI * 2)
-            const targetZoneSize = Phaser.Math.FloatBetween(Math.PI / 6, Math.PI / 3)
-            this.targetZoneEndAngle = Phaser.Math.Wrap(this.targetZoneStartAngle + targetZoneSize, 0, Math.PI * 2)
+        // Calculate the valid range for the new target zone start angle
+        const lowerBound = Phaser.Math.Wrap(handAngleRad + minDistanceRad, 0, Math.PI * 2)
+        const upperBound = Phaser.Math.Wrap(handAngleRad - minDistanceRad + Math.PI, 0, Math.PI * 2)
 
-            const minDistanceStart = Phaser.Math.Angle.ShortestBetween(handAngleRad, this.targetZoneStartAngle)
-            const minDistanceEnd = Phaser.Math.Angle.ShortestBetween(handAngleRad, this.targetZoneEndAngle)
+        // Choose a new start angle within the valid range
+        const targetZoneStartAngle = Phaser.Math.FloatBetween(lowerBound, upperBound)
 
-            validTargetZone =
-                (minDistanceStart >= minDistanceRad && minDistanceEnd >= minDistanceRad) ||
-                (minDistanceStart <= -minDistanceRad && minDistanceEnd <= -minDistanceRad)
-        }
+        // Calculate the target zone size
+        const targetZoneSize = Phaser.Math.FloatBetween(Math.PI / 6, Math.PI / 3)
+
+        // Calculate the target zone end angle
+        this.targetZoneStartAngle = targetZoneStartAngle
+        this.targetZoneEndAngle = Phaser.Math.Wrap(targetZoneStartAngle + targetZoneSize, 0, Math.PI * 2)
 
         this.drawTargetZone()
     }
