@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom'
 import s from './GameStartModal.module.scss'
 
 export const GameStartModal: FC = () => {
-    const { startOnboarding } = levelDataManager.getCurrentLevelData()
+    const { startOnboarding, title } = levelDataManager.getCurrentLevelData()
 
     const start = () => {
         startGame()
@@ -21,6 +21,7 @@ export const GameStartModal: FC = () => {
     return (
         <div className={s.root}>
             <div className={s.masterContainer}>
+                <h1>{title}</h1>
                 <span className={s.masterWords}>{startOnboarding}</span>
             </div>
             <div className={s.buttonsContainer}>
