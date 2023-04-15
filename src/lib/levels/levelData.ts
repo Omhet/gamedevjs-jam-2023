@@ -1,23 +1,16 @@
 type LevelConfig = {
     title: string
-    startOnboarding: {
-        text: string
-    }
-    endOnboarding: {
-        text: string
-    }
+    startOnboarding: string
+    endOnboarding: string
     numberOfRounds: number
 }
 
 const LEVELS_DATA: LevelConfig[] = [
     {
         title: 'Whispers of Time',
-        startOnboarding: {
-            text: 'The player must navigate the dense foliage and stabilize the first time anomaly found in the woods.',
-        },
-        endOnboarding: {
-            text: 'End onboarding',
-        },
+        startOnboarding:
+            'The player must navigate the dense foliage and stabilize the first time anomaly found in the woods.',
+        endOnboarding: 'End onboarding',
         numberOfRounds: 2,
     },
 ]

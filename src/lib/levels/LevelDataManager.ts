@@ -7,12 +7,8 @@ type LevelType = {
     score: number
     maxScore: number
     title: string
-    startOnboarding: {
-        text: string
-    }
-    endOnboarding: {
-        text: string
-    }
+    startOnboarding: string
+    endOnboarding: string
     numberOfRounds: number
     audio: HTMLAudioElement
     images: LevelImages

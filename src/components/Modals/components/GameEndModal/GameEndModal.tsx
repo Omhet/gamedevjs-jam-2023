@@ -27,7 +27,7 @@ export const GameEndModal: FC = () => {
                 <h2>Score: {currentLevelScore}</h2>
             </div>
             <div className={s.masterContainer}>
-                <span className={s.masterWords}>{endOnboarding.text}</span>
+                <span className={s.masterWords}>{endOnboarding}</span>
             </div>
             <div className={s.buttonsContainer}>
                 <motion.button
