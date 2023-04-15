@@ -1,4 +1,4 @@
-import { useLevels } from '@store/levels'
+import { useLevels } from '@store/levels/levelsStore'
 import { FC } from 'react'
 import s from './GameHeader.module.scss'
 

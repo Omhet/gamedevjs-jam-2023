@@ -1,5 +1,5 @@
 import { levelDataManager } from '@lib/levels/LevelDataManager'
-import { useLevels } from '@store/levels'
+import { useLevels } from '@store/levels/levelsStore'
 import { FC } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Level } from '../Level/Level'

@@ -1,5 +1,5 @@
 import { levelDataManager } from '@lib/levels/LevelDataManager'
-import { endGame, setGameScore } from '@store/game'
+import { endGame, setGameScore } from '@store/game/gameStore'
 import { FC, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import { startGame } from './phaser/main'

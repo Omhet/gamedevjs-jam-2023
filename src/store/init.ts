@@ -1,3 +1,3 @@
 import './game/initGame'
-import './levels/init'
-import './modals/init'
+import './levels/initLevels'
+import './modals/initModals'

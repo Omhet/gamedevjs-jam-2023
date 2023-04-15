@@ -6,8 +6,8 @@ import {
     setCurrentLevelNumber,
     setCurrentLevelScore,
     setIsBetterScoreThanEarlier,
-} from '@store/levels'
-import { openGameEndModal, openGameStartModal } from '@store/modals'
+} from '@store/levels/levelsStore'
+import { openGameEndModal, openGameStartModal } from '@store/modals/modalsStore'
 import {
     endGame,
     gameStore,
@@ -18,7 +18,7 @@ import {
     setGameStatus,
     setIsLoading,
     startGame,
-} from './index'
+} from './gameStore'
 
 gameStore
     .on(setIsLoading, (state, isLoading) => ({ ...state, isLoading }))
