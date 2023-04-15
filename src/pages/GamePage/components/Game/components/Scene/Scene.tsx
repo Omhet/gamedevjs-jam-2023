@@ -1,4 +1,5 @@
-import React, { FC, useEffect } from 'react'
+import { endGame } from '@store/game'
+import { FC, useEffect } from 'react'
 import { Redirect, useParams } from 'react-router-dom'
 import { startGame } from './phaser/main'
 
@@ -13,7 +14,7 @@ export const Scene: FC<SceneProps> = ({}) => {
     useEffect(() => {
         if (levelConfig) {
             startGame({ numberOfRounds: 1 }, () => {
-                console.log('Level end')
+                endGame()
             })
         }
     }, [levelConfig])

@@ -1,7 +1,7 @@
 import classnames from 'classnames'
 import { motion } from 'framer-motion'
 import { button2Variants, levelContainerVariants, levelVariants } from 'motions/motions'
-import React, { FC } from 'react'
+import { FC } from 'react'
 import s from './Level.module.scss'
 
 export type LevelProps = {
