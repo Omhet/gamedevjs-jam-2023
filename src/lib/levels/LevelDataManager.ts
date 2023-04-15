@@ -1,41 +1,19 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { AudioManager } from './AudioManager'
 import { ImagesManager, LevelImages, LevelImageUrls } from './ImagesManager'
-
-const LEVELS_DATA = [
-    {
-        name: 'Japan',
-        maxScore: 66,
-        ingredientColors: ['#4B2507', '#C1956B'],
-    },
-]
-
-const LEVELS_FROM_STORAGE = JSON.parse(localStorage.getItem('levels') ?? '[]')
-
-const LEVELS = LEVELS_DATA.map(({ name, maxScore, ingredientColors }, index) => {
-    const number = index + 1
-    const score = LEVELS_FROM_STORAGE[index]?.score ?? 0
-
-    const imgPath = `pics/levels/${number}`
-    const imgUrls: LevelImageUrls = {}
-
-    return {
-        name,
-        number,
-        score,
-        maxScore,
-        ingredientColors,
-        musicUrl: `music/${number}.mp3`,
-        imgUrls,
-    }
-})
+import { LEVELS } from './levelData'
 
 type LevelType = {
-    name: string
+    number: number
     score: number
     maxScore: number
-    number: number
-    ingredientColors: string[]
+    title: string
+    startOnboarding: {
+        text: string
+    }
+    endOnboarding: {
+        text: string
+    }
+    numberOfRounds: number
     audio: HTMLAudioElement
     images: LevelImages
     imgUrls: LevelImageUrls
@@ -46,7 +24,6 @@ class LevelDataManager {
     levels: LevelType[] = []
 
     constructor(public audioManager: AudioManager, public imagesManager: ImagesManager) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         this.levels = [...LEVELS]
     }

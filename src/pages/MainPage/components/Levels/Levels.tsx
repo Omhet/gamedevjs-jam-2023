@@ -1,11 +1,11 @@
+import { levelDataManager } from '@lib/levels/LevelDataManager'
 import { useLevels } from '@store/levels'
 import { FC } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Level } from '../Level/Level'
 import s from './Levels.module.scss'
 
-const LevelTitles = ['Asian meditation', 'Wild spicy west', 'Among the birch trees', 'The greatest secret']
-
+// TODO
 const LevelImages = ['/pics/japanCard.png', '/pics/mexicaCard.png', '/pics/russiaCard.png', '/pics/grandmaCard.png']
 
 export const Levels: FC = () => {
@@ -23,7 +23,7 @@ export const Levels: FC = () => {
                 {levels.map((level, index) => (
                     <Level
                         key={level.number}
-                        title={LevelTitles[index]}
+                        title={levelDataManager.getLevelData(level.number).title}
                         imgSrc={LevelImages[index]}
                         score={level.score}
                         maxLevelScore={level.maxScore}

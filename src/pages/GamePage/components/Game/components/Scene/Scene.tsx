@@ -1,3 +1,4 @@
+import { levelDataManager } from '@lib/levels/LevelDataManager'
 import { endGame, setGameScore } from '@store/game'
 import { FC, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
@@ -6,7 +7,7 @@ import { startGame } from './phaser/main'
 export interface SceneProps {}
 
 export const Scene: FC<SceneProps> = ({}) => {
-    const levelConfig = {}
+    const levelData = levelDataManager.getCurrentLevelData()
 
     const handleLevelEnds = () => {
         endGame()
@@ -17,16 +18,17 @@ export const Scene: FC<SceneProps> = ({}) => {
     }
 
     useEffect(() => {
-        if (levelConfig) {
+        if (levelData) {
+            const { numberOfRounds } = levelData
             startGame({
-                levelConfig: { numberOfRounds: 1 },
+                levelConfig: { numberOfRounds },
                 onLevelEnds: handleLevelEnds,
                 onTap: handleTap,
             })
         }
-    }, [levelConfig])
+    }, [levelData])
 
-    if (!levelConfig) {
+    if (!levelData) {
         return <Redirect to="/" />
     }
 

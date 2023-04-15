@@ -1,5 +1,6 @@
 import { Exit } from '@icons/Exit'
 import { Play } from '@icons/Play'
+import { levelDataManager } from '@lib/levels/LevelDataManager'
 import { startGame } from '@store/game'
 import { useLevels } from '@store/levels'
 import { closeModal } from '@store/modals'
@@ -10,20 +11,9 @@ import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import s from './GameStartModal.module.scss'
 
-const getMasterWords = (currentLevelNumber: number): string => {
-    switch (currentLevelNumber) {
-        case 1:
-            return 'Konnichiwa. The secret is in soy sauce. But you must keep balance. Turn on the volume and try to meditate with me.'
-        case 2:
-            return "¡Hola! I like it spicy. Put more chili sauce and shake your booty, c'mon!"
-        case 3:
-            return 'Здравствуй! Use sour cream to make the taste soft and creamy. Add herbs to create variety of taste.'
-        default:
-            return "Hello, my dear! You silly little kitten, there are no secrets, just cook with love. That's all!"
-    }
-}
-
 export const GameStartModal: FC = () => {
+    const { startOnboarding } = levelDataManager.getCurrentLevelData()
+
     const { currentLevelNumber } = useLevels()
     const start = () => {
         startGame()
@@ -33,7 +23,7 @@ export const GameStartModal: FC = () => {
     return (
         <div className={s.root}>
             <div className={s.masterContainer}>
-                <span className={s.masterWords}>{getMasterWords(currentLevelNumber)}</span>
+                <span className={s.masterWords}>{startOnboarding.text}</span>
             </div>
             <div className={s.buttonsContainer}>
                 <motion.button
