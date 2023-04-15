@@ -1,4 +1,4 @@
-import { MainHeader } from '@components/MainHeader/MainHeader'
+import { MainHeader } from '@pages/MainPage/components/MainHeader/MainHeader'
 import { FC } from 'react'
 import s from './MainPage.module.scss'
 import { Levels } from './components/Levels/Levels'
