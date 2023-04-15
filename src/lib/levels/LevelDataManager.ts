@@ -17,18 +17,7 @@ const LEVELS = LEVELS_DATA.map(({ name, maxScore, ingredientColors }, index) => 
     const score = LEVELS_FROM_STORAGE[index]?.score ?? 0
 
     const imgPath = `pics/levels/${number}`
-    const imgUrls: LevelImageUrls = {
-        back: {
-            horizontal: `${imgPath}/back_h.jpg`,
-            vertical: `${imgPath}/back_v.jpg`,
-        },
-        food: [`${imgPath}/food/1.png`, `${imgPath}/food/2.png`, `${imgPath}/food/3.png`],
-        particles: [`${imgPath}/particles/1.png`, `${imgPath}/particles/2.png`],
-        master: `${imgPath}/master.png`,
-        ingredient: `${imgPath}/ingredient.png`,
-        table: `${imgPath}/table.png`,
-        zone: '/pics/zone.png',
-    }
+    const imgUrls: LevelImageUrls = {}
 
     return {
         name,
@@ -37,7 +26,6 @@ const LEVELS = LEVELS_DATA.map(({ name, maxScore, ingredientColors }, index) => 
         maxScore,
         ingredientColors,
         musicUrl: `music/${number}.mp3`,
-        midiUrl: `midi/${number}.mid`,
         imgUrls,
     }
 })
