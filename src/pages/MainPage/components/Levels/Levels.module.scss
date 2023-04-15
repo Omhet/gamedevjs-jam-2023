@@ -1,48 +1,47 @@
 .sectionContainer {
-  min-height: calc(100vh - 58rem);
-  padding: 32rem 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 32rem;
-  @media (max-width: 1024px) {
-    height: 100%;
-  }
-  @media (max-width: 480px) {
-    padding: 24rem 0;
-  }
+    max-width: 1350rem;
+    margin: auto;
+    min-height: calc(100vh - 58rem);
+    padding: 32rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32rem;
+    @media (max-width: 1024px) {
+        height: 100%;
+    }
+    @media (max-width: 480px) {
+        padding: 24rem 0;
+    }
 }
 
 .levelsTitle {
-  height: fit-content;
-  padding-left: clamp(12rem, 15vw, 250rem);
-  font-size: 48rem;
-  font-weight: 900;
-  font-family: var(--header-font);
-  white-space: nowrap;
-  @media (max-width: 1024px) {
-    font-size: 32rem;
-  }
-  @media (max-width: 480px) {
-    padding-left: 24rem;
-    font-size: 24rem;
-  }
+    height: fit-content;
+    padding-left: clamp(12rem, 15vw, 250rem);
+    font-size: 48rem;
+    font-weight: 900;
+    font-family: var(--header-font);
+    white-space: nowrap;
+    @media (max-width: 1024px) {
+        font-size: 32rem;
+    }
+    @media (max-width: 480px) {
+        padding-left: 24rem;
+        font-size: 24rem;
+    }
 }
 .levelsContainer {
-  width: 100%;
-  max-width: 1350rem;
-  height: 100%;
-  padding: 0 32rem;
-  margin: auto;
-  align-self: center;
-  justify-self: center;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 300rem);
-  justify-content: center;
-  align-items: center;
-  gap: 48rem;
-  @media (max-width: 480px) {
-    padding: 0 24rem;
-    gap: 0;
-  }
+    width: 100%;
+    height: 100%;
+    padding: 0 32rem;
+    align-self: center;
+    justify-self: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    gap: 16rem;
+    @media (max-width: 480px) {
+        padding: 0 24rem;
+        gap: 0;
+    }
 }

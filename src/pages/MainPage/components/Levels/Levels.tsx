@@ -1,32 +1,26 @@
-import { useLevels } from '@store/levels/levelsStore'
+import { levelDataManager } from '@lib/levels/LevelDataManager'
 import { FC } from 'react'
-import { useHistory } from 'react-router-dom'
 import { Level } from '../Level/Level'
 import s from './Levels.module.scss'
 
 export const Levels: FC = () => {
-    const { levels } = useLevels()
-    const history = useHistory()
-
-    const handlePlayClick = (levelNumber: number) => {
-        history.push(`/game?level=${levelNumber}`)
-    }
+    const regions = levelDataManager.getAllRegions()
+    const levelsGroupedByRegion = levelDataManager.getAllLevelsGroupedByRegion()
 
     return (
         <section id="levels" className={s.sectionContainer}>
             <h2 className={s.levelsTitle}>Levels</h2>
-            <div className={s.levelsContainer}>
-                {levels.map((level) => (
-                    <Level
-                        key={level.number}
-                        number={level.number}
-                        score={level.score}
-                        maxLevelScore={level.maxScore}
-                        isOpen={level.isOpen}
-                        onClick={() => handlePlayClick(level.number)}
-                    />
-                ))}
-            </div>
+            {regions.map((region) => (
+                <div key={region.name}>
+                    <h3>{region.name}</h3>
+                    <p>{region.description}</p>
+                    <div className={s.levelsContainer}>
+                        {levelsGroupedByRegion[region.name].map((levelData) => (
+                            <Level key={levelData.number} data={levelData} />
+                        ))}
+                    </div>
+                </div>
+            ))}
         </section>
     )
 }

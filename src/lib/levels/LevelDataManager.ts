@@ -1,8 +1,10 @@
+import { groupBy } from 'utils/groupBy'
+import { uniqueByField } from 'utils/unique'
 import { AudioManager } from './AudioManager'
 import { ImagesManager, LevelImages, LevelImageUrls } from './ImagesManager'
-import { LEVELS } from './levelData'
+import { LEVELS, Region } from './levelData'
 
-type LevelType = {
+export type LevelType = {
     number: number
     score: number
     maxScore: number
@@ -13,6 +15,8 @@ type LevelType = {
     audio: HTMLAudioElement
     images: LevelImages
     imgUrls: LevelImageUrls
+    region: Region
+    regionName: string
     powerups?: string[]
     challenges?: string[]
     miniBoss?: {
@@ -71,6 +75,17 @@ class LevelDataManager {
 
     getAllLevels() {
         return this.levels
+    }
+
+    getAllLevelsGroupedByRegion() {
+        return groupBy(this.levels, 'regionName')
+    }
+
+    getAllRegions() {
+        return uniqueByField(
+            this.levels.map((level) => level.region),
+            'name'
+        )
     }
 
     getCurrentLevelData() {

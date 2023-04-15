@@ -1,4 +1,4 @@
-type Region = {
+export type Region = {
     name: string
     description: string
     levels: Level[]
@@ -100,6 +100,8 @@ export const LEVELS = LEVELS_DATA.regions.flatMap((region, regionIndex) =>
             numberOfRounds,
             musicUrl: `music/${number}.mp3`,
             imgUrls,
+            region,
+            regionName: region.name,
         }
     })
 )
