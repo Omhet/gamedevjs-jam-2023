@@ -1,5 +1,6 @@
 .levelCard {
     width: 100%;
+    min-height: 360rem;
     padding: 32rem;
     display: flex;
     flex-direction: column;
@@ -13,9 +14,11 @@
     background-position: center;
     border: 1px solid var(--accent2-color);
 }
+
 .closedLevel {
     opacity: 0.5;
 }
+
 .infoContainer {
     width: 90%;
     height: 80%;
@@ -29,16 +32,19 @@
     border-radius: 16rem;
     background-color: #fffdf988;
 }
+
 .levelTitle {
     text-align: center;
     font-family: var(--header-font);
 }
+
 .levelScore {
     display: flex;
     align-items: center;
     gap: 8rem;
     font-family: var(--header-font);
 }
+
 .playBtn {
     padding: 12rem 48rem;
     font-size: 24rem;
@@ -47,11 +53,8 @@
     border-radius: 16rem;
     cursor: pointer;
 }
-.cakeIcon {
-    width: 32rem;
-    height: 32rem;
-}
 
 .boss {
     grid-column: 1 / -1;
+    min-height: 560rem;
 }

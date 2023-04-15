@@ -1,3 +1,4 @@
+import { WidthContainer } from '@components/WidthContainer/WidthContainer'
 import { levelDataManager } from '@lib/levels/LevelDataManager'
 import { FC } from 'react'
 import { Level } from '../Level/Level'
@@ -8,14 +9,14 @@ export const Levels: FC = () => {
     const levelsGroupedByRegion = levelDataManager.getAllLevelsGroupedByRegion()
 
     return (
-        <section id="levels" className={s.sectionContainer}>
-            <h2 className={s.levelsTitle}>Levels</h2>
-            <div>
+        <WidthContainer>
+            <h2 className={s.title}>Levels</h2>
+            <div className={s.regions}>
                 {regions.map((region) => (
                     <div key={region.name}>
-                        <h3>{region.name}</h3>
-                        <p>{region.description}</p>
-                        <div className={s.levelsContainer}>
+                        <h3 className={s.regionTitle}>{region.name}</h3>
+                        <p className={s.regionDescription}>{region.description}</p>
+                        <div className={s.levels}>
                             {levelsGroupedByRegion[region.name].map((levelData) => (
                                 <Level key={levelData.number} data={levelData} />
                             ))}
@@ -23,6 +24,6 @@ export const Levels: FC = () => {
                     </div>
                 ))}
             </div>
-        </section>
+        </WidthContainer>
     )
 }
