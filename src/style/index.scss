@@ -1,0 +1,35 @@
+@import url('./theme.scss');
+@import url('./reset.scss');
+
+html {
+    font-size: 1px;
+    scroll-behavior: smooth;
+}
+body {
+    font-family: var(--regular-font);
+    color: var(--text-color);
+    background: var(--back-color);
+}
+// класс для заморозки скролла при открытии модалки
+.frozenScroll {
+    overflow: hidden;
+}
+@media (max-width: 480px) {
+    html {
+        font-size: 0.24155vw;
+    }
+}
+svg {
+    width: 16px;
+    height: 16px;
+    fill: var(--text-color);
+}
+#modal-root {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#root {
+    height: 100%;
+}

@@ -1,0 +1,53 @@
+.levelCard {
+  width: 300rem;
+  height: 450rem;
+  padding: 32rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12rem;
+  font-size: 18rem;
+  border-radius: 16rem;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.closedLevel {
+  opacity: 0.5;
+}
+.infoContainer {
+  width: 90%;
+  height: 80%;
+  padding: 12rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12rem;
+  font-size: 18rem;
+  border-radius: 16rem;
+  background-color: #fffdf988;
+}
+.levelTitle {
+  text-align: center;
+  font-family: var(--header-font);
+}
+.levelScore {
+  display: flex;
+  align-items: center;
+  gap: 8rem;
+  font-family: var(--header-font);
+}
+.playBtn {
+  padding: 12rem 48rem;
+  font-size: 24rem;
+  font-weight: 800;
+  background-color: var(--accent2-color);
+  border-radius: 16rem;
+  cursor: pointer;
+}
+.cakeIcon {
+  width: 32rem;
+  height: 32rem;
+}

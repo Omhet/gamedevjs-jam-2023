@@ -1,0 +1,50 @@
+{
+    "name": "vite-react-redux-template",
+    "version": "0.0.1",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+        "dev": "vite --host",
+        "build": "vite build",
+        "serve": "vite preview",
+        "typecheck": "tsc -p ./tsconfig.json --noEmit",
+        "format": "prettier --write \"src/**/*.{ts,tsx,scss}\""
+    },
+    "dependencies": {
+        "effector": "22.2.0",
+        "effector-react": "22.0.6",
+        "framer-motion": "6.3.1",
+        "phaser": "3.60.0",
+        "react": "18.2.0",
+        "react-dom": "18.2.0",
+        "react-router-dom": "5.2.0",
+        "react-use": "17.3.2"
+    },
+    "devDependencies": {
+        "@babel/core": "7.14.2",
+        "@types/react": "18.0.28",
+        "@types/react-dom": "18.0.11",
+        "@types/react-router-dom": "5.1.7",
+        "@typescript-eslint/eslint-plugin": "4.20.0",
+        "@typescript-eslint/parser": "4.20.0",
+        "@vitejs/plugin-react": "3.1.0",
+        "autoprefixer": "9.0.0",
+        "babel-loader": "8.2.2",
+        "classnames": "^2.3.1",
+        "css-loader": "5.2.4",
+        "postcss": "8.2.15",
+        "postcss-preset-env": "6.7.0",
+        "postcss-scss": "3.0.5",
+        "prettier": "2.2.1",
+        "sass": "1.32.8",
+        "sass-loader": "10.1.1",
+        "style-loader": "2.0.0",
+        "stylelint": "13.12.0",
+        "stylelint-config-prettier": "8.0.2",
+        "stylelint-config-standard": "21.0.0",
+        "typescript": "4.9.3",
+        "vite": "4.2.0",
+        "vite-tsconfig-paths": "4.2.0",
+        "vite-plugin-react-svg": "0.2.0"
+    }
+}

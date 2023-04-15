@@ -1,0 +1,117 @@
+.headerContainer {
+  width: 100%;
+  padding: 12rem clamp(12rem, 15vw, 250rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  font-size: 12rem;
+  background-color: var(--back-color);
+  z-index: 2;
+  @media (max-width: 480px) {
+    padding: 12rem 24rem;
+  }
+}
+.logoImg {
+  width: 32rem;
+  height: 32rem;
+}
+.logo {
+  font-size: 16rem;
+  font-weight: 500;
+  font-family: var(--header-font);
+  color: var(--accent1-color);
+  cursor: default;
+  @media (max-width: 1024px) {
+    display: none;
+  }
+}
+.headerContent {
+  display: flex;
+  align-items: center;
+  gap: 48rem;
+  @media (max-width: 1024px) {
+    justify-content: space-between;
+    gap: unset;
+  }
+}
+.playBtn {
+  padding: 8rem 24rem;
+  font-size: 16rem;
+  font-weight: 900;
+  background-color: var(--accent2-color);
+  border-radius: 16rem;
+  cursor: pointer;
+}
+.connectBtn,
+.disconnectBtn {
+  padding: 8rem 16rem;
+  font-size: 12rem;
+  font-weight: 600;
+  border-radius: 16rem;
+  cursor: pointer;
+}
+.connectBtn {
+  border: 2rem solid var(--accent2-color);
+}
+.disconnectBtn {
+  border: 2rem solid var(--accent1-color);
+}
+.navContainer {
+  display: flex;
+  gap: 48rem;
+}
+.navItem {
+  width: fit-content;
+  font-size: 14rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.score {
+  width: fit-content;
+  padding: 4rem 8rem;
+  position: absolute;
+  top: 120%;
+  right: 24rem;
+  display: flex;
+  align-items: center;
+  gap: 8rem;
+  flex-shrink: 0;
+  font-size: 16rem;
+  font-weight: 500;
+  font-family: var(--header-font);
+  //color: var(--accent1-color);
+  border: 2rem solid var(--accent1-color);
+  background-color: var(--back-color);
+  border-radius: 16rem;
+  cursor: default;
+  & > span {
+    width: fit-content;
+    white-space: nowrap;
+  }
+}
+.menuBtn {
+  width: 32rem;
+  height: 32rem;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .headerContent {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .connectBtn,
+  .disconnectBtn {
+    order: 3;
+  }
+  .playBtn {
+    order: 2;
+  }
+  .menuBtn {
+    order: 1;
+  }
+}

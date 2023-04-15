@@ -1,0 +1,98 @@
+.main {
+  height: calc(100vh - 58rem);
+  padding: 32rem 32rem 32rem clamp(12rem, 15vw, 250rem);
+  margin: auto;
+  margin-top: 70rem;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  @media (max-width: 1024px) {
+    height: calc(100vh - 72rem);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+  }
+  @media (max-width: 480px) {
+    padding: 24rem;
+  }
+}
+.heroContainer {
+  max-width: 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 24rem;
+  @media (max-width: 1024px) {
+    max-width: 70%;
+    gap: 18rem;
+  }
+  @media (max-width: 480px) {
+    max-width: 100%;
+  }
+}
+.primaryText {
+  font-size: 48rem;
+  font-family: var(--header-font);
+  @media (max-width: 1024px) {
+    font-size: 32rem;
+  }
+}
+.secondaryText {
+  font-size: 24rem;
+  @media (max-width: 1024px) {
+    font-size: 18rem;
+  }
+}
+.buttonsContainer {
+  margin-top: 24rem;
+  display: flex;
+  gap: 36rem;
+  font-size: 24rem;
+  @media (max-width: 1024px) {
+    font-size: 18rem;
+    gap: 24rem;
+  }
+  @media (max-width: 480px) {
+    margin-bottom: 24rem;
+    flex-direction: column;
+  }
+}
+.accentBtn {
+  padding: 12rem 48rem;
+  font-weight: 800;
+  background-color: var(--accent2-color);
+  border-radius: 16rem;
+  white-space: nowrap;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  @media (max-width: 1024px) {
+    padding: 12rem 32rem;
+  }
+}
+.secondaryBtn {
+  padding: 12rem 48rem;
+  font-weight: 500;
+  border: 3rem solid var(--accent2-color);
+  border-radius: 16rem;
+  white-space: nowrap;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  @media (max-width: 1024px) {
+    padding: 12rem 32rem;
+  }
+}
+.imgContainer {
+  max-width: 50%;
+  max-height: calc(100vh - 58rem);
+  margin-right: 24rem;
+  @media (max-width: 1024px) {
+    max-width: 80%;
+    align-self: flex-end;
+  }
+  & > img {
+    @media (max-width: 1024px) {
+      max-height: 60vh;
+    }
+  }
+}
