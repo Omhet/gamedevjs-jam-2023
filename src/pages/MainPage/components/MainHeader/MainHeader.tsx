@@ -9,11 +9,9 @@ export const MainHeader: FC = () => {
         <header className={s.headerContainer}>
             <div className={s.logo}>Chrono</div>
             <div className={s.headerContent}></div>
-            {globalScore > 0 && (
-                <div className={s.score}>
-                    <span> Total score: {globalScore}</span>
-                </div>
-            )}
+            <div className={s.score}>
+                <span> Total score: {globalScore}</span>
+            </div>
         </header>
     )
 }

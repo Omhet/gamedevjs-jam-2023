@@ -34,6 +34,7 @@ loadGame.use(async (levelNumber: number) => {
 })
 
 startGame.watch(() => {
+    setCurrentLevelScore(0)
     setGameStatus(GameStatus.InProgress)
     levelDataManager.playLevelMusic()
 })

@@ -18,13 +18,20 @@ export const Scene: FC<SceneProps> = ({}) => {
     }
 
     useEffect(() => {
+        let game: Phaser.Game
         if (levelData) {
             const { numberOfRounds } = levelData
-            startGame({
+            game = startGame({
                 levelConfig: { numberOfRounds },
                 onLevelEnds: handleLevelEnds,
                 onTap: handleTap,
             })
+        }
+
+        return () => {
+            if (game) {
+                game.destroy(true, false)
+            }
         }
     }, [levelData])
 

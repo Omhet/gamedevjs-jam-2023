@@ -25,4 +25,6 @@ export const startGame = (props: {
 }) => {
     const game = new Game(config)
     game.scene.start('MainScene', props)
+
+    return game
 }

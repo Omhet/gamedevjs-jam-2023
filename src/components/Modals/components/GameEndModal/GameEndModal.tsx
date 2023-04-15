@@ -1,7 +1,7 @@
 import { Exit } from '@icons/Exit'
 import { Restart } from '@icons/Restart'
 import { levelDataManager } from '@lib/levels/LevelDataManager'
-import { setCurrentLevelNumber, useCurrentLevel, useLevels, useNextLevel } from '@store/levels'
+import { useLevels, useNextLevel } from '@store/levels'
 import { closeModal } from '@store/modals'
 import classnames from 'classnames'
 import { motion } from 'framer-motion'
@@ -14,12 +14,11 @@ import s from './GameEndModal.module.scss'
 export const GameEndModal: FC = () => {
     const history = useHistory()
     const { currentLevelScore, currentLevelNumber } = useLevels()
-    const { isEnoughScore } = useCurrentLevel()
     const nextLevel = useNextLevel()
     const { endOnboarding } = levelDataManager.getCurrentLevelData()
     const isSmall = useMedia('(max-width: 1024px)')
 
-    const isNextLevelButtonShown = isEnoughScore && nextLevel && nextLevel.isOpen
+    const isNextLevelButtonShown = nextLevel && nextLevel.isOpen
 
     return (
         <div className={s.root}>
@@ -42,7 +41,7 @@ export const GameEndModal: FC = () => {
                 {isNextLevelButtonShown && (
                     <motion.button
                         onClick={() => {
-                            setCurrentLevelNumber(currentLevelNumber + 1)
+                            history.push(`/game?level=${currentLevelNumber + 1}`)
                         }}
                         className={classnames(s.button, s.nextBtn)}
                         whileHover="hover"

@@ -37,7 +37,6 @@ export class MainScene extends Phaser.Scene {
 
                 if (this.roundsCompleted === this.levelConfig.numberOfRounds) {
                     this.onLevelEnds(this.points)
-                    this.scene.pause()
                 } else {
                     this.clock.generateNewTargetZone()
                 }

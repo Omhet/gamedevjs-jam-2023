@@ -21,5 +21,5 @@ export const GamePage: FC = () => {
         }
     }, [level])
 
-    return <div className={s.main}>{isLoading ? <Loader /> : <Game />}</div>
+    return <div className={s.main}>{isLoading ? <Loader /> : <Game key={level} />}</div>
 }

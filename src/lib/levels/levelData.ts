@@ -11,7 +11,14 @@ const LEVELS_DATA: LevelConfig[] = [
         startOnboarding:
             'The player must navigate the dense foliage and stabilize the first time anomaly found in the woods.',
         endOnboarding: 'End onboarding',
-        numberOfRounds: 2,
+        numberOfRounds: 1,
+    },
+    {
+        title: 'Ticking Thicket',
+        startOnboarding:
+            'The player encounters an area where the trees themselves have become affected by the time anomalies, causing the entire thicket to move in strange ways.',
+        endOnboarding: 'End onboarding',
+        numberOfRounds: 1,
     },
 ]
 
