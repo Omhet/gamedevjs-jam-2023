@@ -82,13 +82,8 @@ export class Clock {
         const lowerBound = Phaser.Math.Wrap(handAngleRad + minDistanceRad, 0, Math.PI * 2)
         const upperBound = Phaser.Math.Wrap(handAngleRad - minDistanceRad + Math.PI, 0, Math.PI * 2)
 
-        // Choose a new start angle within the valid range
         const targetZoneStartAngle = Phaser.Math.FloatBetween(lowerBound, upperBound)
-
-        // Calculate the target zone size
         const targetZoneSize = Phaser.Math.FloatBetween(Math.PI / 6, Math.PI / 3)
-
-        // Calculate the target zone end angle
         this.targetZoneStartAngle = targetZoneStartAngle
         this.targetZoneEndAngle = Phaser.Math.Wrap(targetZoneStartAngle + targetZoneSize, 0, Math.PI * 2)
 
@@ -110,14 +105,35 @@ export class Clock {
         return isHandInTargetZone
     }
 
-    checkHandInTargetZone(): boolean {
+    private calculateTapAccuracy(): number {
+        const handAngle = Phaser.Math.Wrap(this.hand.angle, 0, 360)
+        const handAngleRad = Phaser.Math.DegToRad(handAngle)
+
+        const targetZoneCenter = Phaser.Math.Wrap(
+            (this.targetZoneStartAngle + this.targetZoneEndAngle) / 2,
+            0,
+            Math.PI * 2
+        )
+        const angularDistance = Math.abs(handAngleRad - targetZoneCenter)
+
+        const halfZoneSize = (this.targetZoneEndAngle - this.targetZoneStartAngle) / 2
+
+        const normalizedDistance = angularDistance / halfZoneSize
+        const accuracy = 1 - normalizedDistance
+
+        return Math.max(0, accuracy)
+    }
+
+    checkHandInTargetZone(): number | null {
         const isHandInZone = this.isHandInTargetZone()
 
         if (isHandInZone) {
+            const accuracy = this.calculateTapAccuracy()
             this.generateNewTargetZone()
+            return accuracy
         }
 
-        return isHandInZone
+        return null
     }
 
     public update(): void {

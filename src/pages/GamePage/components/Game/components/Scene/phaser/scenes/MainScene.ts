@@ -2,6 +2,7 @@ import { LevelConfig, OnLevelEndsCallback, OnTapCallback } from '@app-types/game
 import Phaser from 'phaser'
 import { Clock } from './components/Clock'
 
+const MAX_POINTS_PER_ROUND = 10
 export class MainScene extends Phaser.Scene {
     private clock!: Clock
     private levelConfig!: LevelConfig
@@ -30,9 +31,13 @@ export class MainScene extends Phaser.Scene {
         const spaceKey = this.input.keyboard!.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
 
         spaceKey.on('down', () => {
-            if (this.clock.checkHandInTargetZone()) {
-                console.log('Success')
-                this.points++
+            const accuracy = this.clock.checkHandInTargetZone()
+
+            if (accuracy !== null) {
+                const pointsEarned = Math.round(accuracy * MAX_POINTS_PER_ROUND)
+                console.log(`Accuracy: ${accuracy}`, `Points Earned: ${pointsEarned}`)
+
+                this.points += pointsEarned
                 this.roundsCompleted++
 
                 if (this.roundsCompleted === this.levelConfig.numberOfRounds) {
