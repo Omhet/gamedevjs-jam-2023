@@ -11,7 +11,7 @@ export const MainHeader: FC = () => {
             <div className={s.headerContent}></div>
             {globalScore > 0 && (
                 <div className={s.score}>
-                    <span> Score: {globalScore}</span>
+                    <span> Total score: {globalScore}</span>
                 </div>
             )}
         </header>
