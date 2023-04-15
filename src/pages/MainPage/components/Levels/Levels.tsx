@@ -10,17 +10,19 @@ export const Levels: FC = () => {
     return (
         <section id="levels" className={s.sectionContainer}>
             <h2 className={s.levelsTitle}>Levels</h2>
-            {regions.map((region) => (
-                <div key={region.name}>
-                    <h3>{region.name}</h3>
-                    <p>{region.description}</p>
-                    <div className={s.levelsContainer}>
-                        {levelsGroupedByRegion[region.name].map((levelData) => (
-                            <Level key={levelData.number} data={levelData} />
-                        ))}
+            <div>
+                {regions.map((region) => (
+                    <div key={region.name}>
+                        <h3>{region.name}</h3>
+                        <p>{region.description}</p>
+                        <div className={s.levelsContainer}>
+                            {levelsGroupedByRegion[region.name].map((levelData) => (
+                                <Level key={levelData.number} data={levelData} />
+                            ))}
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
         </section>
     )
 }
