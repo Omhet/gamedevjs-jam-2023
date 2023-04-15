@@ -72,33 +72,41 @@ export class Clock {
         this.targetZoneGraphics.fillPath()
     }
 
-    // Add this method to the Clock class
     generateNewTargetZone() {
-        this.targetZoneStartAngle = Phaser.Math.FloatBetween(0, Math.PI * 2)
-        const targetZoneSize = Phaser.Math.FloatBetween(Math.PI / 6, Math.PI / 3)
-        this.targetZoneEndAngle = Phaser.Math.Wrap(this.targetZoneStartAngle + targetZoneSize, 0, Math.PI * 2)
+        const handAngle = Phaser.Math.Wrap(this.hand.angle, 0, 360)
+        const handAngleRad = Phaser.Math.DegToRad(handAngle)
+
+        const minDistanceRad = Phaser.Math.DegToRad(45)
+        let validTargetZone = false
+
+        while (!validTargetZone) {
+            this.targetZoneStartAngle = Phaser.Math.FloatBetween(0, Math.PI * 2)
+            const targetZoneSize = Phaser.Math.FloatBetween(Math.PI / 6, Math.PI / 3)
+            this.targetZoneEndAngle = Phaser.Math.Wrap(this.targetZoneStartAngle + targetZoneSize, 0, Math.PI * 2)
+
+            const minDistanceStart = Phaser.Math.Angle.ShortestBetween(handAngleRad, this.targetZoneStartAngle)
+            const minDistanceEnd = Phaser.Math.Angle.ShortestBetween(handAngleRad, this.targetZoneEndAngle)
+
+            validTargetZone =
+                (minDistanceStart >= minDistanceRad && minDistanceEnd >= minDistanceRad) ||
+                (minDistanceStart <= -minDistanceRad && minDistanceEnd <= -minDistanceRad)
+        }
+
         this.drawTargetZone()
     }
 
     isHandInTargetZone(): boolean {
-        // Get the hand's current angle, wrapping it between 0 and 360
         const handAngle = Phaser.Math.Wrap(this.hand.angle, 0, 360)
 
-        // Convert the start and end angles of the target zone to degrees
         const targetZoneStartAngle = Phaser.Math.RadToDeg(this.targetZoneStartAngle)
         const targetZoneEndAngle = Phaser.Math.RadToDeg(this.targetZoneEndAngle)
 
-        // Check if the target zone spans across the 0 angle (360 degrees)
         const targetZoneCrossesZero = targetZoneEndAngle < targetZoneStartAngle
 
-        // console.log({ targetZoneStartAngle, targetZoneEndAngle, handAngle })
-
-        // Check if the hand is within the target zone, taking into account whether the target zone spans across the 0 angle
         const isHandInTargetZone = targetZoneCrossesZero
             ? handAngle >= targetZoneStartAngle || handAngle <= targetZoneEndAngle
             : handAngle >= targetZoneStartAngle && handAngle <= targetZoneEndAngle
 
-        // Return true if the hand is within the target zone, otherwise return false
         return isHandInTargetZone
     }
 
