@@ -1,4 +1,4 @@
-import { LevelConfig, OnLevelEndsCallback } from '@app-types/game'
+import { LevelConfig, OnLevelEndsCallback, OnTapCallback } from '@app-types/game'
 import Phaser, { Game } from 'phaser'
 import { MainScene } from './scenes/MainScene'
 
@@ -18,7 +18,11 @@ const config: Phaser.Types.Core.GameConfig = {
     },
 }
 
-export const startGame = (levelConfig: LevelConfig, onLevelEnds: OnLevelEndsCallback) => {
+export const startGame = (props: {
+    levelConfig: LevelConfig
+    onLevelEnds: OnLevelEndsCallback
+    onTap: OnTapCallback
+}) => {
     const game = new Game(config)
-    game.scene.start('MainScene', { levelConfig, onLevelEnds })
+    game.scene.start('MainScene', props)
 }

@@ -1,21 +1,23 @@
-import { LevelConfig, OnLevelEndsCallback } from '@app-types/game'
+import { LevelConfig, OnLevelEndsCallback, OnTapCallback } from '@app-types/game'
 import Phaser from 'phaser'
 import { Clock } from './components/Clock'
 
 export class MainScene extends Phaser.Scene {
     private clock!: Clock
     private levelConfig!: LevelConfig
-    private onLevelEnds!: OnLevelEndsCallback
     private roundsCompleted: number = 0
     private points: number = 0
+    private onLevelEnds!: OnLevelEndsCallback
+    private onTap!: OnTapCallback
 
     constructor() {
         super('MainScene')
     }
 
-    init(data: { levelConfig: LevelConfig; onLevelEnds: OnLevelEndsCallback }): void {
+    init(data: { levelConfig: LevelConfig; onLevelEnds: OnLevelEndsCallback; onTap: OnTapCallback }): void {
         this.levelConfig = data.levelConfig
         this.onLevelEnds = data.onLevelEnds
+        this.onTap = data.onTap
     }
 
     create() {
@@ -43,6 +45,8 @@ export class MainScene extends Phaser.Scene {
                 console.log('Miss')
                 this.points = Math.max(0, this.points - 1)
             }
+
+            this.onTap(this.points)
         })
     }
 

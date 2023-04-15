@@ -1,6 +1,12 @@
 import { GameStatus } from '@app-types/game'
 import { levelDataManager } from '@lib/levels/LevelDataManager'
-import { setCurrentLevelNumber } from '@store/levels'
+import {
+    currentLevelStore,
+    rewriteCurrentLevelScore,
+    setCurrentLevelNumber,
+    setCurrentLevelScore,
+    setIsBetterScoreThanEarlier,
+} from '@store/levels'
 import { openGameEndModal, openGameStartModal } from '@store/modals'
 import {
     endGame,
@@ -8,6 +14,7 @@ import {
     gameStoreInitial,
     loadGame,
     resetGameData,
+    setGameScore,
     setGameStatus,
     setIsLoading,
     startGame,
@@ -29,6 +36,18 @@ loadGame.use(async (levelNumber: number) => {
 startGame.watch(() => {
     setGameStatus(GameStatus.InProgress)
     levelDataManager.playLevelMusic()
+})
+
+setGameScore.watch((newScore) => {
+    const { score: oldScore } = currentLevelStore.getState()
+
+    setCurrentLevelScore(newScore)
+    if (newScore > oldScore) {
+        setIsBetterScoreThanEarlier(true)
+        rewriteCurrentLevelScore(newScore)
+    } else {
+        setIsBetterScoreThanEarlier(false)
+    }
 })
 
 // Do end game stuff

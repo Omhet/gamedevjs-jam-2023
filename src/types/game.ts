@@ -9,3 +9,4 @@ export interface LevelConfig {
 }
 
 export type OnLevelEndsCallback = (points: number) => void
+export type OnTapCallback = (points: number) => void

@@ -18,6 +18,7 @@ export const gameStatusStore = gameStore.map((state) => state.status)
 
 export const setIsLoading = createEvent<boolean>()
 export const setGameStatus = createEvent<GameStatus>()
+export const setGameScore = createEvent<number>()
 export const resetGameData = createEvent()
 
 export const startGame = createEvent()

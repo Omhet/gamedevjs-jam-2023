@@ -1,20 +1,27 @@
-import { endGame } from '@store/game'
+import { endGame, setGameScore } from '@store/game'
 import { FC, useEffect } from 'react'
-import { Redirect, useParams } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { startGame } from './phaser/main'
 
 export interface SceneProps {}
 
 export const Scene: FC<SceneProps> = ({}) => {
-    const { levelNumber: levelNumberParam } = useParams<{ levelNumber: string }>()
-    const levelNumber = parseInt(levelNumberParam, 10)
-    // const levelConfig = levelsData[levelNumber - 1]
     const levelConfig = {}
+
+    const handleLevelEnds = () => {
+        endGame()
+    }
+
+    const handleTap = (points: number) => {
+        setGameScore(points)
+    }
 
     useEffect(() => {
         if (levelConfig) {
-            startGame({ numberOfRounds: 1 }, () => {
-                endGame()
+            startGame({
+                levelConfig: { numberOfRounds: 1 },
+                onLevelEnds: handleLevelEnds,
+                onTap: handleTap,
             })
         }
     }, [levelConfig])

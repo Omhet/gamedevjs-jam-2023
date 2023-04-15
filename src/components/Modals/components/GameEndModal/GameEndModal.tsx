@@ -6,7 +6,7 @@ import { closeModal } from '@store/modals'
 import classnames from 'classnames'
 import { motion } from 'framer-motion'
 import { buttonVariants } from 'motions/motions'
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useMedia } from 'react-use'
 import s from './GameEndModal.module.scss'
@@ -34,7 +34,7 @@ const getMasterWords = (currentLevelNumber: number, isEnoughScore: boolean): str
 
 export const GameEndModal: FC = () => {
     const history = useHistory()
-    const { currentLevelScore, currentLevelNumber, isBetterScoreThanEarlier } = useLevels()
+    const { currentLevelScore, currentLevelNumber } = useLevels()
     const { isEnoughScore } = useCurrentLevel()
     const nextLevel = useNextLevel()
     const { imgUrls } = levelDataManager.getCurrentLevelData()
@@ -50,7 +50,6 @@ export const GameEndModal: FC = () => {
             </div>
             <div className={s.masterContainer}>
                 <span className={s.masterWords}>{getMasterWords(currentLevelNumber, isEnoughScore)}</span>
-                <img className={s.master} src={imgUrls.master} />
             </div>
             <div className={s.buttonsContainer}>
                 <motion.button
