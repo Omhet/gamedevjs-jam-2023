@@ -110,9 +110,8 @@ export class Clock {
 
     isHandInTargetZone(): boolean {
         const handAngle = Phaser.Math.Wrap(this.hand.angle, 0, 360)
-
-        const targetZoneStartAngle = Phaser.Math.RadToDeg(this.targetZoneStartAngle)
-        const targetZoneEndAngle = Phaser.Math.RadToDeg(this.targetZoneEndAngle)
+        const targetZoneStartAngle = Phaser.Math.Wrap(Phaser.Math.RadToDeg(this.targetZoneStartAngle), 0, 360)
+        const targetZoneEndAngle = Phaser.Math.Wrap(Phaser.Math.RadToDeg(this.targetZoneEndAngle), 0, 360)
 
         const targetZoneCrossesZero = targetZoneEndAngle < targetZoneStartAngle
 
