@@ -9,6 +9,7 @@ export class MainScene extends Phaser.Scene {
     private levelConfig!: LevelConfig
     private roundsCompleted: number = 0
     private points: number = 0
+    private comboCounter: number = 0
     private challengeManager!: ChallengeManager
     private onLevelEnds!: OnLevelEndsCallback
     private onTap!: OnTapCallback
@@ -38,8 +39,9 @@ export class MainScene extends Phaser.Scene {
             const accuracy = this.clock.checkHandInTargetZone()
 
             if (accuracy !== null) {
-                const pointsEarned = Math.round(accuracy * MAX_POINTS_PER_ROUND)
-                console.log(`Accuracy: ${accuracy}`, `Points Earned: ${pointsEarned}`)
+                this.comboCounter++
+                const pointsEarned = Math.round(accuracy * MAX_POINTS_PER_ROUND * this.comboCounter)
+                console.log(`Accuracy: ${accuracy}`, `Points Earned: ${pointsEarned}`, `Combo: ${this.comboCounter}`)
 
                 this.points += pointsEarned
                 this.roundsCompleted++
@@ -53,6 +55,7 @@ export class MainScene extends Phaser.Scene {
             } else {
                 console.log('Miss')
                 this.points = Math.max(0, this.points - MAX_POINTS_PER_ROUND)
+                this.comboCounter = 0 // Reset combo counter
             }
 
             this.onTap(this.points)
