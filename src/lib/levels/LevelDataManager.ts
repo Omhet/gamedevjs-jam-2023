@@ -2,7 +2,7 @@ import { groupBy } from 'utils/groupBy'
 import { uniqueByField } from 'utils/unique'
 import { AudioManager } from './AudioManager'
 import { ImagesManager, LevelImages, LevelImageUrls } from './ImagesManager'
-import { LEVELS, Region } from './levelData'
+import { Challenge, LEVELS, Region } from './levelData'
 
 export type LevelType = {
     number: number
@@ -18,7 +18,7 @@ export type LevelType = {
     region: Region
     regionName: string
     powerups?: string[]
-    challenges?: string[]
+    challenges?: Challenge[]
     miniBoss?: {
         name: string
         description: string

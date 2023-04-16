@@ -10,7 +10,6 @@ export class Clock {
     private clockFace: Phaser.GameObjects.Arc
     private hand: Phaser.GameObjects.Rectangle
     private initialHandRotationSpeed: number = 0.01
-    private maxHandRotationSpeed: number = 0.04
     private handRotationSpeed: number = 0.01
     private handRotationDirection: number = 1
     private targetZoneGraphics: Phaser.GameObjects.Graphics
@@ -18,11 +17,8 @@ export class Clock {
     private targetZoneEndAngle!: number
     private targetZoneRotationSpeed: number = 0
     private targetZoneRotationDirection: number = 1
-    private initialTargetZoneRotationSpeed: number = 0.005
-    private maxTargetZoneRotationSpeed: number = 0.01
     private targetZoneSizeRange: [number, number] = [Math.PI / 2, Math.PI / 1.5]
     private initialTargetZoneSizeRange: [number, number] = [Math.PI / 2, Math.PI / 1.5]
-    private minZoneSize: number = Math.PI / 12
     private forgivingAngleOffset: number = 3 // You can adjust this value to make the game more or less forgiving
 
     private centerX: number
@@ -164,14 +160,14 @@ export class Clock {
         return null
     }
 
-    updateTargetZoneSize(round: number): void {
+    updateTargetZoneSize(round: number, minTargetZoneSize: number): void {
         const decreaseStep =
-            (1 - this.minZoneSize / this.initialTargetZoneSizeRange[1]) / this.levelConfig.numberOfRounds
+            (1 - minTargetZoneSize / this.initialTargetZoneSizeRange[1]) / this.levelConfig.numberOfRounds
         const decreaseFactor = 1 - round * decreaseStep
 
         const newSizeRange = [
-            Math.max(this.minZoneSize, this.targetZoneSizeRange[0] * decreaseFactor),
-            Math.max(this.minZoneSize, this.targetZoneSizeRange[1] * decreaseFactor),
+            Math.max(minTargetZoneSize, this.targetZoneSizeRange[0] * decreaseFactor),
+            Math.max(minTargetZoneSize, this.targetZoneSizeRange[1] * decreaseFactor),
         ] as [number, number]
 
         // Ensure that the minimum size is not greater than the maximum size
@@ -180,19 +176,18 @@ export class Clock {
         }
     }
 
-    updateHandRotationSpeed(round: number): void {
+    updateHandRotationSpeed(round: number, maxHandSpeed: number): void {
         const increaseFactorPerRound =
-            (this.maxHandRotationSpeed / this.initialHandRotationSpeed - 1) / (this.levelConfig.numberOfRounds - 1)
+            (maxHandSpeed / this.initialHandRotationSpeed - 1) / (this.levelConfig.numberOfRounds - 1)
         const increaseFactor = 1 + round * increaseFactorPerRound
         this.handRotationSpeed = this.initialHandRotationSpeed * increaseFactor * this.handRotationDirection
     }
 
-    updateTargetZoneRotationSpeed(round: number): void {
+    updateTargetZoneRotationSpeed(round: number, minTargetZoneSpeed: number, maxTargetZoneSpeed: number): void {
         const increaseFactorPerRound =
-            (this.maxTargetZoneRotationSpeed / this.initialTargetZoneRotationSpeed - 1) /
-            (this.levelConfig.numberOfRounds - 1)
+            (maxTargetZoneSpeed / minTargetZoneSpeed - 1) / (this.levelConfig.numberOfRounds - 1)
         const increaseFactor = 1 + round * increaseFactorPerRound
-        this.targetZoneRotationSpeed = this.initialTargetZoneRotationSpeed * increaseFactor
+        this.targetZoneRotationSpeed = minTargetZoneSpeed * increaseFactor
 
         if (Math.abs(this.handRotationSpeed - this.targetZoneRotationSpeed) < 0.01) {
             this.targetZoneRotationDirection = -this.handRotationDirection
