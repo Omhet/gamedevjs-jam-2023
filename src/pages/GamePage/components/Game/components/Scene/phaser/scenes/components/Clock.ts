@@ -1,3 +1,4 @@
+import { LevelConfig } from '@app-types/game'
 import Phaser from 'phaser'
 
 const clockFaceColor = 0xcccccc
@@ -8,18 +9,27 @@ export class Clock {
     private scene: Phaser.Scene
     private clockFace: Phaser.GameObjects.Arc
     private hand: Phaser.GameObjects.Rectangle
+    private initialHandRotationSpeed: number = 0.01
     private handRotationSpeed: number = 0.01
     private targetZoneGraphics: Phaser.GameObjects.Graphics
     private targetZoneStartAngle!: number
     private targetZoneEndAngle!: number
+    private targetZoneRotationSpeed: number = 0
+    private targetZoneRotationDirection: number = 1
+    private initialTargetZoneRotationSpeed: number = 0
+    private targetZoneSizeRange: [number, number] = [Math.PI / 2, Math.PI / 1.5]
+    private initialTargetZoneSizeRange: [number, number] = [Math.PI / 2, Math.PI / 1.5]
+    private minZoneSize: number = Math.PI / 12
     private centerX: number
     private centerY: number
     private radius: number
+    private levelConfig: LevelConfig
 
-    constructor(scene: Phaser.Scene, centerX: number, centerY: number, radius: number) {
+    constructor(scene: Phaser.Scene, centerX: number, centerY: number, radius: number, levelConfig: LevelConfig) {
         this.centerX = centerX
         this.centerY = centerY
         this.radius = radius
+        this.levelConfig = levelConfig
         this.scene = scene
         this.clockFace = this.createClockFace()
         this.hand = this.createHand()
@@ -81,7 +91,7 @@ export class Clock {
 
         while (!validTargetZone) {
             this.targetZoneStartAngle = Phaser.Math.FloatBetween(0, Math.PI * 2)
-            const targetZoneSize = Phaser.Math.FloatBetween(Math.PI / 6, Math.PI / 3)
+            const targetZoneSize = Phaser.Math.FloatBetween(this.targetZoneSizeRange[0], this.targetZoneSizeRange[1])
             this.targetZoneEndAngle = Phaser.Math.Wrap(this.targetZoneStartAngle + targetZoneSize, 0, Math.PI * 2)
 
             const minDistanceStart = Phaser.Math.Angle.ShortestBetween(handAngleRad, this.targetZoneStartAngle)
@@ -141,7 +151,37 @@ export class Clock {
         return null
     }
 
+    updateTargetZoneSize(round: number): void {
+        const decreaseStep =
+            (1 - this.minZoneSize / this.initialTargetZoneSizeRange[1]) / this.levelConfig.numberOfRounds
+        const decreaseFactor = 1 - round * decreaseStep
+
+        const newSizeRange = [
+            Math.max(this.minZoneSize, this.targetZoneSizeRange[0] * decreaseFactor),
+            Math.max(this.minZoneSize, this.targetZoneSizeRange[1] * decreaseFactor),
+        ] as [number, number]
+
+        // Ensure that the minimum size is not greater than the maximum size
+        if (newSizeRange[0] <= newSizeRange[1]) {
+            this.targetZoneSizeRange = newSizeRange
+        }
+    }
+
+    updateHandRotationSpeed(round: number): void {
+        const increaseFactor = Math.min(3, 1 + round * 0.1)
+        this.handRotationSpeed = this.initialHandRotationSpeed * increaseFactor
+    }
+
+    updateTargetZoneRotationSpeed(round: number): void {
+        const increaseFactor = Math.min(1.5, 1 + round * 0.05)
+        this.targetZoneRotationSpeed = this.initialTargetZoneRotationSpeed * increaseFactor
+        this.targetZoneRotationDirection = Math.random() < 0.5 ? 1 : -1
+    }
+
     public update(): void {
         this.hand.rotation += this.handRotationSpeed
+        this.targetZoneStartAngle += this.targetZoneRotationSpeed * this.targetZoneRotationDirection
+        this.targetZoneEndAngle += this.targetZoneRotationSpeed * this.targetZoneRotationDirection
+        this.drawTargetZone()
     }
 }
