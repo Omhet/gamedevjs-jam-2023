@@ -52,7 +52,7 @@ export class MainScene extends Phaser.Scene {
                 }
             } else {
                 console.log('Miss')
-                this.points = Math.max(0, this.points - 1)
+                this.points = Math.max(0, this.points - MAX_POINTS_PER_ROUND)
             }
 
             this.onTap(this.points)

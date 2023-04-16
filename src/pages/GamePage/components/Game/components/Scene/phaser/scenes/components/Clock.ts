@@ -23,6 +23,8 @@ export class Clock {
     private targetZoneSizeRange: [number, number] = [Math.PI / 2, Math.PI / 1.5]
     private initialTargetZoneSizeRange: [number, number] = [Math.PI / 2, Math.PI / 1.5]
     private minZoneSize: number = Math.PI / 12
+    private forgivingAngleOffset: number = 3 // You can adjust this value to make the game more or less forgiving
+
     private centerX: number
     private centerY: number
     private radius: number
@@ -113,11 +115,14 @@ export class Clock {
         const targetZoneStartAngle = Phaser.Math.Wrap(Phaser.Math.RadToDeg(this.targetZoneStartAngle), 0, 360)
         const targetZoneEndAngle = Phaser.Math.Wrap(Phaser.Math.RadToDeg(this.targetZoneEndAngle), 0, 360)
 
-        const targetZoneCrossesZero = targetZoneEndAngle < targetZoneStartAngle
+        const extendedStartAngle = Phaser.Math.Wrap(targetZoneStartAngle - this.forgivingAngleOffset, 0, 360)
+        const extendedEndAngle = Phaser.Math.Wrap(targetZoneEndAngle + this.forgivingAngleOffset, 0, 360)
+
+        const targetZoneCrossesZero = extendedEndAngle < extendedStartAngle
 
         const isHandInTargetZone = targetZoneCrossesZero
-            ? handAngle >= targetZoneStartAngle || handAngle <= targetZoneEndAngle
-            : handAngle >= targetZoneStartAngle && handAngle <= targetZoneEndAngle
+            ? handAngle >= extendedStartAngle || handAngle <= extendedEndAngle
+            : handAngle >= extendedStartAngle && handAngle <= extendedEndAngle
 
         return isHandInTargetZone
     }
@@ -131,14 +136,20 @@ export class Clock {
             0,
             Math.PI * 2
         )
-        const angularDistance = Math.abs(handAngleRad - targetZoneCenter)
+        const angularDistance = Math.abs(Phaser.Math.Angle.Wrap(handAngleRad - targetZoneCenter))
 
         const halfZoneSize = (this.targetZoneEndAngle - this.targetZoneStartAngle) / 2
 
-        const normalizedDistance = angularDistance / halfZoneSize
+        // Adjusting the target zone size with forgivingAngleOffset
+        const adjustedHalfZoneSize = halfZoneSize + Phaser.Math.DegToRad(this.forgivingAngleOffset)
+
+        // Clamp angularDistance to be between 0 and adjustedHalfZoneSize
+        const clampedAngularDistance = Phaser.Math.Clamp(angularDistance, 0, adjustedHalfZoneSize)
+
+        const normalizedDistance = clampedAngularDistance / adjustedHalfZoneSize
         const accuracy = 1 - normalizedDistance
 
-        return Math.max(0, accuracy)
+        return accuracy
     }
 
     checkHandInTargetZone(): number | null {
