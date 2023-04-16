@@ -10,6 +10,7 @@ export class Clock {
     private clockFace: Phaser.GameObjects.Arc
     private hand: Phaser.GameObjects.Rectangle
     private initialHandRotationSpeed: number = 0.01
+    private maxHandRotationSpeed: number = 0.04
     private handRotationSpeed: number = 0.01
     private targetZoneGraphics: Phaser.GameObjects.Graphics
     private targetZoneStartAngle!: number
@@ -168,10 +169,11 @@ export class Clock {
     }
 
     updateHandRotationSpeed(round: number): void {
-        const increaseFactor = Math.min(3, 1 + round * 0.1)
+        const increaseFactorPerRound =
+            (this.maxHandRotationSpeed / this.initialHandRotationSpeed - 1) / (this.levelConfig.numberOfRounds - 1)
+        const increaseFactor = 1 + round * increaseFactorPerRound
         this.handRotationSpeed = this.initialHandRotationSpeed * increaseFactor
     }
-
     updateTargetZoneRotationSpeed(round: number): void {
         const increaseFactor = Math.min(1.5, 1 + round * 0.05)
         this.targetZoneRotationSpeed = this.initialTargetZoneRotationSpeed * increaseFactor
