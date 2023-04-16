@@ -30,6 +30,7 @@ export class MainScene extends Phaser.Scene {
 
         this.clock = new Clock(this, centerX, centerY, radius, this.levelConfig)
         this.challengeManager = new ChallengeManager(this.levelConfig.challenges ?? [])
+        this.challengeManager.applyChallenges(this.clock, this.roundsCompleted)
 
         const spaceKey = this.input.keyboard!.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
 

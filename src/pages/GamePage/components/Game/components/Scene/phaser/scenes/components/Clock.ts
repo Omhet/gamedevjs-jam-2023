@@ -12,12 +12,14 @@ export class Clock {
     private initialHandRotationSpeed: number = 0.01
     private maxHandRotationSpeed: number = 0.04
     private handRotationSpeed: number = 0.01
+    private handRotationDirection: number = 1
     private targetZoneGraphics: Phaser.GameObjects.Graphics
     private targetZoneStartAngle!: number
     private targetZoneEndAngle!: number
     private targetZoneRotationSpeed: number = 0
     private targetZoneRotationDirection: number = 1
-    private initialTargetZoneRotationSpeed: number = 0
+    private initialTargetZoneRotationSpeed: number = 0.005
+    private maxTargetZoneRotationSpeed: number = 0.01
     private targetZoneSizeRange: [number, number] = [Math.PI / 2, Math.PI / 1.5]
     private initialTargetZoneSizeRange: [number, number] = [Math.PI / 2, Math.PI / 1.5]
     private minZoneSize: number = Math.PI / 12
@@ -172,16 +174,25 @@ export class Clock {
         const increaseFactorPerRound =
             (this.maxHandRotationSpeed / this.initialHandRotationSpeed - 1) / (this.levelConfig.numberOfRounds - 1)
         const increaseFactor = 1 + round * increaseFactorPerRound
-        this.handRotationSpeed = this.initialHandRotationSpeed * increaseFactor
+        this.handRotationSpeed = this.initialHandRotationSpeed * increaseFactor * this.handRotationDirection
     }
+
     updateTargetZoneRotationSpeed(round: number): void {
-        const increaseFactor = Math.min(1.5, 1 + round * 0.05)
+        const increaseFactorPerRound =
+            (this.maxTargetZoneRotationSpeed / this.initialTargetZoneRotationSpeed - 1) /
+            (this.levelConfig.numberOfRounds - 1)
+        const increaseFactor = 1 + round * increaseFactorPerRound
         this.targetZoneRotationSpeed = this.initialTargetZoneRotationSpeed * increaseFactor
-        this.targetZoneRotationDirection = Math.random() < 0.5 ? 1 : -1
+
+        if (Math.abs(this.handRotationSpeed - this.targetZoneRotationSpeed) < 0.01) {
+            this.targetZoneRotationDirection = -this.handRotationDirection
+        } else {
+            this.targetZoneRotationDirection = Math.random() < 0.5 ? 1 : -1
+        }
     }
 
     public update(): void {
-        this.hand.rotation += this.handRotationSpeed
+        this.hand.rotation += this.handRotationSpeed * this.handRotationDirection
         this.targetZoneStartAngle += this.targetZoneRotationSpeed * this.targetZoneRotationDirection
         this.targetZoneEndAngle += this.targetZoneRotationSpeed * this.targetZoneRotationDirection
         this.drawTargetZone()

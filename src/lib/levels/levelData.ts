@@ -32,7 +32,7 @@ const WoodsRegion = {
                 'The player must navigate the dense foliage and stabilize the first time anomaly found in the woods.',
             endOnboarding: 'End onboarding',
             numberOfRounds: 5,
-            challenges: ['HandSpeedIncrease'],
+            challenges: ['TargetZonePositionMove'],
         },
         {
             title: 'Ticking Thicket',
