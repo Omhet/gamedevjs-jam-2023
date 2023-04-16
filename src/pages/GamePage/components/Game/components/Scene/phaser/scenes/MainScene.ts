@@ -3,7 +3,7 @@ import Phaser from 'phaser'
 import { ChallengeManager } from './components/ChallengeManager'
 import { Clock } from './components/Clock'
 
-const MAX_POINTS_PER_ROUND = 10
+const MAX_POINTS_PER_ROUND = 3
 export class MainScene extends Phaser.Scene {
     private clock!: Clock
     private levelConfig!: LevelConfig

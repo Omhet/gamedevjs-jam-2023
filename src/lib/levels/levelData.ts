@@ -19,12 +19,25 @@ export type Challenge =
           maxTargetZoneSpeed: number
       }
 
+export type Powerup =
+    | {
+          type: 'TimeSlowdown'
+          slowdownFactor: number
+          duration: number
+          cooldown: number
+      }
+    | {
+          type: 'TimeFreeze'
+          duration: number
+          cooldown: number
+      }
+
 type Level = {
     title: string
     startOnboarding: string
     endOnboarding: string
     numberOfRounds: number
-    powerups?: string[]
+    powerups?: Powerup[]
     challenges?: Challenge[]
     miniBoss?: {
         name: string
@@ -60,6 +73,14 @@ const WoodsRegion: Region = {
                     type: 'TargetZonePositionMove',
                     minTargetZoneSpeed: 0.005,
                     maxTargetZoneSpeed: 0.01,
+                },
+            ],
+            powerups: [
+                {
+                    type: 'TimeSlowdown',
+                    slowdownFactor: 2,
+                    duration: 2000,
+                    cooldown: 2000,
                 },
             ],
         },
