@@ -11,7 +11,8 @@ export type LevelType = {
     title: string
     startOnboarding: string
     endOnboarding: string
-    numberOfRounds: number
+    minNumberOfRounds: number
+    maxNumberOfRounds: number
     audio: HTMLAudioElement
     images: LevelImages
     imgUrls: LevelImageUrls

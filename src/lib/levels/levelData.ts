@@ -36,7 +36,8 @@ type Level = {
     title: string
     startOnboarding: string
     endOnboarding: string
-    numberOfRounds: number
+    minNumberOfRounds: number
+    maxNumberOfRounds: number
     powerups?: Powerup[]
     challenges?: Challenge[]
     miniBoss?: {
@@ -59,7 +60,8 @@ const WoodsRegion: Region = {
             startOnboarding:
                 'The player must navigate the dense foliage and stabilize the first time anomaly found in the woods.',
             endOnboarding: 'End onboarding',
-            numberOfRounds: 5,
+            minNumberOfRounds: 3,
+            maxNumberOfRounds: 6,
             challenges: [
                 {
                     type: 'TargetZoneSizeDecrease',
@@ -196,11 +198,11 @@ const LEVELS_FROM_STORAGE = JSON.parse(localStorage.getItem('levels') ?? '[]')
 
 export const LEVELS = LEVELS_DATA.regions.flatMap((region, regionIndex) =>
     region.levels.map((level, levelIndex) => {
-        const { numberOfRounds, ...rest } = level
+        const { maxNumberOfRounds, minNumberOfRounds, ...rest } = level
         const number = regionIndex * region.levels.length + levelIndex + 1
         const score = LEVELS_FROM_STORAGE[levelIndex]?.score ?? 0
 
-        const maxScore = numberOfRounds
+        const maxScore = maxNumberOfRounds
 
         const imgPath = `pics/levels/${number}`
         const imgUrls = {}
@@ -210,7 +212,8 @@ export const LEVELS = LEVELS_DATA.regions.flatMap((region, regionIndex) =>
             number,
             score,
             maxScore,
-            numberOfRounds,
+            maxNumberOfRounds,
+            minNumberOfRounds,
             musicUrl: `music/${number}.mp3`,
             imgUrls,
             region,

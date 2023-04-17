@@ -8,6 +8,7 @@ const MAX_POINTS_PER_ROUND = 3
 export class MainScene extends Phaser.Scene {
     private clock!: Clock
     private levelConfig!: LevelConfig
+    private missCounter: number = 0
     private roundsCompleted: number = 0
     private points: number = 0
     private comboCounter: number = 0
@@ -70,7 +71,7 @@ export class MainScene extends Phaser.Scene {
                 this.points += pointsEarned
                 this.roundsCompleted++
 
-                if (this.roundsCompleted === this.levelConfig.numberOfRounds) {
+                if (this.roundsCompleted === this.getNumberOfRoundsToCompleteLevel()) {
                     this.onLevelEnds(this.points)
                 } else {
                     this.challengeManager.applyChallenges(this.clock, this.roundsCompleted)
@@ -80,10 +81,23 @@ export class MainScene extends Phaser.Scene {
                 console.log('Miss')
                 this.points = Math.max(0, this.points - MAX_POINTS_PER_ROUND)
                 this.comboCounter = 0
+                this.missCounter++
             }
 
             this.onTap(this.points)
         })
+    }
+
+    getNumberOfRoundsToCompleteLevel(): number {
+        if (this.missCounter > 2) {
+            const num = Math.max(
+                this.levelConfig.minNumberOfRounds,
+                Math.min(this.levelConfig.maxNumberOfRounds, this.roundsCompleted)
+            )
+            return num
+        }
+
+        return this.levelConfig.maxNumberOfRounds
     }
 
     update() {

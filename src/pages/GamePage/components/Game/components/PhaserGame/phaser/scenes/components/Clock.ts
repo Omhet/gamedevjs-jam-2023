@@ -181,7 +181,7 @@ export class Clock {
 
     updateTargetZoneSize(round: number, minTargetZoneSize: number): void {
         const decreaseStep =
-            (1 - minTargetZoneSize / this.initialTargetZoneSizeRange[1]) / this.levelConfig.numberOfRounds
+            (1 - minTargetZoneSize / this.initialTargetZoneSizeRange[1]) / this.levelConfig.maxNumberOfRounds
         const decreaseFactor = 1 - round * decreaseStep
 
         const newSizeRange = [
@@ -197,14 +197,14 @@ export class Clock {
 
     updateHandRotationSpeed(round: number, maxHandSpeed: number): void {
         const increaseFactorPerRound =
-            (maxHandSpeed / this.initialHandRotationSpeed - 1) / (this.levelConfig.numberOfRounds - 1)
+            (maxHandSpeed / this.initialHandRotationSpeed - 1) / (this.levelConfig.maxNumberOfRounds - 1)
         const increaseFactor = 1 + round * increaseFactorPerRound
         this.handRotationSpeed = this.initialHandRotationSpeed * increaseFactor * this.handRotationDirection
     }
 
     updateTargetZoneRotationSpeed(round: number, minTargetZoneSpeed: number, maxTargetZoneSpeed: number): void {
         const increaseFactorPerRound =
-            (maxTargetZoneSpeed / minTargetZoneSpeed - 1) / (this.levelConfig.numberOfRounds - 1)
+            (maxTargetZoneSpeed / minTargetZoneSpeed - 1) / (this.levelConfig.maxNumberOfRounds - 1)
         const increaseFactor = 1 + round * increaseFactorPerRound
         this.targetZoneRotationSpeed = minTargetZoneSpeed * increaseFactor
 
