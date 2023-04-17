@@ -3,7 +3,6 @@ import Phaser from 'phaser'
 
 const clockFaceColor = 0xcccccc
 const handColor = 0x0000ff
-const targetZoneColor = 0x000000
 
 function lerp(a: number, b: number, t: number): number {
     return a + (b - a) * t

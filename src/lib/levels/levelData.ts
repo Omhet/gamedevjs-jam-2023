@@ -50,6 +50,10 @@ type LevelsData = {
     regions: Region[]
 }
 
+export const MAX_POINTS_PER_ROUND = 3
+export const LIVES_PER_ROUND = 10
+export const SUPER_COMBO_MULTIPLIER = 2
+
 const Challenges = {
     TargetZoneSizeDecrease: {
         type: 'TargetZoneSizeDecrease',
@@ -90,12 +94,12 @@ const WoodsRegion: Region = {
             startOnboarding:
                 'The player must navigate the dense foliage and stabilize the first time anomaly found in the woods.',
             endOnboarding: 'End onboarding',
-            minNumberOfRounds: 10,
-            maxNumberOfRounds: 15,
+            minNumberOfRounds: 3,
+            maxNumberOfRounds: 5,
             challenges: [
-                Challenges.HandSpeedIncrease,
-                Challenges.TargetZonePositionMove,
-                Challenges.TargetZoneSizeDecrease,
+                // Challenges.HandSpeedIncrease,
+                // Challenges.TargetZonePositionMove,
+                // Challenges.TargetZoneSizeDecrease,
             ],
             powerups: [Powerups.TimeSlowdown],
         },
@@ -104,8 +108,8 @@ const WoodsRegion: Region = {
             startOnboarding:
                 'The player encounters an area where the trees themselves have become affected by the time anomalies, causing the entire thicket to move in strange ways.',
             endOnboarding: 'End onboarding',
-            minNumberOfRounds: 3,
-            maxNumberOfRounds: 6,
+            minNumberOfRounds: 4,
+            maxNumberOfRounds: 7,
             challenges: [
                 Challenges.HandSpeedIncrease,
                 Challenges.TargetZonePositionMove,
@@ -217,7 +221,15 @@ export const LEVELS = LEVELS_DATA.regions.flatMap((region, regionIndex) =>
         const score = LEVELS_FROM_STORAGE[levelIndex]?.score ?? 0
         const completed = LEVELS_FROM_STORAGE[levelIndex]?.completed ?? false
 
-        const maxScore = maxNumberOfRounds
+        let maxScore = 0
+        for (let i = 1; i <= maxNumberOfRounds; i++) {
+            const pointsEarned = i * MAX_POINTS_PER_ROUND
+            if (i > 1) {
+                maxScore += pointsEarned * SUPER_COMBO_MULTIPLIER
+            } else {
+                maxScore += pointsEarned
+            }
+        }
 
         const imgPath = `pics/levels/${number}`
         const imgUrls = {}

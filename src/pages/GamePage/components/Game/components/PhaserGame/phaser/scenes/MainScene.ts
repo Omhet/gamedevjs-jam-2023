@@ -1,20 +1,18 @@
 import { LevelConfig, OnLevelEndsCallback, OnTapCallback } from '@app-types/game'
+import { LIVES_PER_ROUND, MAX_POINTS_PER_ROUND, SUPER_COMBO_MULTIPLIER } from '@lib/levels/levelData'
 import Phaser from 'phaser'
 import { ChallengeManager } from './components/ChallengeManager'
 import { Clock } from './components/Clock'
 import { PowerupManager } from './components/PowerupManager'
 
-const maxPointsPerRound = 3
-const initialLives = 10
 export class MainScene extends Phaser.Scene {
     private clock!: Clock
     private levelConfig!: LevelConfig
     private missCounter: number = 0
     private roundsCompleted: number = 0
     private points: number = 0
-    private lives: number = initialLives
+    private lives: number = LIVES_PER_ROUND
     private comboCounter: number = 0
-    private superComboMultiplier: number = 2
     private challengeManager!: ChallengeManager
     private powerupManager!: PowerupManager
     private onLevelEnds!: OnLevelEndsCallback
@@ -55,16 +53,18 @@ export class MainScene extends Phaser.Scene {
 
             if (accuracy !== null) {
                 this.comboCounter++
-                let pointsEarned = Math.round(accuracy * maxPointsPerRound * this.comboCounter)
+                const rawPoints = Math.round(accuracy * MAX_POINTS_PER_ROUND)
+                let pointsEarned = rawPoints * this.comboCounter
 
                 const handCrossedZone = this.clock.handCrossedZoneTimes > 0
                 const isSuperCombo = !handCrossedZone && this.comboCounter > 1
                 if (isSuperCombo) {
-                    pointsEarned *= this.superComboMultiplier
+                    pointsEarned *= SUPER_COMBO_MULTIPLIER
                 }
 
                 console.log(
                     `Accuracy: ${accuracy}`,
+                    `Raw Points: ${rawPoints}`,
                     `Points Earned: ${pointsEarned}`,
                     `Combo: ${this.comboCounter}`,
                     isSuperCombo ? 'SUPERCOMBO' : ''
@@ -72,7 +72,7 @@ export class MainScene extends Phaser.Scene {
 
                 this.points += pointsEarned
                 this.roundsCompleted++
-                this.lives = initialLives
+                this.lives = LIVES_PER_ROUND
 
                 if (this.roundsCompleted === this.getNumberOfRoundsToCompleteLevel()) {
                     this.onLevelEnds(this.points)
@@ -82,14 +82,14 @@ export class MainScene extends Phaser.Scene {
                 }
             } else {
                 console.log('Miss')
-                this.points = Math.max(0, this.points - maxPointsPerRound)
+                this.points = Math.max(0, this.points - MAX_POINTS_PER_ROUND)
                 this.comboCounter = 0
                 this.missCounter++
                 this.lives = Math.max(0, this.lives - 1)
                 if (this.lives === 0) {
                     this.onLevelEnds(this.points)
                 }
-                this.clock.increaseTargetZoneSize(this.lives, initialLives)
+                this.clock.increaseTargetZoneSize(this.lives, LIVES_PER_ROUND)
             }
 
             this.onTap(this.points)
