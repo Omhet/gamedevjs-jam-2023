@@ -15,8 +15,6 @@ export class PowerupManager {
     }
 
     destroy(): void {
-        console.log('DWSTORYP')
-
         window.removeEventListener('powerupActivated', this.handlePowerupActivated as EventListener)
         window.removeEventListener('powerupDeactivated', this.handlePowerupActivated as EventListener)
     }

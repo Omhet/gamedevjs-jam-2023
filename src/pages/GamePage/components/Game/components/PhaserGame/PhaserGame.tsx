@@ -30,7 +30,7 @@ export const PhaserGame: FC<PhaserGameProps> = ({}) => {
         }
 
         return () => {
-            console.log('Unmout')
+            console.log('Game Unmount')
 
             if (game) {
                 ;(game.scene.getScene('MainScene') as MainScene).destroy()

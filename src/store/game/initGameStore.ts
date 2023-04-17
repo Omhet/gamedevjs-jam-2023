@@ -54,5 +54,6 @@ setGameScore.watch((newScore) => {
 
 // Do end game stuff
 endGame.watch(() => {
+    setGameStatus(GameStatus.End)
     openGameEndModal()
 })

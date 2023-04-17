@@ -27,6 +27,8 @@ export class MainScene extends Phaser.Scene {
     }
 
     destroy() {
+        console.log('MainScene destroy')
+
         this.powerupManager.destroy()
     }
 
