@@ -66,7 +66,7 @@ export class MainScene extends Phaser.Scene {
             } else {
                 console.log('Miss')
                 this.points = Math.max(0, this.points - MAX_POINTS_PER_ROUND)
-                this.comboCounter = 0 // Reset combo counter
+                this.comboCounter = 0
             }
 
             this.onTap(this.points)

@@ -24,10 +24,10 @@ export class PowerupManager {
 
         switch (powerup.type) {
             case 'TimeSlowdown':
-                this.clock.slowDownTime(powerup.slowdownFactor)
+                this.clock.slowDownAllTime(powerup.slowdownFactor)
                 break
             case 'TimeFreeze':
-                this.clock.freezeTime()
+                this.clock.freezeTargetZoneTime()
                 break
             default:
                 console.warn('Unknown powerup')
@@ -39,10 +39,11 @@ export class PowerupManager {
 
         switch (powerup.type) {
             case 'TimeSlowdown':
-                this.clock.resetTime()
+                this.clock.resetHandTime()
+                this.clock.resetTargetZoneTime()
                 break
             case 'TimeFreeze':
-                this.clock.resetTime()
+                this.clock.unfreezeTargetZoneTime()
                 break
             default:
                 console.warn('Unknown powerup')

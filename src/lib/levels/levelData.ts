@@ -79,7 +79,7 @@ const WoodsRegion: Region = {
                 {
                     type: 'TimeSlowdown',
                     slowdownFactor: 0.5,
-                    duration: 2000,
+                    duration: 4000,
                     cooldown: 2000,
                 },
                 {
