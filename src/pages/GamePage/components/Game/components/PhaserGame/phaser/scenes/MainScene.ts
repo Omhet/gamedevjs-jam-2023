@@ -5,7 +5,7 @@ import { Clock } from './components/Clock'
 import { PowerupManager } from './components/PowerupManager'
 
 const maxPointsPerRound = 3
-const initialLives = 3
+const initialLives = 10
 export class MainScene extends Phaser.Scene {
     private clock!: Clock
     private levelConfig!: LevelConfig

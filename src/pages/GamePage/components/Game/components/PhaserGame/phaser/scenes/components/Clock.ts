@@ -183,60 +183,35 @@ export class Clock {
         return null
     }
 
-    private adjustCurrentTargetZoneSize(currentStepNumber: number, stepsNumber: number): void {
-        const progress = currentStepNumber / stepsNumber
-        const newSize = lerp(this.targetZoneSizeRange[0], this.targetZoneSizeRange[1], progress)
-
-        const targetZoneCenter = (this.targetZoneStartAngle + this.targetZoneEndAngle) / 2
-        const halfNewSize = newSize / 2
-
-        this.targetZoneStartAngle = Phaser.Math.Wrap(targetZoneCenter - halfNewSize, 0, Math.PI * 2)
-        this.targetZoneEndAngle = Phaser.Math.Wrap(targetZoneCenter + halfNewSize, 0, Math.PI * 2)
-
-        this.drawTargetZone()
-    }
-
-    updateTargetZoneSize(
-        targetSize: number,
-        stepsNumber: number,
-        currentStepNumber: number,
-        isIncreasing: boolean
-    ): void {
-        const sizeFactor = isIncreasing
-            ? 1 - currentStepNumber / stepsNumber
-            : 1 - currentStepNumber / (stepsNumber - 1)
+    decreaseTargetZoneSize(round: number, minTargetZoneSize: number): void {
+        const decreaseStep =
+            (1 - minTargetZoneSize / this.initialTargetZoneSizeRange[1]) / this.levelConfig.maxNumberOfRounds
+        const decreaseFactor = 1 - round * decreaseStep
 
         const newSizeRange = [
-            isIncreasing
-                ? this.targetZoneSizeRange[0]
-                : Math.max(targetSize, this.initialTargetZoneSizeRange[0] * sizeFactor),
-            isIncreasing
-                ? this.initialTargetZoneSizeRange[1] +
-                  (targetSize - this.initialTargetZoneSizeRange[1]) * (1 - sizeFactor)
-                : Math.max(targetSize, this.initialTargetZoneSizeRange[1] * sizeFactor),
+            Math.max(minTargetZoneSize, this.targetZoneSizeRange[0] * decreaseFactor),
+            Math.max(minTargetZoneSize, this.targetZoneSizeRange[1] * decreaseFactor),
         ] as [number, number]
 
         // Ensure that the minimum size is not greater than the maximum size
         if (newSizeRange[0] <= newSizeRange[1]) {
             this.targetZoneSizeRange = newSizeRange
         }
-
-        this.adjustCurrentTargetZoneSize(currentStepNumber, stepsNumber)
     }
 
     increaseTargetZoneSize(currentLives: number, initialLives: number): void {
-        const maxTargetZoneSize = Math.PI * 1.5
-        const currentStepNumber = initialLives - currentLives
-        const stepsNumber = initialLives
+        const maxSize = Math.PI
+        const currentSize = this.targetZoneEndAngle - this.targetZoneStartAngle
+        const newSize = currentSize + (maxSize - currentSize) * (1 - currentLives / initialLives)
 
-        this.updateTargetZoneSize(maxTargetZoneSize, stepsNumber, currentStepNumber, true)
-    }
+        const clampedNewSize = Math.min(newSize, maxSize)
+        const halfNewSize = clampedNewSize / 2
+        const targetZoneCenter = (this.targetZoneStartAngle + this.targetZoneEndAngle) / 2
 
-    decreaseTargetZoneSize(round: number, minTargetZoneSize: number): void {
-        const currentStepNumber = round
-        const stepsNumber = this.levelConfig.maxNumberOfRounds
+        this.targetZoneStartAngle = Phaser.Math.Wrap(targetZoneCenter - halfNewSize, 0, 2 * Math.PI)
+        this.targetZoneEndAngle = Phaser.Math.Wrap(targetZoneCenter + halfNewSize, 0, 2 * Math.PI)
 
-        this.updateTargetZoneSize(minTargetZoneSize, stepsNumber, currentStepNumber, false)
+        this.drawTargetZone()
     }
 
     increaseHandRotationSpeed(round: number, maxHandSpeed: number): void {
