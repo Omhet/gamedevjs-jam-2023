@@ -4,9 +4,9 @@ import { FC, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import { startGame } from './phaser/main'
 
-export interface SceneProps {}
+export interface PhaserGameProps {}
 
-export const Scene: FC<SceneProps> = ({}) => {
+export const PhaserGame: FC<PhaserGameProps> = ({}) => {
     const levelData = levelDataManager.getCurrentLevelData()
 
     const handleLevelEnds = () => {
