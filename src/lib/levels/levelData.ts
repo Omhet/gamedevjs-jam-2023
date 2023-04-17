@@ -215,6 +215,7 @@ export const LEVELS = LEVELS_DATA.regions.flatMap((region, regionIndex) =>
         const { maxNumberOfRounds, minNumberOfRounds, ...rest } = level
         const number = regionIndex * region.levels.length + levelIndex + 1
         const score = LEVELS_FROM_STORAGE[levelIndex]?.score ?? 0
+        const completed = LEVELS_FROM_STORAGE[levelIndex]?.completed ?? false
 
         const maxScore = maxNumberOfRounds
 
@@ -232,6 +233,7 @@ export const LEVELS = LEVELS_DATA.regions.flatMap((region, regionIndex) =>
             imgUrls,
             region,
             regionName: region.name,
+            completed,
         }
     })
 )

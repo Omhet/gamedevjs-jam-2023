@@ -3,6 +3,7 @@ import { levelDataManager } from '@lib/levels/LevelDataManager'
 import {
     currentLevelStore,
     rewriteCurrentLevelScore,
+    setCurrentLevelCompleted,
     setCurrentLevelNumber,
     setCurrentLevelScore,
     setIsBetterScoreThanEarlier,
@@ -54,6 +55,7 @@ setGameScore.watch((newScore) => {
 
 // Do end game stuff
 endGame.watch(() => {
+    setCurrentLevelCompleted()
     setGameStatus(GameStatus.End)
     openGameEndModal()
 })

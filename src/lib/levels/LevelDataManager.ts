@@ -8,6 +8,7 @@ export type LevelType = {
     number: number
     score: number
     maxScore: number
+    completed: boolean
     title: string
     startOnboarding: string
     endOnboarding: string

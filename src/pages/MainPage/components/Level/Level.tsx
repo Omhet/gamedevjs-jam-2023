@@ -49,6 +49,7 @@ export const Level: FC<LevelProps> = ({ data }) => {
                         Play
                     </motion.button>
                 )}
+                {!isOpen && <div>Play previous levels till the end to unblock</div>}
             </motion.div>
         </motion.div>
     )

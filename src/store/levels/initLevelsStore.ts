@@ -1,6 +1,7 @@
 import {
     levelsStore,
     rewriteCurrentLevelScore,
+    setCurrentLevelCompleted,
     setCurrentLevelNumber,
     setCurrentLevelScore,
     setIsBetterScoreThanEarlier,
@@ -17,6 +18,18 @@ levelsStore
                 return {
                     ...level,
                     score,
+                }
+            }
+            return level
+        }),
+    }))
+    .on(setCurrentLevelCompleted, (state) => ({
+        ...state,
+        levels: state.levels.map((level) => {
+            if (level.number === state.currentLevelNumber) {
+                return {
+                    ...level,
+                    completed: true,
                 }
             }
             return level
