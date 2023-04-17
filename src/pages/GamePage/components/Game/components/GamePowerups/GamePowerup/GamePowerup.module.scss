@@ -1,0 +1,15 @@
+.root {
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    color: white;
+    background-color: #111;
+    border: white 1px solid;
+    padding: 12px;
+
+    &.disabled {
+        opacity: 0.5;
+    }
+}
