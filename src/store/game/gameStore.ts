@@ -22,7 +22,7 @@ export const setGameScore = createEvent<number>()
 export const resetGameData = createEvent()
 
 export const startGame = createEvent()
-export const endGame = createEvent()
+export const endGame = createEvent<boolean>()
 
 export const loadGame = createEffect<number, void, void>()
 

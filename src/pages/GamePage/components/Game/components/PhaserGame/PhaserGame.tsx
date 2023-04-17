@@ -1,3 +1,4 @@
+import { OnLevelEndsCallback } from '@app-types/game'
 import { levelDataManager } from '@lib/levels/LevelDataManager'
 import { endGame, setGameScore } from '@store/game/gameStore'
 import { FC, useEffect } from 'react'
@@ -11,8 +12,9 @@ export interface PhaserGameProps {}
 export const PhaserGame: FC<PhaserGameProps> = ({}) => {
     const levelData = levelDataManager.getCurrentLevelData()
 
-    const handleLevelEnds = () => {
-        endGame()
+    const handleLevelEnds: OnLevelEndsCallback = ({ isDead }) => {
+        const isCompleted = Boolean(levelData.miniBoss) ? !isDead : true
+        endGame(isCompleted)
     }
 
     const handleTap = (points: number) => {

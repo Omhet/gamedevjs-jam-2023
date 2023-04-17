@@ -23,13 +23,13 @@ levelsStore
             return level
         }),
     }))
-    .on(setCurrentLevelCompleted, (state) => ({
+    .on(setCurrentLevelCompleted, (state, isCompleted) => ({
         ...state,
         levels: state.levels.map((level) => {
             if (level.number === state.currentLevelNumber) {
                 return {
                     ...level,
-                    completed: true,
+                    completed: isCompleted,
                 }
             }
             return level

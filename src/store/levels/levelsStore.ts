@@ -74,7 +74,7 @@ export const useNextLevel = () => {
     return state
 }
 
-export const setCurrentLevelCompleted = createEvent()
+export const setCurrentLevelCompleted = createEvent<boolean>()
 export const setCurrentLevelNumber = createEvent<number>()
 export const setCurrentLevelScore = createEvent<number>()
 export const rewriteCurrentLevelScore = createEvent<number>()

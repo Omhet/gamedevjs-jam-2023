@@ -54,8 +54,8 @@ setGameScore.watch((newScore) => {
 })
 
 // Do end game stuff
-endGame.watch(() => {
-    setCurrentLevelCompleted()
+endGame.watch((isCompleted) => {
+    setCurrentLevelCompleted(isCompleted)
     setGameStatus(GameStatus.End)
     openGameEndModal()
 })

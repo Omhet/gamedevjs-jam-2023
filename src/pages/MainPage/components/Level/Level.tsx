@@ -13,7 +13,7 @@ export type LevelProps = {
 
 export const Level: FC<LevelProps> = ({ data }) => {
     const { levels } = useLevels()
-    const { isOpen, score } = levels.find((lvl) => lvl.number === data.number) ?? {}
+    const { isOpen, score, completed } = levels.find((lvl) => lvl.number === data.number) ?? {}
 
     const history = useHistory()
 
@@ -33,6 +33,7 @@ export const Level: FC<LevelProps> = ({ data }) => {
         >
             <motion.div className={s.infoContainer} variants={levelVariants} whileHover="hover">
                 <div className={s.levelTitle}>{data.title}</div>
+                {completed && <div>Completed</div>}
                 {isOpen && (
                     <div className={s.levelScore}>
                         {score} / {data.maxScore}

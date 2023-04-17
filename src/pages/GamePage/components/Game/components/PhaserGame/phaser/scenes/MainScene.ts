@@ -75,7 +75,7 @@ export class MainScene extends Phaser.Scene {
                 this.lives = LIVES_PER_ROUND
 
                 if (this.roundsCompleted === this.getNumberOfRoundsToCompleteLevel()) {
-                    this.onLevelEnds(this.points)
+                    this.finishGame(false)
                 } else {
                     this.challengeManager.applyChallenges(this.clock, this.roundsCompleted)
                     this.clock.generateNewTargetZone()
@@ -87,13 +87,17 @@ export class MainScene extends Phaser.Scene {
                 this.missCounter++
                 this.lives = Math.max(0, this.lives - 1)
                 if (this.lives === 0) {
-                    this.onLevelEnds(this.points)
+                    this.finishGame(true)
                 }
                 this.clock.increaseTargetZoneSize(this.lives, LIVES_PER_ROUND)
             }
 
             this.onTap(this.points)
         })
+    }
+
+    finishGame(isDead: boolean) {
+        this.onLevelEnds({ points: this.points, isDead })
     }
 
     getNumberOfRoundsToCompleteLevel(): number {
