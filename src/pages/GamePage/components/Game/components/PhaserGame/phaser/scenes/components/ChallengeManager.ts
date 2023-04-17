@@ -8,13 +8,13 @@ export class ChallengeManager {
         for (const challenge of this.challenges) {
             switch (challenge.type) {
                 case 'TargetZoneSizeDecrease':
-                    clock.updateTargetZoneSize(roundsCompleted, challenge.minTargetZoneSize)
+                    clock.decreaseTargetZoneSize(roundsCompleted, challenge.minTargetZoneSize)
                     break
                 case 'HandSpeedIncrease':
-                    clock.updateHandRotationSpeed(roundsCompleted, challenge.maxHandSpeed)
+                    clock.increaseHandRotationSpeed(roundsCompleted, challenge.maxHandSpeed)
                     break
                 case 'TargetZonePositionMove':
-                    clock.updateTargetZoneRotationSpeed(
+                    clock.increaseTargetZoneRotationSpeed(
                         roundsCompleted,
                         challenge.minTargetZoneSpeed,
                         challenge.maxTargetZoneSpeed
