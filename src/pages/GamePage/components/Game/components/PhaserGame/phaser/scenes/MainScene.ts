@@ -54,7 +54,8 @@ export class MainScene extends Phaser.Scene {
                 this.comboCounter++
                 let pointsEarned = Math.round(accuracy * MAX_POINTS_PER_ROUND * this.comboCounter)
 
-                const isSuperCombo = this.clock.handCrossedZoneTimes === 0
+                const handCrossedZone = this.clock.handCrossedZoneTimes > 0
+                const isSuperCombo = !handCrossedZone && this.comboCounter > 1
                 if (isSuperCombo) {
                     pointsEarned *= this.superComboMultiplier
                 }

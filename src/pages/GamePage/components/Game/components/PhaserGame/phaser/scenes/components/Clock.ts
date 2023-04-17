@@ -23,6 +23,7 @@ export class Clock {
     private handTime: number = 1
     private targetZoneTime: number = 1
 
+    private prevHandInZone: boolean = false
     public handCrossedZoneTimes: number = 0
 
     private centerX: number
@@ -101,6 +102,7 @@ export class Clock {
 
     generateNewTargetZone() {
         this.handCrossedZoneTimes = 0
+        this.prevHandInZone = false
 
         const handAngle = Phaser.Math.Wrap(this.hand.angle, 0, 360)
         const handAngleRad = Phaser.Math.DegToRad(handAngle)
@@ -235,15 +237,15 @@ export class Clock {
     }
 
     public checkHandCrossedZone(): void {
-        const prevHandInZone = this.isHandInTargetZone()
         this.hand.rotation += this.handRotationSpeed * this.handRotationDirection * this.handTime
         const currHandInZone = this.isHandInTargetZone()
 
-        if (prevHandInZone && !currHandInZone) {
+        if (this.prevHandInZone && !currHandInZone) {
             console.log('Crossed')
-
             this.handCrossedZoneTimes++
         }
+
+        this.prevHandInZone = currHandInZone
     }
 
     public update(): void {
