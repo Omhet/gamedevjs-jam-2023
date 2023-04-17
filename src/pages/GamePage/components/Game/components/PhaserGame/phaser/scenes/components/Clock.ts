@@ -211,8 +211,16 @@ export class Clock {
         }
     }
 
-    updateTime(time: number): void {
-        this.time = time
+    slowDownTime(slowdownFactor: number): void {
+        this.time = this.time * slowdownFactor
+    }
+
+    freezeTime(): void {
+        this.time = 0
+    }
+
+    resetTime(): void {
+        this.time = 1
     }
 
     public update(): void {

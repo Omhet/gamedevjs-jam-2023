@@ -4,6 +4,7 @@ import { FC, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import s from './PhaserGame.module.scss'
 import { startGame } from './phaser/main'
+import { MainScene } from './phaser/scenes/MainScene'
 
 export interface PhaserGameProps {}
 
@@ -29,7 +30,10 @@ export const PhaserGame: FC<PhaserGameProps> = ({}) => {
         }
 
         return () => {
+            console.log('Unmout')
+
             if (game) {
+                ;(game.scene.getScene('MainScene') as MainScene).destroy()
                 game.destroy(true, false)
             }
         }

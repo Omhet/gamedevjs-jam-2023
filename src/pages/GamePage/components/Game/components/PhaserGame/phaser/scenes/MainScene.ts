@@ -2,6 +2,7 @@ import { LevelConfig, OnLevelEndsCallback, OnTapCallback } from '@app-types/game
 import Phaser from 'phaser'
 import { ChallengeManager } from './components/ChallengeManager'
 import { Clock } from './components/Clock'
+import { PowerupManager } from './components/PowerupManager'
 
 const MAX_POINTS_PER_ROUND = 3
 export class MainScene extends Phaser.Scene {
@@ -11,6 +12,7 @@ export class MainScene extends Phaser.Scene {
     private points: number = 0
     private comboCounter: number = 0
     private challengeManager!: ChallengeManager
+    private powerupManager!: PowerupManager
     private onLevelEnds!: OnLevelEndsCallback
     private onTap!: OnTapCallback
 
@@ -24,14 +26,21 @@ export class MainScene extends Phaser.Scene {
         this.onTap = data.onTap
     }
 
+    destroy() {
+        this.powerupManager.destroy()
+    }
+
     create() {
         const centerX = this.scale.width / 2
         const centerY = this.scale.height / 2
         const radius = Math.min(centerX, centerY) * 0.8
 
         this.clock = new Clock(this, centerX, centerY, radius, this.levelConfig)
+
         this.challengeManager = new ChallengeManager(this.levelConfig.challenges ?? [])
         this.challengeManager.applyChallenges(this.clock, this.roundsCompleted)
+
+        this.powerupManager = new PowerupManager(this.clock)
 
         const spaceKey = this.input.keyboard!.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
 

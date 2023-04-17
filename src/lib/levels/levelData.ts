@@ -78,7 +78,12 @@ const WoodsRegion: Region = {
             powerups: [
                 {
                     type: 'TimeSlowdown',
-                    slowdownFactor: 2,
+                    slowdownFactor: 0.5,
+                    duration: 2000,
+                    cooldown: 2000,
+                },
+                {
+                    type: 'TimeFreeze',
                     duration: 2000,
                     cooldown: 2000,
                 },
