@@ -50,6 +50,36 @@ type LevelsData = {
     regions: Region[]
 }
 
+const Challenges = {
+    TargetZoneSizeDecrease: {
+        type: 'TargetZoneSizeDecrease',
+        minTargetZoneSize: Math.PI / 12,
+    },
+    HandSpeedIncrease: {
+        type: 'HandSpeedIncrease',
+        maxHandSpeed: 0.04,
+    },
+    TargetZonePositionMove: {
+        type: 'TargetZonePositionMove',
+        minTargetZoneSpeed: 0.005,
+        maxTargetZoneSpeed: 0.01,
+    },
+} as const
+
+const Powerups = {
+    TimeSlowdown: {
+        type: 'TimeSlowdown',
+        slowdownFactor: 0.5,
+        duration: 4000,
+        cooldown: 2000,
+    },
+    TimeFreeze: {
+        type: 'TimeFreeze',
+        duration: 2000,
+        cooldown: 2000,
+    },
+} as const
+
 const WoodsRegion: Region = {
     name: 'ChronoWoods',
     description:
@@ -60,45 +90,29 @@ const WoodsRegion: Region = {
             startOnboarding:
                 'The player must navigate the dense foliage and stabilize the first time anomaly found in the woods.',
             endOnboarding: 'End onboarding',
+            minNumberOfRounds: 2,
+            maxNumberOfRounds: 5,
+            challenges: [
+                Challenges.HandSpeedIncrease,
+                Challenges.TargetZonePositionMove,
+                Challenges.TargetZoneSizeDecrease,
+            ],
+            powerups: [Powerups.TimeSlowdown],
+        },
+        {
+            title: 'Ticking Thicket',
+            startOnboarding:
+                'The player encounters an area where the trees themselves have become affected by the time anomalies, causing the entire thicket to move in strange ways.',
+            endOnboarding: 'End onboarding',
             minNumberOfRounds: 3,
             maxNumberOfRounds: 6,
             challenges: [
-                {
-                    type: 'TargetZoneSizeDecrease',
-                    minTargetZoneSize: Math.PI / 12,
-                },
-                {
-                    type: 'HandSpeedIncrease',
-                    maxHandSpeed: 0.04,
-                },
-                {
-                    type: 'TargetZonePositionMove',
-                    minTargetZoneSpeed: 0.005,
-                    maxTargetZoneSpeed: 0.01,
-                },
+                Challenges.HandSpeedIncrease,
+                Challenges.TargetZonePositionMove,
+                Challenges.TargetZoneSizeDecrease,
             ],
-            powerups: [
-                {
-                    type: 'TimeSlowdown',
-                    slowdownFactor: 0.5,
-                    duration: 4000,
-                    cooldown: 2000,
-                },
-                {
-                    type: 'TimeFreeze',
-                    duration: 2000,
-                    cooldown: 2000,
-                },
-            ],
+            powerups: [Powerups.TimeSlowdown, Powerups.TimeFreeze],
         },
-        // {
-        //     title: 'Ticking Thicket',
-        //     startOnboarding:
-        //         'The player encounters an area where the trees themselves have become affected by the time anomalies, causing the entire thicket to move in strange ways.',
-        //     endOnboarding: 'End onboarding',
-        //     numberOfRounds: 2,
-        //     powerups: ['TimeSlowdown'],
-        // },
         // {
         //     title: 'Temporal Glade',
         //     startOnboarding:
