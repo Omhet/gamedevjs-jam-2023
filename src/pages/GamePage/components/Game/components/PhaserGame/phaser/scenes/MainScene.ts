@@ -11,6 +11,7 @@ export class MainScene extends Phaser.Scene {
     private roundsCompleted: number = 0
     private points: number = 0
     private comboCounter: number = 0
+    private superComboMultiplier: number = 2
     private challengeManager!: ChallengeManager
     private powerupManager!: PowerupManager
     private onLevelEnds!: OnLevelEndsCallback
@@ -37,6 +38,7 @@ export class MainScene extends Phaser.Scene {
         const radius = Math.min(centerX, centerY) * 0.8
 
         this.clock = new Clock(this, centerX, centerY, radius, this.levelConfig)
+        this.clock.generateNewTargetZone()
 
         this.challengeManager = new ChallengeManager(this.levelConfig.challenges ?? [])
         this.challengeManager.applyChallenges(this.clock, this.roundsCompleted)
@@ -50,8 +52,19 @@ export class MainScene extends Phaser.Scene {
 
             if (accuracy !== null) {
                 this.comboCounter++
-                const pointsEarned = Math.round(accuracy * MAX_POINTS_PER_ROUND * this.comboCounter)
-                console.log(`Accuracy: ${accuracy}`, `Points Earned: ${pointsEarned}`, `Combo: ${this.comboCounter}`)
+                let pointsEarned = Math.round(accuracy * MAX_POINTS_PER_ROUND * this.comboCounter)
+
+                const isSuperCombo = this.clock.handCrossedZoneTimes === 0
+                if (isSuperCombo) {
+                    pointsEarned *= this.superComboMultiplier
+                }
+
+                console.log(
+                    `Accuracy: ${accuracy}`,
+                    `Points Earned: ${pointsEarned}`,
+                    `Combo: ${this.comboCounter}`,
+                    isSuperCombo ? 'SUPERCOMBO' : ''
+                )
 
                 this.points += pointsEarned
                 this.roundsCompleted++

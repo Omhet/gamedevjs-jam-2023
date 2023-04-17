@@ -23,6 +23,8 @@ export class Clock {
     private handTime: number = 1
     private targetZoneTime: number = 1
 
+    public handCrossedZoneTimes: number = 0
+
     private centerX: number
     private centerY: number
     private radius: number
@@ -41,8 +43,6 @@ export class Clock {
             lineStyle: { width: 0 },
             fillStyle: { color: 0x00ff00, alpha: 0.3 },
         })
-
-        this.generateNewTargetZone()
     }
 
     private createClockFace(): Phaser.GameObjects.Arc {
@@ -100,6 +100,8 @@ export class Clock {
     }
 
     generateNewTargetZone() {
+        this.handCrossedZoneTimes = 0
+
         const handAngle = Phaser.Math.Wrap(this.hand.angle, 0, 360)
         const handAngleRad = Phaser.Math.DegToRad(handAngle)
 
@@ -169,7 +171,6 @@ export class Clock {
 
         if (isHandInZone) {
             const accuracy = this.calculateTapAccuracy()
-            this.generateNewTargetZone()
             return accuracy
         }
 
@@ -233,8 +234,20 @@ export class Clock {
         this.targetZoneTime = this.targetZoneTime !== 0 ? 1 : this.targetZoneTime
     }
 
-    public update(): void {
+    public checkHandCrossedZone(): void {
+        const prevHandInZone = this.isHandInTargetZone()
         this.hand.rotation += this.handRotationSpeed * this.handRotationDirection * this.handTime
+        const currHandInZone = this.isHandInTargetZone()
+
+        if (prevHandInZone && !currHandInZone) {
+            console.log('Crossed')
+
+            this.handCrossedZoneTimes++
+        }
+    }
+
+    public update(): void {
+        this.checkHandCrossedZone()
         this.targetZoneStartAngle +=
             this.targetZoneRotationSpeed * this.targetZoneRotationDirection * this.targetZoneTime
         this.targetZoneEndAngle += this.targetZoneRotationSpeed * this.targetZoneRotationDirection * this.targetZoneTime
