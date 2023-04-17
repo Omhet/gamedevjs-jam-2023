@@ -20,6 +20,7 @@ export class Clock {
     private targetZoneSizeRange: [number, number] = [Math.PI / 2, Math.PI / 1.5]
     private initialTargetZoneSizeRange: [number, number] = [Math.PI / 2, Math.PI / 1.5]
     private forgivingAngleOffset: number = 3 // You can adjust this value to make the game more or less forgiving
+    private time: number = 1
 
     private centerX: number
     private centerY: number
@@ -210,10 +211,14 @@ export class Clock {
         }
     }
 
+    updateTime(time: number): void {
+        this.time = time
+    }
+
     public update(): void {
-        this.hand.rotation += this.handRotationSpeed * this.handRotationDirection
-        this.targetZoneStartAngle += this.targetZoneRotationSpeed * this.targetZoneRotationDirection
-        this.targetZoneEndAngle += this.targetZoneRotationSpeed * this.targetZoneRotationDirection
+        this.hand.rotation += this.handRotationSpeed * this.handRotationDirection * this.time
+        this.targetZoneStartAngle += this.targetZoneRotationSpeed * this.targetZoneRotationDirection * this.time
+        this.targetZoneEndAngle += this.targetZoneRotationSpeed * this.targetZoneRotationDirection * this.time
         this.drawTargetZone()
     }
 }
