@@ -5,6 +5,10 @@ const clockFaceColor = 0xcccccc
 const handColor = 0x0000ff
 const targetZoneColor = 0x000000
 
+function lerp(a: number, b: number, t: number): number {
+    return a + (b - a) * t
+}
+
 export class Clock {
     private scene: Phaser.Scene
     private clockFace: Phaser.GameObjects.Arc
@@ -179,6 +183,19 @@ export class Clock {
         return null
     }
 
+    private adjustCurrentTargetZoneSize(currentStepNumber: number, stepsNumber: number): void {
+        const progress = currentStepNumber / stepsNumber
+        const newSize = lerp(this.targetZoneSizeRange[0], this.targetZoneSizeRange[1], progress)
+
+        const targetZoneCenter = (this.targetZoneStartAngle + this.targetZoneEndAngle) / 2
+        const halfNewSize = newSize / 2
+
+        this.targetZoneStartAngle = Phaser.Math.Wrap(targetZoneCenter - halfNewSize, 0, Math.PI * 2)
+        this.targetZoneEndAngle = Phaser.Math.Wrap(targetZoneCenter + halfNewSize, 0, Math.PI * 2)
+
+        this.drawTargetZone()
+    }
+
     updateTargetZoneSize(
         targetSize: number,
         stepsNumber: number,
@@ -186,7 +203,7 @@ export class Clock {
         isIncreasing: boolean
     ): void {
         const sizeFactor = isIncreasing
-            ? currentStepNumber / (stepsNumber - 1)
+            ? 1 - currentStepNumber / stepsNumber
             : 1 - currentStepNumber / (stepsNumber - 1)
 
         const newSizeRange = [
@@ -194,7 +211,8 @@ export class Clock {
                 ? this.targetZoneSizeRange[0]
                 : Math.max(targetSize, this.initialTargetZoneSizeRange[0] * sizeFactor),
             isIncreasing
-                ? this.initialTargetZoneSizeRange[1] + (targetSize - this.initialTargetZoneSizeRange[1]) * sizeFactor
+                ? this.initialTargetZoneSizeRange[1] +
+                  (targetSize - this.initialTargetZoneSizeRange[1]) * (1 - sizeFactor)
                 : Math.max(targetSize, this.initialTargetZoneSizeRange[1] * sizeFactor),
         ] as [number, number]
 
@@ -202,10 +220,12 @@ export class Clock {
         if (newSizeRange[0] <= newSizeRange[1]) {
             this.targetZoneSizeRange = newSizeRange
         }
+
+        this.adjustCurrentTargetZoneSize(currentStepNumber, stepsNumber)
     }
 
     increaseTargetZoneSize(currentLives: number, initialLives: number): void {
-        const maxTargetZoneSize = Math.PI
+        const maxTargetZoneSize = Math.PI * 1.5
         const currentStepNumber = initialLives - currentLives
         const stepsNumber = initialLives
 

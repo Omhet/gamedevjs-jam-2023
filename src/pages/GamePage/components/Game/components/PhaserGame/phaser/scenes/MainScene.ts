@@ -72,6 +72,7 @@ export class MainScene extends Phaser.Scene {
 
                 this.points += pointsEarned
                 this.roundsCompleted++
+                this.lives = initialLives
 
                 if (this.roundsCompleted === this.getNumberOfRoundsToCompleteLevel()) {
                     this.onLevelEnds(this.points)
@@ -85,6 +86,9 @@ export class MainScene extends Phaser.Scene {
                 this.comboCounter = 0
                 this.missCounter++
                 this.lives = Math.max(0, this.lives - 1)
+                if (this.lives === 0) {
+                    this.onLevelEnds(this.points)
+                }
                 this.clock.increaseTargetZoneSize(this.lives, initialLives)
             }
 
