@@ -2,6 +2,7 @@ import { levelDataManager } from '@lib/levels/LevelDataManager'
 import { endGame, setGameScore } from '@store/game/gameStore'
 import { FC, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
+import s from './PhaserGame.module.scss'
 import { startGame } from './phaser/main'
 
 export interface PhaserGameProps {}
@@ -38,5 +39,5 @@ export const PhaserGame: FC<PhaserGameProps> = ({}) => {
         return <Redirect to="/" />
     }
 
-    return <div id="app"></div>
+    return <div className={s.root} id="app"></div>
 }

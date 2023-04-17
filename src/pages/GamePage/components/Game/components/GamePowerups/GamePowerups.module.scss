@@ -1,0 +1,16 @@
+.root {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+}
+
+.powerup {
+    color: white;
+    background-color: #111;
+    border: white 1px solid;
+    padding: 12px;
+}
