@@ -4,13 +4,15 @@ import { ChallengeManager } from './components/ChallengeManager'
 import { Clock } from './components/Clock'
 import { PowerupManager } from './components/PowerupManager'
 
-const MAX_POINTS_PER_ROUND = 3
+const maxPointsPerRound = 3
+const initialLives = 3
 export class MainScene extends Phaser.Scene {
     private clock!: Clock
     private levelConfig!: LevelConfig
     private missCounter: number = 0
     private roundsCompleted: number = 0
     private points: number = 0
+    private lives: number = initialLives
     private comboCounter: number = 0
     private superComboMultiplier: number = 2
     private challengeManager!: ChallengeManager
@@ -53,7 +55,7 @@ export class MainScene extends Phaser.Scene {
 
             if (accuracy !== null) {
                 this.comboCounter++
-                let pointsEarned = Math.round(accuracy * MAX_POINTS_PER_ROUND * this.comboCounter)
+                let pointsEarned = Math.round(accuracy * maxPointsPerRound * this.comboCounter)
 
                 const handCrossedZone = this.clock.handCrossedZoneTimes > 0
                 const isSuperCombo = !handCrossedZone && this.comboCounter > 1
@@ -79,9 +81,11 @@ export class MainScene extends Phaser.Scene {
                 }
             } else {
                 console.log('Miss')
-                this.points = Math.max(0, this.points - MAX_POINTS_PER_ROUND)
+                this.points = Math.max(0, this.points - maxPointsPerRound)
                 this.comboCounter = 0
                 this.missCounter++
+                this.lives = Math.max(0, this.lives - 1)
+                this.clock.increaseTargetZoneSize(this.lives, initialLives)
             }
 
             this.onTap(this.points)

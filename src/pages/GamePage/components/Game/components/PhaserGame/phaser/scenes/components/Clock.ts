@@ -179,20 +179,44 @@ export class Clock {
         return null
     }
 
-    decreaseTargetZoneSize(round: number, minTargetZoneSize: number): void {
-        const decreaseStep =
-            (1 - minTargetZoneSize / this.initialTargetZoneSizeRange[1]) / this.levelConfig.maxNumberOfRounds
-        const decreaseFactor = 1 - round * decreaseStep
+    updateTargetZoneSize(
+        targetSize: number,
+        stepsNumber: number,
+        currentStepNumber: number,
+        isIncreasing: boolean
+    ): void {
+        const sizeFactor = isIncreasing
+            ? currentStepNumber / (stepsNumber - 1)
+            : 1 - currentStepNumber / (stepsNumber - 1)
 
         const newSizeRange = [
-            Math.max(minTargetZoneSize, this.targetZoneSizeRange[0] * decreaseFactor),
-            Math.max(minTargetZoneSize, this.targetZoneSizeRange[1] * decreaseFactor),
+            isIncreasing
+                ? this.targetZoneSizeRange[0]
+                : Math.max(targetSize, this.initialTargetZoneSizeRange[0] * sizeFactor),
+            isIncreasing
+                ? this.initialTargetZoneSizeRange[1] + (targetSize - this.initialTargetZoneSizeRange[1]) * sizeFactor
+                : Math.max(targetSize, this.initialTargetZoneSizeRange[1] * sizeFactor),
         ] as [number, number]
 
         // Ensure that the minimum size is not greater than the maximum size
         if (newSizeRange[0] <= newSizeRange[1]) {
             this.targetZoneSizeRange = newSizeRange
         }
+    }
+
+    increaseTargetZoneSize(currentLives: number, initialLives: number): void {
+        const maxTargetZoneSize = Math.PI
+        const currentStepNumber = initialLives - currentLives
+        const stepsNumber = initialLives
+
+        this.updateTargetZoneSize(maxTargetZoneSize, stepsNumber, currentStepNumber, true)
+    }
+
+    decreaseTargetZoneSize(round: number, minTargetZoneSize: number): void {
+        const currentStepNumber = round
+        const stepsNumber = this.levelConfig.maxNumberOfRounds
+
+        this.updateTargetZoneSize(minTargetZoneSize, stepsNumber, currentStepNumber, false)
     }
 
     increaseHandRotationSpeed(round: number, maxHandSpeed: number): void {
