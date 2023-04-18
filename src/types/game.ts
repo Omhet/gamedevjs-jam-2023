@@ -8,5 +8,15 @@ export enum GameStatus {
 
 export type LevelConfig = LevelType
 
-export type OnLevelEndsCallback = (params: { points: number; isDead: boolean }) => void
-export type OnTapCallback = (points: number) => void
+type LevelEndParams = { points: number; isDead: boolean }
+export type OnLevelEndsCallback = (params: LevelEndParams) => void
+
+type TapParams = {
+    points: number
+    comboCounter: number
+    missCounter: number
+    isSuperCombo: boolean
+    isMiss: boolean
+    isBonusRound: boolean
+}
+export type OnTapCallback = (params: TapParams) => void

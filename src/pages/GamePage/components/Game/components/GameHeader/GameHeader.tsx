@@ -5,5 +5,9 @@ import s from './GameHeader.module.scss'
 export const GameHeader: FC = () => {
     const { currentLevelScore } = useLevels()
 
-    return <div className={s.root}>Score: {currentLevelScore}</div>
+    return (
+        <div className={s.root}>
+            Score: <b>{currentLevelScore}</b>
+        </div>
+    )
 }

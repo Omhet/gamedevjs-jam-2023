@@ -1,6 +1,6 @@
-import { OnLevelEndsCallback } from '@app-types/game'
+import { OnLevelEndsCallback, OnTapCallback } from '@app-types/game'
 import { levelDataManager } from '@lib/levels/LevelDataManager'
-import { endGame, setGameScore } from '@store/game/gameStore'
+import { endGame, setGameScore, setGameUI } from '@store/game/gameStore'
 import { FC, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import s from './PhaserGame.module.scss'
@@ -17,8 +17,9 @@ export const PhaserGame: FC<PhaserGameProps> = ({}) => {
         endGame(isCompleted)
     }
 
-    const handleTap = (points: number) => {
+    const handleTap: OnTapCallback = ({ points, ...gameUI }) => {
         setGameScore(points)
+        setGameUI(gameUI)
     }
 
     useEffect(() => {

@@ -2,14 +2,30 @@ import { GameStatus } from '@app-types/game'
 import { createEffect, createEvent, createStore } from 'effector'
 import { useStore } from 'effector-react'
 
+type GameUI = {
+    comboCounter: number
+    missCounter: number
+    isSuperCombo: boolean
+    isMiss: boolean
+    isBonusRound: boolean
+}
+
 type GameStore = {
     isLoading: boolean
     status: GameStatus
+    gameUI: GameUI
 }
 
 export const gameStoreInitial = {
     isLoading: true,
     status: GameStatus.NotStarted,
+    gameUI: {
+        comboCounter: 0,
+        missCounter: 0,
+        isSuperCombo: false,
+        isMiss: false,
+        isBonusRound: false,
+    },
 }
 
 export const gameStore = createStore<GameStore>(gameStoreInitial)
@@ -19,6 +35,7 @@ export const gameStatusStore = gameStore.map((state) => state.status)
 export const setIsLoading = createEvent<boolean>()
 export const setGameStatus = createEvent<GameStatus>()
 export const setGameScore = createEvent<number>()
+export const setGameUI = createEvent<GameUI>()
 export const resetGameData = createEvent()
 
 export const startGame = createEvent()

@@ -17,6 +17,7 @@ import {
     resetGameData,
     setGameScore,
     setGameStatus,
+    setGameUI,
     setIsLoading,
     startGame,
 } from './gameStore'
@@ -24,6 +25,7 @@ import {
 gameStore
     .on(setIsLoading, (state, isLoading) => ({ ...state, isLoading }))
     .on(setGameStatus, (state, status) => ({ ...state, status }))
+    .on(setGameUI, (state, gameUI) => ({ ...state, gameUI }))
     .on(resetGameData, () => ({ ...gameStoreInitial }))
 
 loadGame.use(async (levelNumber: number) => {

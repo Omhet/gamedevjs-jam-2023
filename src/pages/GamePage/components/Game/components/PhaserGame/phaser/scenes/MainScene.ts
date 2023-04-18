@@ -50,6 +50,9 @@ export class MainScene extends Phaser.Scene {
 
         spaceKey.on('down', () => {
             const accuracy = this.clock.checkHandInTargetZone()
+            let isSuperCombo = false
+            let isMiss = false
+            let isBonusRound = false
 
             if (accuracy !== null) {
                 this.comboCounter++
@@ -57,7 +60,7 @@ export class MainScene extends Phaser.Scene {
                 let pointsEarned = rawPoints * this.comboCounter
 
                 const handCrossedZone = this.clock.handCrossedZoneTimes > 0
-                const isSuperCombo = !handCrossedZone && this.comboCounter > 1
+                isSuperCombo = !handCrossedZone && this.comboCounter > 1
                 if (isSuperCombo) {
                     pointsEarned *= SUPER_COMBO_MULTIPLIER
                 }
@@ -86,13 +89,26 @@ export class MainScene extends Phaser.Scene {
                 this.comboCounter = 0
                 this.missCounter++
                 this.lives = Math.max(0, this.lives - 1)
+                isMiss = true
+                isSuperCombo = false
+
                 if (this.lives === 0) {
                     this.finishGame(true)
                 }
                 this.clock.increaseTargetZoneSize(this.lives, LIVES_PER_ROUND)
             }
 
-            this.onTap(this.points)
+            isBonusRound =
+                this.roundsCompleted >= this.levelConfig.minNumberOfRounds &&
+                this.levelConfig.minNumberOfRounds < this.levelConfig.maxNumberOfRounds
+            this.onTap({
+                points: this.points,
+                isSuperCombo,
+                isMiss,
+                comboCounter: this.comboCounter,
+                isBonusRound,
+                missCounter: this.missCounter,
+            })
         })
     }
 
