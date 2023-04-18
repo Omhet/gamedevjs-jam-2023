@@ -3,18 +3,25 @@ import { FC } from 'react'
 import s from './GameUI.module.scss'
 
 export const GameUI: FC = () => {
-    const { gameUI } = useGame()
+    const {
+        gameUI: { comboCounter, isSuperCombo, isBonusRound, isMiss, missCounter, points },
+    } = useGame()
 
     return (
         <div className={s.root}>
-            {gameUI.comboCounter > 0 && (
-                <div className={s.fadeIn}>
-                    X{gameUI.comboCounter} {gameUI.isSuperCombo && <span className={s.fadeIn}>SUPER COMBO</span>}
+            {points > 0 && (
+                <div key={points}>
+                    <span className={s.fadeInOut}>+{points}</span>
                 </div>
             )}
-            {gameUI.isBonusRound && <div className={s.fadeIn}>AWESOME</div>}
-            {gameUI.isMiss && (
-                <div key={gameUI.missCounter} className={s.fadeInOut}>
+            {comboCounter > 1 && (
+                <div className={s.fadeIn}>
+                    X{comboCounter} {isSuperCombo && <span className={s.fadeIn}>SUPER COMBO</span>}
+                </div>
+            )}
+            {isBonusRound && <div className={s.fadeIn}>AWESOME</div>}
+            {isMiss && (
+                <div key={missCounter} className={s.fadeInOut}>
                     MISS
                 </div>
             )}

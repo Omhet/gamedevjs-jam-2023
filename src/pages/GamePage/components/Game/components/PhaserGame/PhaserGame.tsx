@@ -19,7 +19,7 @@ export const PhaserGame: FC<PhaserGameProps> = ({}) => {
 
     const handleTap: OnTapCallback = ({ points, ...gameUI }) => {
         setGameScore(points)
-        setGameUI(gameUI)
+        setGameUI({ ...gameUI, points })
     }
 
     useEffect(() => {

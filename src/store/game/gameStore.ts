@@ -3,6 +3,7 @@ import { createEffect, createEvent, createStore } from 'effector'
 import { useStore } from 'effector-react'
 
 type GameUI = {
+    points: number
     comboCounter: number
     missCounter: number
     isSuperCombo: boolean
@@ -20,6 +21,7 @@ export const gameStoreInitial = {
     isLoading: true,
     status: GameStatus.NotStarted,
     gameUI: {
+        points: 0,
         comboCounter: 0,
         missCounter: 0,
         isSuperCombo: false,
