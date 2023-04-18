@@ -108,6 +108,7 @@ export class MainScene extends Phaser.Scene {
                 comboCounter: this.comboCounter,
                 isBonusRound,
                 missCounter: this.missCounter,
+                lives: this.lives,
             })
         })
     }

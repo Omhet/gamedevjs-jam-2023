@@ -9,17 +9,17 @@ export const GameUI: FC = () => {
 
     return (
         <div className={s.root}>
-            {points > 0 && (
+            {points > 0 && !isMiss && (
                 <div key={points}>
                     <span className={s.fadeInOut}>+{points}</span>
                 </div>
             )}
             {comboCounter > 1 && (
-                <div className={s.fadeIn}>
-                    X{comboCounter} {isSuperCombo && <span className={s.fadeIn}>SUPER COMBO</span>}
+                <div key={comboCounter} className={s.fadeInOut}>
+                    X{comboCounter} {isSuperCombo && <span>SUPER COMBO</span>}
                 </div>
             )}
-            {isBonusRound && <div className={s.fadeIn}>AWESOME</div>}
+            {isBonusRound && <div>Bonus Round</div>}
             {isMiss && (
                 <div key={missCounter} className={s.fadeInOut}>
                     MISS

@@ -15,6 +15,7 @@ type TapParams = {
     points: number
     comboCounter: number
     missCounter: number
+    lives: number
     isSuperCombo: boolean
     isMiss: boolean
     isBonusRound: boolean
