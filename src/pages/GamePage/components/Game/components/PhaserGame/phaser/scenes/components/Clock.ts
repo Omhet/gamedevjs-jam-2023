@@ -75,31 +75,52 @@ export class Clock {
 
         this.targetZoneGraphics.clear()
 
-        const subzonePercentages = [0.3, 0.15, 0.1]
-        const subzoneColors = [0x888888, 0x444444, 0x000000]
+        const drawArc = (startAngle: number, endAngle: number) => {
+            const subzonePercentages = [0.3, 0.15, 0.1]
+            const subzoneColors = [0x888888, 0x444444, 0x000000]
 
-        let startAngle = adjustedStartAngle
+            let currentAngle = startAngle
 
-        const drawSubzone = (color: number, percentage: number) => {
-            const subzoneAngleDifference = angleDifference * percentage
-            const endAngle = startAngle + subzoneAngleDifference
+            const drawSubzone = (color: number, percentage: number) => {
+                const subzoneAngleDifference = (endAngle - startAngle) * percentage
+                const nextAngle = currentAngle + subzoneAngleDifference
 
-            this.targetZoneGraphics.fillStyle(color, 1)
-            this.targetZoneGraphics.beginPath()
-            this.targetZoneGraphics.moveTo(this.centerX, this.centerY)
-            this.targetZoneGraphics.arc(this.centerX, this.centerY, this.radius, startAngle, endAngle, false, 0.01)
-            this.targetZoneGraphics.closePath()
-            this.targetZoneGraphics.fillPath()
+                this.targetZoneGraphics.fillStyle(color, 1)
+                this.targetZoneGraphics.beginPath()
+                this.targetZoneGraphics.moveTo(this.centerX, this.centerY)
+                this.targetZoneGraphics.arc(
+                    this.centerX,
+                    this.centerY,
+                    this.radius,
+                    currentAngle,
+                    nextAngle,
+                    false,
+                    0.01
+                )
+                this.targetZoneGraphics.closePath()
+                this.targetZoneGraphics.fillPath()
 
-            startAngle = endAngle
+                currentAngle = nextAngle
+            }
+
+            for (let i = 0; i < subzonePercentages.length; i++) {
+                drawSubzone(subzoneColors[i], subzonePercentages[i])
+            }
+
+            for (let i = subzonePercentages.length - 2; i >= 0; i--) {
+                drawSubzone(subzoneColors[i], subzonePercentages[i])
+            }
         }
 
-        for (let i = 0; i < subzonePercentages.length; i++) {
-            drawSubzone(subzoneColors[i], subzonePercentages[i])
-        }
+        if (angleDifference <= Math.PI) {
+            drawArc(adjustedStartAngle, adjustedEndAngle)
+        } else {
+            const firstEndAngle = adjustedStartAngle + Math.PI
+            drawArc(adjustedStartAngle, firstEndAngle)
 
-        for (let i = subzonePercentages.length - 2; i >= 0; i--) {
-            drawSubzone(subzoneColors[i], subzonePercentages[i])
+            const secondStartAngle = firstEndAngle
+            const secondEndAngle = adjustedEndAngle
+            drawArc(secondStartAngle, secondEndAngle)
         }
     }
 
@@ -138,8 +159,8 @@ export class Clock {
     }
 
     kill() {
-        // this.targetZoneStartAngle = 0
-        // this.targetZoneEndAngle = Math.PI * 2
+        this.targetZoneStartAngle = 0
+        this.targetZoneEndAngle = Math.PI * 2
         this.targetZoneRotationSpeed = 0
         this.handRotationSpeed = 0
         // this.drawTargetZone()
