@@ -12,8 +12,8 @@ export const GamePowerups: FC = () => {
 
     return (
         <div className={s.root}>
-            {powerups.map((powerup) => (
-                <GamePowerup key={powerup.type} powerup={powerup} />
+            {powerups.map((powerup, index) => (
+                <GamePowerup key={powerup.type} powerup={powerup} keyToActivate={String(index + 1)} />
             ))}
         </div>
     )

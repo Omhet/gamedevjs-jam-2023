@@ -1,19 +1,20 @@
 import { Powerup } from '@lib/levels/levelData'
 import cs from 'classnames'
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { ProgressBar } from '../ProgressBar/ProgressBar'
 import s from './GamePowerup.module.scss'
 
 interface GamePowerupProps {
     powerup: Powerup
+    keyToActivate: string
 }
 
-export const GamePowerup: FC<GamePowerupProps> = ({ powerup }) => {
+export const GamePowerup: FC<GamePowerupProps> = ({ powerup, keyToActivate }) => {
     const [isEnabled, setIsEnabled] = useState(true)
     const [isActivated, setIsActivated] = useState(false)
     const [isCooldownShown, setIsCooldownShown] = useState(false)
 
-    const handleClick = () => {
+    const activate = () => {
         const powerupEvent = new CustomEvent('powerupActivated', { detail: powerup })
         window.dispatchEvent(powerupEvent)
         setIsEnabled(false)
@@ -32,10 +33,24 @@ export const GamePowerup: FC<GamePowerupProps> = ({ powerup }) => {
         }, powerup.duration)
     }
 
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === keyToActivate && isEnabled) {
+                activate()
+            }
+        }
+
+        window.addEventListener('keydown', handleKeyDown)
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown)
+        }
+    }, [keyToActivate, isEnabled])
+
     return (
         <div className={s.root}>
             {isActivated && <ProgressBar duration={powerup.duration} color="aqua" isReversed />}
-            <button className={cs(s.button, { [s.disabled]: !isEnabled })} disabled={!isEnabled} onClick={handleClick}>
+            <button className={cs(s.button, { [s.disabled]: !isEnabled })} disabled={!isEnabled} onClick={activate}>
                 {powerup.type}
             </button>
             {isCooldownShown && <ProgressBar duration={powerup.cooldown} color="white" />}
