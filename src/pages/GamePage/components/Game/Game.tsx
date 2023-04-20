@@ -7,15 +7,15 @@ import { GameUI } from './components/GameUI/GameUI'
 import { PhaserGame } from './components/PhaserGame/PhaserGame'
 
 export const Game: FC = () => {
-    const { isGameStarted } = useGame()
+    const { isGameInProgress } = useGame()
 
     return (
         <>
             <Background />
-            {isGameStarted && <PhaserGame />}
-            {isGameStarted && <GameHeader />}
-            {isGameStarted && <GameUI />}
-            {isGameStarted && <GamePowerups />}
+            <PhaserGame isGameInProgress={isGameInProgress} />
+            {isGameInProgress && <GameHeader />}
+            {isGameInProgress && <GameUI />}
+            {isGameInProgress && <GamePowerups />}
         </>
     )
 }

@@ -15,6 +15,7 @@ import {
     gameStoreInitial,
     loadGame,
     resetGameData,
+    setGameCountdown,
     setGameScore,
     setGameStatus,
     setGameUI,
@@ -25,6 +26,7 @@ import {
 gameStore
     .on(setIsLoading, (state, isLoading) => ({ ...state, isLoading }))
     .on(setGameStatus, (state, status) => ({ ...state, status }))
+    .on(setGameCountdown, (state, countdown) => ({ ...state, countdown }))
     .on(setGameUI, (state, gameUI) => ({ ...state, gameUI }))
     .on(resetGameData, () => ({ ...gameStoreInitial }))
 
@@ -39,8 +41,8 @@ loadGame.use(async (levelNumber: number) => {
 
 startGame.watch(() => {
     setCurrentLevelScore(0)
-    setGameStatus(GameStatus.InProgress)
     levelDataManager.playLevelMusic()
+    setGameStatus(GameStatus.InProgress)
 })
 
 setGameScore.watch((newScore) => {
@@ -58,12 +60,9 @@ setGameScore.watch((newScore) => {
 // Do end game stuff
 endGame.watch((isCompleted) => {
     setCurrentLevelCompleted(isCompleted)
+    setGameStatus(GameStatus.End)
 
     setTimeout(() => {
         openGameEndModal()
-
-        setTimeout(() => {
-            setGameStatus(GameStatus.End)
-        }, 1000)
     }, 1000)
 })

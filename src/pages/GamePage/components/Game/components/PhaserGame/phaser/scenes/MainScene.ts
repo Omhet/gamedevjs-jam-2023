@@ -17,13 +17,18 @@ export class MainScene extends Phaser.Scene {
     private powerupManager!: PowerupManager
     private onLevelEnds!: OnLevelEndsCallback
     private onTap!: OnTapCallback
-    isGameEnded: boolean = false
+    isGameInProgress: boolean = false
 
     constructor() {
         super('MainScene')
     }
 
-    init(data: { levelConfig: LevelConfig; onLevelEnds: OnLevelEndsCallback; onTap: OnTapCallback }): void {
+    init(data: {
+        levelConfig: LevelConfig
+        isGameInProgress: boolean
+        onLevelEnds: OnLevelEndsCallback
+        onTap: OnTapCallback
+    }): void {
         this.levelConfig = data.levelConfig
         this.onLevelEnds = data.onLevelEnds
         this.onTap = data.onTap
@@ -32,6 +37,10 @@ export class MainScene extends Phaser.Scene {
     destroy() {
         console.log('MainScene destroy')
         this.powerupManager.destroy()
+    }
+
+    start() {
+        this.isGameInProgress = true
     }
 
     create() {
@@ -50,7 +59,7 @@ export class MainScene extends Phaser.Scene {
         const spaceKey = this.input.keyboard!.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
 
         spaceKey.on('down', () => {
-            if (this.isGameEnded) {
+            if (!this.isGameInProgress) {
                 return
             }
 
@@ -123,7 +132,6 @@ export class MainScene extends Phaser.Scene {
     }
 
     finishGame({ isDead }: { isDead: boolean }) {
-        this.isGameEnded = true
         this.onLevelEnds({ points: this.points, isDead })
     }
 
@@ -140,6 +148,8 @@ export class MainScene extends Phaser.Scene {
     }
 
     update() {
-        this.clock.update()
+        if (this.isGameInProgress) {
+            this.clock.update()
+        }
     }
 }

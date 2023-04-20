@@ -16,6 +16,7 @@ type GameStore = {
     isLoading: boolean
     status: GameStatus
     gameUI: GameUI
+    countdown?: number
 }
 
 export const gameStoreInitial = {
@@ -37,6 +38,7 @@ export const gameStatusStore = gameStore.map((state) => state.status)
 
 export const setIsLoading = createEvent<boolean>()
 export const setGameStatus = createEvent<GameStatus>()
+export const setGameCountdown = createEvent<number | undefined>()
 export const setGameScore = createEvent<number>()
 export const setGameUI = createEvent<GameUI>()
 export const resetGameData = createEvent()
@@ -50,7 +52,7 @@ export const useGame = () => {
     const state = useStore(gameStore)
 
     return {
-        isGameStarted: state.status === GameStatus.InProgress,
+        isGameInProgress: state.status === GameStatus.InProgress,
         isGameEnd: state.status === GameStatus.End,
         ...state,
     }

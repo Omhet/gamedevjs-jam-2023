@@ -1,16 +1,19 @@
 import { OnLevelEndsCallback, OnTapCallback } from '@app-types/game'
 import { levelDataManager } from '@lib/levels/LevelDataManager'
-import { endGame, setGameScore, setGameUI } from '@store/game/gameStore'
-import { FC, useEffect } from 'react'
+import { endGame, setGameCountdown, setGameScore, setGameUI } from '@store/game/gameStore'
+import { FC, useEffect, useRef } from 'react'
 import { Redirect } from 'react-router-dom'
 import s from './PhaserGame.module.scss'
 import { startGame } from './phaser/main'
 import { MainScene } from './phaser/scenes/MainScene'
 
-export interface PhaserGameProps {}
+export interface PhaserGameProps {
+    isGameInProgress: boolean
+}
 
-export const PhaserGame: FC<PhaserGameProps> = ({}) => {
+export const PhaserGame: FC<PhaserGameProps> = ({ isGameInProgress }) => {
     const levelData = levelDataManager.getCurrentLevelData()
+    const gameRef = useRef<Phaser.Game>()
 
     const handleLevelEnds: OnLevelEndsCallback = ({ isDead }) => {
         const isCompleted = Boolean(levelData.miniBoss) ? !isDead : true
@@ -30,6 +33,7 @@ export const PhaserGame: FC<PhaserGameProps> = ({}) => {
                 onLevelEnds: handleLevelEnds,
                 onTap: handleTap,
             })
+            gameRef.current = game
         }
 
         return () => {
@@ -41,6 +45,24 @@ export const PhaserGame: FC<PhaserGameProps> = ({}) => {
             }
         }
     }, [levelData])
+
+    useEffect(() => {
+        let counter = 1
+        let timeout = setInterval(() => {
+            setGameCountdown(counter)
+            if (counter > 3 && gameRef.current) {
+                ;(gameRef.current.scene.getScene('MainScene') as MainScene).start()
+                clearInterval(timeout)
+                setGameCountdown(undefined)
+                return
+            }
+            counter++
+        }, 1000)
+
+        return () => {
+            clearInterval(timeout)
+        }
+    }, [])
 
     if (!levelData) {
         return <Redirect to="/" />

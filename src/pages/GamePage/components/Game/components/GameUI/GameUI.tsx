@@ -1,10 +1,12 @@
 import { useGame } from '@store/game/gameStore'
+import cs from 'classnames'
 import { FC } from 'react'
 import s from './GameUI.module.scss'
 
 export const GameUI: FC = () => {
     const {
         gameUI: { comboCounter, isSuperCombo, isBonusRound, isMiss, missCounter, points },
+        countdown,
     } = useGame()
 
     return (
@@ -23,6 +25,11 @@ export const GameUI: FC = () => {
             {isMiss && (
                 <div key={missCounter} className={s.fadeInOut}>
                     MISS
+                </div>
+            )}
+            {countdown && (
+                <div key={countdown} className={cs(s.fadeInOut, s.center)}>
+                    {countdown}
                 </div>
             )}
         </div>
