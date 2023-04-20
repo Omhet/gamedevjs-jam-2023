@@ -12,7 +12,7 @@ export const Game: FC = () => {
     return (
         <>
             <Background />
-            <PhaserGame isGameInProgress={isGameInProgress} />
+            <PhaserGame />
             {isGameInProgress && <GameHeader />}
             {isGameInProgress && <GameUI />}
             {isGameInProgress && <GamePowerups />}

@@ -7,11 +7,9 @@ import s from './PhaserGame.module.scss'
 import { startGame } from './phaser/main'
 import { MainScene } from './phaser/scenes/MainScene'
 
-export interface PhaserGameProps {
-    isGameInProgress: boolean
-}
+export interface PhaserGameProps {}
 
-export const PhaserGame: FC<PhaserGameProps> = ({ isGameInProgress }) => {
+export const PhaserGame: FC<PhaserGameProps> = ({}) => {
     const levelData = levelDataManager.getCurrentLevelData()
     const gameRef = useRef<Phaser.Game>()
 
@@ -47,16 +45,16 @@ export const PhaserGame: FC<PhaserGameProps> = ({ isGameInProgress }) => {
     }, [levelData])
 
     useEffect(() => {
-        let counter = 1
+        let counter = 3
         let timeout = setInterval(() => {
             setGameCountdown(counter)
-            if (counter > 3 && gameRef.current) {
+            if (counter === 0 && gameRef.current) {
                 ;(gameRef.current.scene.getScene('MainScene') as MainScene).start()
                 clearInterval(timeout)
                 setGameCountdown(undefined)
                 return
             }
-            counter++
+            counter--
         }, 1000)
 
         return () => {
