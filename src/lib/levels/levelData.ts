@@ -94,8 +94,8 @@ const WoodsRegion: Region = {
             startOnboarding:
                 'The player must navigate the dense foliage and stabilize the first time anomaly found in the woods.',
             endOnboarding: 'End onboarding',
-            minNumberOfRounds: 3,
-            maxNumberOfRounds: 5,
+            minNumberOfRounds: 1,
+            maxNumberOfRounds: 1,
             challenges: [
                 // Challenges.HandSpeedIncrease,
                 // Challenges.TargetZonePositionMove,

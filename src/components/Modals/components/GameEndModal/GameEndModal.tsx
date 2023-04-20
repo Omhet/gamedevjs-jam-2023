@@ -21,7 +21,12 @@ export const GameEndModal: FC = () => {
     const isNextLevelButtonShown = nextLevel && nextLevel.isOpen
 
     return (
-        <div className={s.root}>
+        <motion.div
+            className={s.root}
+            initial={{ opacity: 0, scale: 0, originX: 0.5, originY: 0.5 }}
+            animate={{ opacity: 1, scale: 1, originX: 0.5, originY: 0.5 }}
+            transition={{ duration: 0.5 }}
+        >
             <div className={s.scoreContainer}>
                 <h2>Score: {currentLevelScore}</h2>
             </div>
@@ -57,6 +62,6 @@ export const GameEndModal: FC = () => {
                     </Link>
                 </motion.button>
             </div>
-        </div>
+        </motion.div>
     )
 }
