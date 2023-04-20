@@ -36,7 +36,9 @@ export const GameEndModal: FC = () => {
             <div className={s.buttonsContainer}>
                 <motion.button
                     className={classnames(s.button, s.restartBtn)}
-                    onClick={() => history.go(0)}
+                    onClick={() => {
+                        window.location.reload()
+                    }}
                     whileHover="hover"
                     variants={buttonVariants}
                 >
@@ -47,6 +49,7 @@ export const GameEndModal: FC = () => {
                     <motion.button
                         onClick={() => {
                             history.push(`/game?level=${currentLevelNumber + 1}`)
+                            window.location.reload()
                         }}
                         className={classnames(s.button, s.nextBtn)}
                         whileHover="hover"
