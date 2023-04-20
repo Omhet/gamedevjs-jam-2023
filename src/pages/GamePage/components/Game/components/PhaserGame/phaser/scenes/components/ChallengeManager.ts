@@ -11,7 +11,7 @@ export class ChallengeManager {
                     clock.decreaseTargetZoneSize(roundsCompleted, challenge.minTargetZoneSize)
                     break
                 case 'HandSpeedIncrease':
-                    clock.increaseHandRotationSpeed(roundsCompleted, challenge.maxHandSpeed)
+                    clock.increaseHandRotationSpeed(roundsCompleted, challenge.minHandSpeed, challenge.maxHandSpeed)
                     break
                 case 'TargetZonePositionMove':
                     clock.increaseTargetZoneRotationSpeed(

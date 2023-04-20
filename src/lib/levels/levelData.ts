@@ -11,6 +11,7 @@ export type Challenge =
       }
     | {
           type: 'HandSpeedIncrease'
+          minHandSpeed: number
           maxHandSpeed: number
       }
     | {
@@ -36,6 +37,7 @@ type Level = {
     title: string
     startOnboarding: string
     endOnboarding: string
+    initialHandSpeed?: number
     minNumberOfRounds: number
     maxNumberOfRounds: number
     powerups?: Powerup[]
@@ -53,6 +55,7 @@ type LevelsData = {
 export const MAX_POINTS_PER_ROUND = 3
 export const LIVES_PER_ROUND = 3
 export const SUPER_COMBO_MULTIPLIER = 2
+export const SLOWEST_HAND_SPEED = 0.001
 
 const Challenges = {
     TargetZoneSizeDecrease: {
@@ -61,12 +64,13 @@ const Challenges = {
     },
     HandSpeedIncrease: {
         type: 'HandSpeedIncrease',
-        maxHandSpeed: 0.04,
+        minHandSpeed: 0.002,
+        maxHandSpeed: 0.005,
     },
     TargetZonePositionMove: {
         type: 'TargetZonePositionMove',
-        minTargetZoneSpeed: 0.005,
-        maxTargetZoneSpeed: 0.01,
+        minTargetZoneSpeed: 0.0005,
+        maxTargetZoneSpeed: 0.001,
     },
 } as const
 

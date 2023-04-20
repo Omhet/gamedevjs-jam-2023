@@ -10,6 +10,7 @@ export type LevelType = {
     maxScore: number
     completed: boolean
     title: string
+    initialHandSpeed?: number
     startOnboarding: string
     endOnboarding: string
     minNumberOfRounds: number

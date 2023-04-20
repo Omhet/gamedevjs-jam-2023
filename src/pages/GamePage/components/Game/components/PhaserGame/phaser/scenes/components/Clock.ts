@@ -1,4 +1,5 @@
 import { LevelConfig } from '@app-types/game'
+import { SLOWEST_HAND_SPEED } from '@lib/levels/levelData'
 import Phaser from 'phaser'
 
 const clockFaceColor = 0xcccccc
@@ -12,8 +13,7 @@ export class Clock {
     private scene: Phaser.Scene
     private clockFace: Phaser.GameObjects.Arc
     private hand: Phaser.GameObjects.Rectangle
-    private initialHandRotationSpeed: number = 0.01
-    private handRotationSpeed: number = 0.01
+    private handRotationSpeed: number = 0
     private handRotationDirection: number = 1
     private targetZoneGraphics: Phaser.GameObjects.Graphics
     private targetZoneStartAngle!: number
@@ -65,6 +65,7 @@ export class Clock {
         const hand = this.scene.add.rectangle(this.centerX, this.centerY, width, height, handColor)
         hand.setOrigin(0.5, 1)
         hand.setDepth(1)
+        this.handRotationSpeed = this.levelConfig.initialHandSpeed ?? SLOWEST_HAND_SPEED
         return hand
     }
 
@@ -250,11 +251,10 @@ export class Clock {
         this.drawTargetZone()
     }
 
-    increaseHandRotationSpeed(round: number, maxHandSpeed: number): void {
-        const increaseFactorPerRound =
-            (maxHandSpeed / this.initialHandRotationSpeed - 1) / (this.levelConfig.maxNumberOfRounds - 1)
+    increaseHandRotationSpeed(round: number, minHandSpeed: number, maxHandSpeed: number): void {
+        const increaseFactorPerRound = (maxHandSpeed / minHandSpeed - 1) / (this.levelConfig.maxNumberOfRounds - 1)
         const increaseFactor = 1 + round * increaseFactorPerRound
-        this.handRotationSpeed = this.initialHandRotationSpeed * increaseFactor * this.handRotationDirection
+        this.handRotationSpeed = minHandSpeed * increaseFactor * this.handRotationDirection
     }
 
     setHandSpeed(speed: number): void {
@@ -295,8 +295,8 @@ export class Clock {
         this.targetZoneTime = this.targetZoneTime !== 0 ? 1 : this.targetZoneTime
     }
 
-    public checkHandCrossedZone(): void {
-        this.hand.rotation += this.handRotationSpeed * this.handRotationDirection * this.handTime
+    public checkHandCrossedZone(delta: number): void {
+        this.hand.rotation += this.handRotationSpeed * this.handRotationDirection * this.handTime * delta
         const currHandInZone = this.isHandInTargetZone()
 
         if (this.prevHandInZone && !currHandInZone) {
@@ -307,11 +307,12 @@ export class Clock {
         this.prevHandInZone = currHandInZone
     }
 
-    public update(): void {
-        this.checkHandCrossedZone()
+    public update(delta: number): void {
+        this.checkHandCrossedZone(delta)
         this.targetZoneStartAngle +=
-            this.targetZoneRotationSpeed * this.targetZoneRotationDirection * this.targetZoneTime
-        this.targetZoneEndAngle += this.targetZoneRotationSpeed * this.targetZoneRotationDirection * this.targetZoneTime
+            this.targetZoneRotationSpeed * this.targetZoneRotationDirection * this.targetZoneTime * delta
+        this.targetZoneEndAngle +=
+            this.targetZoneRotationSpeed * this.targetZoneRotationDirection * this.targetZoneTime * delta
         this.drawTargetZone()
     }
 }

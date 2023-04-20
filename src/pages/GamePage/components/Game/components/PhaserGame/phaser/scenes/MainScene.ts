@@ -105,7 +105,7 @@ export class MainScene extends Phaser.Scene {
             if (this.roundsCompleted === this.getNumberOfRoundsToCompleteLevel()) {
                 this.finishGame({ isDead: false })
                 this.clock.hideTargetZone()
-                this.clock.setHandSpeed(0.1)
+                this.clock.setHandSpeed(0.05)
             } else {
                 this.challengeManager.applyChallenges(this.clock, this.roundsCompleted)
                 this.clock.generateNewTargetZone()
@@ -157,9 +157,9 @@ export class MainScene extends Phaser.Scene {
         return this.levelConfig.maxNumberOfRounds
     }
 
-    update() {
+    update(time: number, delta: number) {
         if (this.isGameInProgress) {
-            this.clock.update()
+            this.clock.update(delta)
         }
     }
 }
