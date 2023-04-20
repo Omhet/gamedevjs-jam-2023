@@ -17,6 +17,7 @@ export class MainScene extends Phaser.Scene {
     private powerupManager!: PowerupManager
     private onLevelEnds!: OnLevelEndsCallback
     private onTap!: OnTapCallback
+    isGameEnded: boolean = false
 
     constructor() {
         super('MainScene')
@@ -49,6 +50,10 @@ export class MainScene extends Phaser.Scene {
         const spaceKey = this.input.keyboard!.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
 
         spaceKey.on('down', () => {
+            if (this.isGameEnded) {
+                return
+            }
+
             const accuracy = this.clock.checkHandInTargetZone()
             let isSuperCombo = false
             let isMiss = false
@@ -78,7 +83,9 @@ export class MainScene extends Phaser.Scene {
                 this.lives = LIVES_PER_ROUND
 
                 if (this.roundsCompleted === this.getNumberOfRoundsToCompleteLevel()) {
-                    this.finishGame(false)
+                    this.finishGame({ isDead: false })
+                    this.clock.hideTargetZone()
+                    this.clock.setHandSpeed(0.1)
                 } else {
                     this.challengeManager.applyChallenges(this.clock, this.roundsCompleted)
                     this.clock.generateNewTargetZone()
@@ -93,9 +100,11 @@ export class MainScene extends Phaser.Scene {
                 isSuperCombo = false
 
                 if (this.lives === 0) {
-                    this.finishGame(true)
+                    this.finishGame({ isDead: true })
+                    this.clock.kill()
+                } else {
+                    this.clock.increaseTargetZoneSize(this.lives, LIVES_PER_ROUND)
                 }
-                this.clock.increaseTargetZoneSize(this.lives, LIVES_PER_ROUND)
             }
 
             isBonusRound =
@@ -113,7 +122,8 @@ export class MainScene extends Phaser.Scene {
         })
     }
 
-    finishGame(isDead: boolean) {
+    finishGame({ isDead }: { isDead: boolean }) {
+        this.isGameEnded = true
         this.onLevelEnds({ points: this.points, isDead })
     }
 

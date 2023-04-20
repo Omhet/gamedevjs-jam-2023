@@ -129,6 +129,22 @@ export class Clock {
         this.drawTargetZone()
     }
 
+    hideTargetZone() {
+        this.targetZoneStartAngle = 0
+        this.targetZoneEndAngle = 0
+        this.targetZoneRotationSpeed = 0
+
+        this.drawTargetZone()
+    }
+
+    kill() {
+        // this.targetZoneStartAngle = 0
+        // this.targetZoneEndAngle = Math.PI * 2
+        this.targetZoneRotationSpeed = 0
+        this.handRotationSpeed = 0
+        // this.drawTargetZone()
+    }
+
     isHandInTargetZone(): boolean {
         const handAngle = Phaser.Math.Wrap(this.hand.angle, 0, 360)
         const targetZoneStartAngle = Phaser.Math.Wrap(Phaser.Math.RadToDeg(this.targetZoneStartAngle), 0, 360)
@@ -218,6 +234,10 @@ export class Clock {
             (maxHandSpeed / this.initialHandRotationSpeed - 1) / (this.levelConfig.maxNumberOfRounds - 1)
         const increaseFactor = 1 + round * increaseFactorPerRound
         this.handRotationSpeed = this.initialHandRotationSpeed * increaseFactor * this.handRotationDirection
+    }
+
+    setHandSpeed(speed: number): void {
+        this.handRotationSpeed = speed
     }
 
     increaseTargetZoneRotationSpeed(round: number, minTargetZoneSpeed: number, maxTargetZoneSpeed: number): void {
