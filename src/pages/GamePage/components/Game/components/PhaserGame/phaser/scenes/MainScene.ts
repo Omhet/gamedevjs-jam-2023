@@ -17,7 +17,7 @@ export class MainScene extends Phaser.Scene {
     private powerupManager!: PowerupManager
     private onLevelEnds!: OnLevelEndsCallback
     private onTap!: OnTapCallback
-    isGameInProgress: boolean = false
+    isGameInProgress: boolean = true
 
     constructor() {
         super('MainScene')
@@ -59,75 +59,85 @@ export class MainScene extends Phaser.Scene {
         const spaceKey = this.input.keyboard!.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
 
         spaceKey.on('down', () => {
-            if (!this.isGameInProgress) {
-                return
+            this.handleInput()
+        })
+
+        this.input.on('pointerdown', () => {
+            console.log('POINTER')
+
+            this.handleInput()
+        })
+    }
+
+    handleInput = () => {
+        if (!this.isGameInProgress) {
+            return
+        }
+
+        const accuracy = this.clock.checkHandInTargetZone()
+        let isSuperCombo = false
+        let isMiss = false
+        let isBonusRound = false
+
+        if (accuracy !== null) {
+            this.comboCounter++
+            const rawPoints = Math.round(accuracy * MAX_POINTS_PER_ROUND)
+            let pointsEarned = rawPoints * this.comboCounter
+
+            const handCrossedZone = this.clock.handCrossedZoneTimes > 0
+            isSuperCombo = !handCrossedZone && this.comboCounter > 1
+            if (isSuperCombo) {
+                pointsEarned *= SUPER_COMBO_MULTIPLIER
             }
 
-            const accuracy = this.clock.checkHandInTargetZone()
-            let isSuperCombo = false
-            let isMiss = false
-            let isBonusRound = false
+            console.log(
+                `Accuracy: ${accuracy}`,
+                `Raw Points: ${rawPoints}`,
+                `Points Earned: ${pointsEarned}`,
+                `Combo: ${this.comboCounter}`,
+                isSuperCombo ? 'SUPERCOMBO' : ''
+            )
 
-            if (accuracy !== null) {
-                this.comboCounter++
-                const rawPoints = Math.round(accuracy * MAX_POINTS_PER_ROUND)
-                let pointsEarned = rawPoints * this.comboCounter
+            this.points += pointsEarned
+            this.roundsCompleted++
+            this.lives = LIVES_PER_ROUND
 
-                const handCrossedZone = this.clock.handCrossedZoneTimes > 0
-                isSuperCombo = !handCrossedZone && this.comboCounter > 1
-                if (isSuperCombo) {
-                    pointsEarned *= SUPER_COMBO_MULTIPLIER
-                }
-
-                console.log(
-                    `Accuracy: ${accuracy}`,
-                    `Raw Points: ${rawPoints}`,
-                    `Points Earned: ${pointsEarned}`,
-                    `Combo: ${this.comboCounter}`,
-                    isSuperCombo ? 'SUPERCOMBO' : ''
-                )
-
-                this.points += pointsEarned
-                this.roundsCompleted++
-                this.lives = LIVES_PER_ROUND
-
-                if (this.roundsCompleted === this.getNumberOfRoundsToCompleteLevel()) {
-                    this.finishGame({ isDead: false })
-                    this.clock.hideTargetZone()
-                    this.clock.setHandSpeed(0.1)
-                } else {
-                    this.challengeManager.applyChallenges(this.clock, this.roundsCompleted)
-                    this.clock.generateNewTargetZone()
-                }
+            if (this.roundsCompleted === this.getNumberOfRoundsToCompleteLevel()) {
+                this.finishGame({ isDead: false })
+                this.clock.hideTargetZone()
+                this.clock.setHandSpeed(0.1)
             } else {
-                console.log('Miss')
-                this.points = Math.max(0, this.points - MAX_POINTS_PER_ROUND)
-                this.comboCounter = 0
-                this.missCounter++
-                this.lives = Math.max(0, this.lives - 1)
-                isMiss = true
-                isSuperCombo = false
-
-                if (this.lives === 0) {
-                    this.finishGame({ isDead: true })
-                    this.clock.kill()
-                } else {
-                    this.clock.increaseTargetZoneSize(this.lives, LIVES_PER_ROUND)
-                }
+                this.challengeManager.applyChallenges(this.clock, this.roundsCompleted)
+                this.clock.generateNewTargetZone()
             }
+        } else {
+            console.log('Miss')
+            this.points = Math.max(0, this.points - MAX_POINTS_PER_ROUND)
+            this.comboCounter = 0
+            this.missCounter++
+            this.lives = Math.max(0, this.lives - 1)
+            isMiss = true
+            isSuperCombo = false
 
-            isBonusRound =
-                this.roundsCompleted >= this.levelConfig.minNumberOfRounds &&
-                this.levelConfig.minNumberOfRounds < this.levelConfig.maxNumberOfRounds
-            this.onTap({
-                points: this.points,
-                isSuperCombo,
-                isMiss,
-                comboCounter: this.comboCounter,
-                isBonusRound,
-                missCounter: this.missCounter,
-                lives: this.lives,
-            })
+            if (this.lives === 0) {
+                this.finishGame({ isDead: true })
+                this.clock.kill()
+            } else {
+                this.clock.increaseTargetZoneSize(this.lives, LIVES_PER_ROUND)
+            }
+        }
+
+        isBonusRound =
+            this.roundsCompleted >= this.levelConfig.minNumberOfRounds &&
+            this.levelConfig.minNumberOfRounds < this.levelConfig.maxNumberOfRounds
+        this.onTap({
+            points: this.points,
+            isSuperCombo,
+            isMiss,
+            comboCounter: this.comboCounter,
+            isBonusRound,
+            missCounter: this.missCounter,
+            lives: this.lives,
         })
     }
 

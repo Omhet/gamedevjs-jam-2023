@@ -5,7 +5,7 @@ import s from './GameUI.module.scss'
 
 export const GameUI: FC = () => {
     const {
-        gameUI: { comboCounter, isSuperCombo, isBonusRound, isMiss, missCounter, points },
+        gameUI: { comboCounter, isSuperCombo, isMiss, missCounter, points },
         countdown,
     } = useGame()
 
@@ -21,7 +21,6 @@ export const GameUI: FC = () => {
                     X{comboCounter} {isSuperCombo && <span>SUPER COMBO</span>}
                 </div>
             )}
-            {isBonusRound && <div>Bonus Round</div>}
             {isMiss && (
                 <div key={missCounter} className={s.fadeInOut}>
                     MISS
