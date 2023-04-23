@@ -47,3 +47,35 @@
     align-items: center;
     flex: 1;
 }
+
+.levelScoreContainer {
+    margin: 0 auto;
+    background-color: var(--back-lighter-color);
+    width: 240rem;
+    min-height: 240rem;
+    padding: 8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.levelScore {
+    margin: auto 0;
+    font-size: 48rem;
+    font-weight: 700;
+    color: var(--accent1-color);
+}
+
+.progress {
+    height: 24rem;
+    background-color: var(--accent1-color);
+}
+
+.accuracy {
+    font-size: 16rem;
+}
+
+.accuracyPercent {
+    color: var(--accent1-color);
+}

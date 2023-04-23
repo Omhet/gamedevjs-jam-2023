@@ -1,7 +1,7 @@
 import { Button } from '@components/Button/Button'
 import { LevelType } from '@lib/levels/LevelDataManager'
 import { useLevels } from '@store/levels/levelsStore'
-import classnames from 'classnames'
+import cx from 'classnames'
 import { FC } from 'react'
 import { useHistory } from 'react-router-dom'
 import s from './Level.module.scss'
@@ -22,27 +22,34 @@ export const Level: FC<LevelProps> = ({ data }) => {
 
     const imgSrc = data.imgUrls.back
 
+    const hasScore = score && score > 0
+
     return (
         <div
             style={{
                 backgroundImage: `url(${imgSrc})`,
             }}
-            className={classnames(s.root, { [s.closedLevel]: !isOpen, [s.boss]: Boolean(data.miniBoss) })}
+            className={cx(s.root, { [s.closedLevel]: !isOpen, [s.boss]: Boolean(data.miniBoss) })}
         >
             <div className={s.title}>
                 <div className={s.line} />
                 <h3 className={s.titleText}>{data.title}</h3>
                 <div className={s.line} />
             </div>
-            {completed && <div>Completed</div>}
-            {isOpen && score && score > 0 ? (
-                <div className={s.levelScore}>
-                    {score} / {data.maxScore}
+            {isOpen && hasScore ? (
+                <div className={s.levelScoreContainer}>
+                    <div className={s.accuracy}>
+                        <span className={s.accuracyPercent}>todo% </span>Accuracy
+                    </div>
+                    <div className={s.levelScore}>
+                        {score} / {data.maxScore}
+                    </div>
+                    <div style={{ width: `${Math.floor(score / data.maxScore) * 100}%` }} className={s.progress} />
                 </div>
             ) : null}
             {isOpen && (
                 <Button className={s.playBtn} type="secondary" disabled={!isOpen} onClick={() => handlePlayClick()}>
-                    Play
+                    {hasScore ? 'Play Again' : 'Play'}
                 </Button>
             )}
             {!isOpen && <div className={s.blockedContainer}>Play previous levels to unblock</div>}

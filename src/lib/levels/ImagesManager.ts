@@ -13,12 +13,12 @@ export class ImagesManager {
     async loadLevelImages(levelNumber: number): Promise<LevelImages> {
         const index = levelNumber - 1
 
-        const levelImageUrl = this.levelImageUrls[index]
-        if (!levelImageUrl) {
+        const levelImageUrls = this.levelImageUrls[index]
+        if (!levelImageUrls) {
             throw Error('No images url for this level')
         }
 
-        const { back } = levelImageUrl
+        const { back } = levelImageUrls
         const [backImg] = await Promise.all([this.loadImage(back)])
 
         return {
