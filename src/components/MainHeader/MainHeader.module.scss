@@ -6,7 +6,7 @@
     border-top: 8rem solid var(--accent1-border-color);
 
     &.blur {
-        backdrop-filter: blur(10px);
+        background-color: var(--back-color);
     }
 }
 
@@ -27,4 +27,15 @@
 .scoreNumber {
     font-weight: 700;
     color: var(--accent1-color);
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    gap: 12rem;
+}
+
+.arrow {
+    width: 24rem;
+    height: 24rem;
 }

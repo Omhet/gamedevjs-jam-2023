@@ -1,4 +1,5 @@
 import { WidthContainer } from '@components/WidthContainer/WidthContainer'
+import { Arrow } from '@icons/Arrow'
 import { useLevels } from '@store/levels/levelsStore'
 import cx from 'classnames'
 import { FC } from 'react'
@@ -18,7 +19,8 @@ export const MainHeader: FC<MainHeaderProps> = ({ withLink = true, isBlured = tr
             <WidthContainer className={cx(s.container, { [s.center]: !withLink, [s.blur]: isBlured })}>
                 {withLink && (
                     <Link to="/" className={s.link}>
-                        Back To Menu
+                        <Arrow className={s.arrow} />
+                        <span>Back To Menu</span>
                     </Link>
                 )}
                 <div className={s.score}>
