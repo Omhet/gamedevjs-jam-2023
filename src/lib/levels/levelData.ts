@@ -122,6 +122,22 @@ const WoodsRegion: Region = {
             powerups: [Powerups.TimeSlowdown, Powerups.TimeFreeze],
         },
         {
+            title: 'Temporal Glade',
+            startOnboarding:
+                'In a serene glade, the player discovers a massive, ancient tree at the center of multiple time anomalies, requiring them to act quickly to save the tree.',
+            endOnboarding: 'End onboarding',
+            minNumberOfRounds: 4,
+            maxNumberOfRounds: 7,
+        },
+        {
+            title: 'Enchanted Canopy',
+            startOnboarding:
+                'The player climbs to the treetops and faces a series of anomalies high above the forest floor, where the magical energies are even more concentrated.',
+            endOnboarding: 'End onboarding',
+            minNumberOfRounds: 4,
+            maxNumberOfRounds: 7,
+        },
+        {
             title: 'Chrono Creeper',
             startOnboarding: 'First miniboss level',
             endOnboarding: 'End onboarding',
@@ -139,126 +155,10 @@ const WoodsRegion: Region = {
                     'A massive, time-twisted serpent-like creature that has been corrupted by the time anomalies. The player must defeat the ChronoCreeper to restore balance to the woods.',
             },
         },
-        // {
-        //     title: 'Temporal Glade',
-        //     startOnboarding:
-        //         'In a serene glade, the player discovers a massive, ancient tree at the center of multiple time anomalies, requiring them to act quickly to save the tree.',
-        //     endOnboarding: 'End onboarding',
-        //     numberOfRounds: 3,
-        //     powerups: ['TimeSlowdown'],
-        //     challenges: ['TargetZoneSizeDecrease'],
-        // },
-        // {
-        //     title: 'Enchanted Canopy',
-        //     startOnboarding:
-        //         'The player climbs to the treetops and faces a series of anomalies high above the forest floor, where the magical energies are even more concentrated.',
-        //     endOnboarding: 'End onboarding',
-        //     numberOfRounds: 3,
-        //     powerups: ['TimeSlowdown'],
-        //     challenges: ['TargetZoneSizeDecrease'],
-        // },
-        // {
-        //     title: 'Beware ChronoCreeper',
-        //     startOnboarding: 'First miniboss level',
-        //     endOnboarding: 'End onboarding',
-        //     numberOfRounds: 3,
-        //     powerups: ['TimeSlowdown'],
-        //     challenges: ['TargetZoneSizeDecrease'],
-        //     miniBoss: {
-        //         name: 'ChronoCreeper',
-        //         description:
-        //             'A massive, time-twisted serpent-like creature that has been corrupted by the time anomalies. The player must defeat the ChronoCreeper to restore balance to the woods.',
-        //     },
-        // },
     ],
 }
 
-const WoodsRegion2: Region = {
-    name: 'New Region',
-    description:
-        'A lush, magical forest filled with ancient trees and mysterious creatures. Time anomalies are more common here due to the mystical energies of the woods.',
-    levels: [
-        {
-            title: 'Whispers of Time',
-            startOnboarding:
-                'The player must navigate the dense foliage and stabilize the first time anomaly found in the woods.',
-            endOnboarding: 'End onboarding',
-            minNumberOfRounds: 3,
-            maxNumberOfRounds: 5,
-            challenges: [
-                // Challenges.HandSpeedIncrease,
-                // Challenges.TargetZonePositionMove,
-                // Challenges.TargetZoneSizeDecrease,
-            ],
-            powerups: [Powerups.TimeSlowdown],
-        },
-        {
-            title: 'Ticking Thicket',
-            startOnboarding:
-                'The player encounters an area where the trees themselves have become affected by the time anomalies, causing the entire thicket to move in strange ways.',
-            endOnboarding: 'End onboarding',
-            minNumberOfRounds: 4,
-            maxNumberOfRounds: 7,
-            challenges: [
-                Challenges.HandSpeedIncrease,
-                Challenges.TargetZonePositionMove,
-                Challenges.TargetZoneSizeDecrease,
-            ],
-            powerups: [Powerups.TimeSlowdown, Powerups.TimeFreeze],
-        },
-        {
-            title: 'Beware ChronoCreeper',
-            startOnboarding: 'First miniboss level',
-            endOnboarding: 'End onboarding',
-            minNumberOfRounds: 4,
-            maxNumberOfRounds: 7,
-            challenges: [
-                // Challenges.HandSpeedIncrease,
-                // Challenges.TargetZonePositionMove,
-                // Challenges.TargetZoneSizeDecrease,
-            ],
-            powerups: [Powerups.TimeSlowdown],
-            miniBoss: {
-                name: 'ChronoCreeper',
-                description:
-                    'A massive, time-twisted serpent-like creature that has been corrupted by the time anomalies. The player must defeat the ChronoCreeper to restore balance to the woods.',
-            },
-        },
-        // {
-        //     title: 'Temporal Glade',
-        //     startOnboarding:
-        //         'In a serene glade, the player discovers a massive, ancient tree at the center of multiple time anomalies, requiring them to act quickly to save the tree.',
-        //     endOnboarding: 'End onboarding',
-        //     numberOfRounds: 3,
-        //     powerups: ['TimeSlowdown'],
-        //     challenges: ['TargetZoneSizeDecrease'],
-        // },
-        // {
-        //     title: 'Enchanted Canopy',
-        //     startOnboarding:
-        //         'The player climbs to the treetops and faces a series of anomalies high above the forest floor, where the magical energies are even more concentrated.',
-        //     endOnboarding: 'End onboarding',
-        //     numberOfRounds: 3,
-        //     powerups: ['TimeSlowdown'],
-        //     challenges: ['TargetZoneSizeDecrease'],
-        // },
-        // {
-        //     title: 'Beware ChronoCreeper',
-        //     startOnboarding: 'First miniboss level',
-        //     endOnboarding: 'End onboarding',
-        //     numberOfRounds: 3,
-        //     powerups: ['TimeSlowdown'],
-        //     challenges: ['TargetZoneSizeDecrease'],
-        //     miniBoss: {
-        //         name: 'ChronoCreeper',
-        //         description:
-        //             'A massive, time-twisted serpent-like creature that has been corrupted by the time anomalies. The player must defeat the ChronoCreeper to restore balance to the woods.',
-        //     },
-        // },
-    ],
-}
-
-const CanyonsRegion = {
+const CanyonsRegion: Region = {
     name: 'Clockwork Canyons',
     description:
         'A desolate region filled with mechanical contraptions and clockwork devices built by an ancient civilization, now inhabited by the Creepz.',
@@ -268,44 +168,39 @@ const CanyonsRegion = {
             startOnboarding:
                 'The player enters the Clockwork Canyons, facing time anomalies within a vast desert landscape filled with buried clockwork relics.',
             endOnboarding: 'End onboarding',
-            numberOfRounds: 1,
-            powerups: ['TimeSlowdown'],
-            challenges: ['TargetZoneSizeDecrease', 'HandSpeedIncrease'],
+            minNumberOfRounds: 4,
+            maxNumberOfRounds: 7,
         },
         {
             title: 'Gear Gorge',
             startOnboarding:
                 'The player traverses a deep gorge lined with functioning clockwork mechanisms, some of which trigger additional time anomalies.',
             endOnboarding: 'End onboarding',
-            numberOfRounds: 2,
-            powerups: ['TimeSlowdown', 'TimeFreeze'],
-            challenges: ['TargetZoneSizeDecrease', 'HandSpeedIncrease'],
+            minNumberOfRounds: 4,
+            maxNumberOfRounds: 7,
         },
         {
             title: 'Winding Ravine',
             startOnboarding:
                 'In a serene glade, the player discovers a massive, ancient tree at the center of multiple time anomalies, requiring them to act quickly to save the tree.',
             endOnboarding: 'End onboarding',
-            numberOfRounds: 3,
-            powerups: ['TimeSlowdown', 'TimeFreeze'],
-            challenges: ['TargetZoneSizeDecrease', 'HandSpeedIncrease'],
+            minNumberOfRounds: 4,
+            maxNumberOfRounds: 7,
         },
         {
             title: 'Cog Citadel',
             startOnboarding:
                 'The player climbs to the treetops and faces a series of anomalies high above the forest floor, where the magical energies are even more concentrated.',
             endOnboarding: 'End onboarding',
-            numberOfRounds: 3,
-            powerups: ['TimeSlowdown', 'TimeFreeze'],
-            challenges: ['TargetZoneSizeDecrease', 'HandSpeedIncrease', 'TargetZonePositionMove'],
+            minNumberOfRounds: 4,
+            maxNumberOfRounds: 7,
         },
         {
             title: 'Mighty Clockroach',
             startOnboarding: 'Second miniboss level',
             endOnboarding: 'End onboarding',
-            numberOfRounds: 3,
-            powerups: ['TimeSlowdown', 'TimeFreeze'],
-            challenges: ['TargetZoneSizeDecrease', 'HandSpeedIncrease', 'TargetZonePositionMove'],
+            minNumberOfRounds: 4,
+            maxNumberOfRounds: 7,
             miniBoss: {
                 name: 'Clockroach',
                 description:
@@ -316,7 +211,7 @@ const CanyonsRegion = {
 }
 
 const LEVELS_DATA: LevelsData = {
-    regions: [WoodsRegion, WoodsRegion2],
+    regions: [WoodsRegion, CanyonsRegion],
 }
 
 const LEVELS_FROM_STORAGE = JSON.parse(localStorage.getItem('levels') ?? '[]')
