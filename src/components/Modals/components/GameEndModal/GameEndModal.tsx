@@ -1,5 +1,5 @@
 import { Exit } from '@icons/Exit'
-import { Restart } from '@icons/Restart'
+import { Retry } from '@icons/Retry'
 import { levelDataManager } from '@lib/levels/LevelDataManager'
 import { useLevels, useNextLevel } from '@store/levels/levelsStore'
 import { closeModal } from '@store/modals/modalsStore'
@@ -35,14 +35,14 @@ export const GameEndModal: FC = () => {
             </div>
             <div className={s.buttonsContainer}>
                 <motion.button
-                    className={classnames(s.button, s.restartBtn)}
+                    className={classnames(s.button, s.RetryBtn)}
                     onClick={() => {
                         window.location.reload()
                     }}
                     whileHover="hover"
                     variants={buttonVariants}
                 >
-                    <Restart className={s.icon} />
+                    <Retry className={s.icon} />
                     {!isSmall && 'Retry'}
                 </motion.button>
                 {isNextLevelButtonShown && (

@@ -4,11 +4,13 @@
 html {
     font-size: 1px;
     scroll-behavior: smooth;
+    background: var(--back-color);
 }
 body {
     font-family: var(--regular-font);
     color: var(--text-color);
-    background: var(--back-color);
+    background: url('/main-back.jpg');
+    font-size: 18rem;
 }
 // класс для заморозки скролла при открытии модалки
 .frozenScroll {

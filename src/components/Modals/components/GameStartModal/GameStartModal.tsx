@@ -1,5 +1,4 @@
 import { Exit } from '@icons/Exit'
-import { Play } from '@icons/Play'
 import { levelDataManager } from '@lib/levels/LevelDataManager'
 import { startGame } from '@store/game/gameStore'
 import { closeModal } from '@store/modals/modalsStore'
@@ -47,7 +46,6 @@ export const GameStartModal: FC = () => {
                     whileHover="hover"
                     variants={buttonVariants}
                 >
-                    <Play className={s.icon} />
                     Let&apos;s try
                 </motion.button>
                 <motion.button whileHover="hover" variants={buttonVariants}>

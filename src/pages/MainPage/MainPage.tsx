@@ -1,16 +1,13 @@
-import { MainHeader } from '@pages/MainPage/components/MainHeader/MainHeader'
+import { MainHeader } from '@components/MainHeader/MainHeader'
 import { FC } from 'react'
 import s from './MainPage.module.scss'
-import { Levels } from './components/Levels/Levels'
+import { Hero } from './components/Hero/Hero'
 
 export const MainPage: FC = () => {
     return (
-        <>
-            <main className={s.main}>
-                <MainHeader />
-                {/* <Hero /> */}
-                <Levels />
-            </main>
-        </>
+        <main className={s.root}>
+            <MainHeader withLink={false} />
+            <Hero />
+        </main>
     )
 }

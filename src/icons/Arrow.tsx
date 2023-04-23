@@ -1,15 +1,26 @@
-import { WithClassName } from '@app-types/common';
-import React, { FC } from 'react';
+import { WithClassName } from '@app-types/common'
+import { FC } from 'react'
 
 export const Arrow: FC<WithClassName> = ({ className }) => {
-  return (
-    <svg className={className} viewBox="0 0 152 91" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M1.8 90.6C.3 80.3-.4 72.3 4.4 63c3.2-6.1 7-12.1 11-17.8 2.7-4 13.6-18.5 20-12 3.9 4.2 19 48 31.3 27.1 6.5-11 12.5-31.3 25.6-36.9 7.8-3.2 13.6 27 17.3 31.7 5.3 6.8 9.1-6 11-10 4.7-9.8 9.8-19.4 15.9-28.4 3-4.5 5.6-8.7 9.8-12 2.2-1.6.4-1.1-1.4-1-2.7.3-15.2 2-6.2.6 5.4-.9 7.5 2.5 9 7.4.7 2.3 1 4.6 1.2 7 0 .5-.3 1.8.3 1.6.9-.3 1.2-16.8 2.2-19.4M137.4 7l8.2 9.8"
-        stroke="#eb7070"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-};
+    return (
+        <svg className={className} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 25">
+            <path
+                fill="#D6CEEA"
+                fill-rule="evenodd"
+                d="M19 11.5H7.13l3.64-4.36a1 1 0 1 0-1.54-1.28l-5 6-.09.15-.07.13a.99.99 0 0 0-.07.36c0 .13.03.25.07.36l.07.13c.03.05.05.1.1.15l5 6a1 1 0 1 0 1.53-1.28L7.14 13.5H19a1 1 0 0 0 0-2Z"
+                clip-rule="evenodd"
+            />
+            <mask id="a" width="16" height="15" x="4" y="5" maskUnits="userSpaceOnUse" style="mask-type:luminance">
+                <path
+                    fill="#fff"
+                    fill-rule="evenodd"
+                    d="M19 11.5H7.13l3.64-4.36a1 1 0 1 0-1.54-1.28l-5 6-.09.15-.07.13a.99.99 0 0 0-.07.36c0 .13.03.25.07.36l.07.13c.03.05.05.1.1.15l5 6a1 1 0 1 0 1.53-1.28L7.14 13.5H19a1 1 0 0 0 0-2Z"
+                    clip-rule="evenodd"
+                />
+            </mask>
+            <g mask="url(#a)">
+                <path fill="#D6CEEA" d="M0 .5h24v24H0z" />
+            </g>
+        </svg>
+    )
+}
