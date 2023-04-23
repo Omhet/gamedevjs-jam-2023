@@ -11,7 +11,7 @@ export const Retry: FC<WithClassName> = ({ className }) => {
                 clipRule="evenodd"
             />
             <mask
-                id="a"
+                id="Retry"
                 width="25"
                 height="25"
                 x="4"
@@ -26,7 +26,7 @@ export const Retry: FC<WithClassName> = ({ className }) => {
                     clipRule="evenodd"
                 />
             </mask>
-            <g mask="url(#a)">
+            <g mask="url(#Retry)">
                 <path fill="#D6CEEA" d="M0 0h32v32H0z" />
             </g>
         </svg>

@@ -11,7 +11,7 @@ export const Timer: FC<WithClassName> = ({ className }) => {
                 clipRule="evenodd"
             />
             <mask
-                id="a"
+                id="Timer"
                 width="22"
                 height="25"
                 x="3"
@@ -26,7 +26,7 @@ export const Timer: FC<WithClassName> = ({ className }) => {
                     clipRule="evenodd"
                 />
             </mask>
-            <g mask="url(#a)">
+            <g mask="url(#Timer)">
                 <path fill="#7E42FF" d="M0 0h28v28H0z" />
             </g>
         </svg>

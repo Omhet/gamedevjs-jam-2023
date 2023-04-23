@@ -1,23 +1,25 @@
+import { Button } from '@components/Button/Button'
+import { WidthContainer } from '@components/WidthContainer/WidthContainer'
 import { Exit } from '@icons/Exit'
 import { Retry } from '@icons/Retry'
 import { levelDataManager } from '@lib/levels/LevelDataManager'
 import { useLevels, useNextLevel } from '@store/levels/levelsStore'
 import { closeModal } from '@store/modals/modalsStore'
-import classnames from 'classnames'
+import cx from 'classnames'
 import { motion } from 'framer-motion'
-import { buttonVariants } from 'motions/motions'
 import { FC } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { useMedia } from 'react-use'
+import { LevelModalHeader } from '../LevelModalHeader/LevelModalHeader'
 import s from './GameEndModal.module.scss'
 
 export const GameEndModal: FC = () => {
     const history = useHistory()
-    const { currentLevelScore, currentLevelNumber } = useLevels()
+    const { currentLevelScore, currentLevelNumber, globalScore } = useLevels()
     const nextLevel = useNextLevel()
-    const { endOnboarding } = levelDataManager.getCurrentLevelData()
-    const isSmall = useMedia('(max-width: 1024px)')
+    const { title, endOnboarding, imgUrls, maxScore } = levelDataManager.getCurrentLevelData()
 
+    const isSmall = useMedia('(max-width: 1150px)')
     const isNextLevelButtonShown = nextLevel && nextLevel.isOpen
 
     return (
@@ -27,44 +29,55 @@ export const GameEndModal: FC = () => {
             animate={{ opacity: 1, scale: 1, originX: 0.5, originY: 0.5 }}
             transition={{ duration: 0.5 }}
         >
-            <div className={s.scoreContainer}>
-                <h2>Score: {currentLevelScore}</h2>
-            </div>
-            <div className={s.masterContainer}>
-                <span className={s.masterWords}>{endOnboarding}</span>
-            </div>
-            <div className={s.buttonsContainer}>
-                <motion.button
-                    className={classnames(s.button, s.RetryBtn)}
-                    onClick={() => {
-                        window.location.reload()
-                    }}
-                    whileHover="hover"
-                    variants={buttonVariants}
-                >
-                    <Retry className={s.icon} />
-                    {!isSmall && 'Retry'}
-                </motion.button>
-                {isNextLevelButtonShown && (
-                    <motion.button
-                        onClick={() => {
-                            history.push(`/game?level=${currentLevelNumber + 1}`)
-                            window.location.reload()
-                        }}
-                        className={classnames(s.button, s.nextBtn)}
-                        whileHover="hover"
-                        variants={buttonVariants}
-                    >
-                        Next level
-                    </motion.button>
-                )}
-                <motion.button whileHover="hover" variants={buttonVariants}>
-                    <Link className={classnames(s.button, s.exitBtn)} onClick={() => closeModal()} to="/#levels">
-                        <Exit className={s.icon} />
-                        {!isSmall && 'Menu'}
-                    </Link>
-                </motion.button>
-            </div>
+            <LevelModalHeader title={title} />
+            <WidthContainer className={s.content}>
+                <div className={s.left}>
+                    <div className={s.stats}>
+                        <div className={s.score}>
+                            Score:&nbsp;&nbsp;
+                            <span className={s.scoreNumber}>
+                                {currentLevelScore} / {maxScore}
+                            </span>
+                        </div>
+                        <div className={s.score}>
+                            Total Score:&nbsp;&nbsp;
+                            <span className={s.scoreNumber}>{globalScore}</span>
+                        </div>
+                    </div>
+
+                    <div className={s.onboarding}>
+                        <div className={s.name}>Sage</div>
+                        <div>{endOnboarding}</div>
+                    </div>
+
+                    <div className={s.buttonsContainer}>
+                        {isNextLevelButtonShown && (
+                            <Button
+                                className={cx(s.button, s.playBtn)}
+                                onClick={() => {
+                                    history.push(`/game?level=${currentLevelNumber + 1}`)
+                                    window.location.reload()
+                                }}
+                            >
+                                <span>Next Level</span>
+                            </Button>
+                        )}
+                        <Button
+                            className={cx(s.button, s.playBtn)}
+                            type="tertiary"
+                            onClick={() => window.location.reload()}
+                        >
+                            <Retry className={s.retry} />
+                            <span>Retry</span>
+                        </Button>
+                        <Button onClick={() => closeModal()} to="/levels" type="tertiary">
+                            <Exit className={s.exit} />
+                            <span>Back To Levels</span>
+                        </Button>
+                    </div>
+                </div>
+                {!isSmall && <img className={s.character} src={imgUrls.character} alt="Level Character" />}
+            </WidthContainer>
         </motion.div>
     )
 }

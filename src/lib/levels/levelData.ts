@@ -97,7 +97,8 @@ const WoodsRegion: Region = {
             title: 'Whispers of Time',
             startOnboarding:
                 'Young ChronoGuardian, welcome to the ChronoWoods. The mystical energies of these ancient trees have attracted time anomalies, disrupting the harmony of this once peaceful land. Our journey begins here, in the whispers of time. Stabilize the first time anomaly found in the woods and restore order to the forest. Remember, focus on the clock hand and tap with precision. Good luck!',
-            endOnboarding: 'End onboarding',
+            endOnboarding:
+                'Well done, ChronoGuardian! You have successfully stabilized the time anomaly and brought tranquility back to this part of the woods. Your journey has only just begun, and many more challenges lie ahead. Continue to hone your skills and protect the lands of Arcadia from the Creepz forces. I have faith in your abilities.',
             minNumberOfRounds: 1,
             maxNumberOfRounds: 1,
             challenges: [

@@ -11,7 +11,7 @@ export const Arrow: FC<WithClassName> = ({ className }) => {
                 clipRule="evenodd"
             />
             <mask
-                id="a"
+                id="Arrow"
                 width="16"
                 height="15"
                 x="4"
@@ -26,7 +26,7 @@ export const Arrow: FC<WithClassName> = ({ className }) => {
                     clipRule="evenodd"
                 />
             </mask>
-            <g mask="url(#a)">
+            <g mask="url(#Arrow)">
                 <path fill="#D6CEEA" d="M0 .5h24v24H0z" />
             </g>
         </svg>

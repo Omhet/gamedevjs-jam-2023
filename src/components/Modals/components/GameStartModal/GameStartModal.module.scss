@@ -13,6 +13,13 @@
 .buttonsContainer {
     display: flex;
     gap: 40rem;
+
+    @media (max-width: 1150px) {
+        flex-wrap: wrap;
+        & > * {
+            flex: 1;
+        }
+    }
 }
 
 .exit {
@@ -37,6 +44,10 @@
 }
 
 .character {
-    margin-top: 160rem;
-    margin-left: -120rem;
+    margin-top: 50rem;
+    margin-left: 40rem;
+}
+
+.left {
+    width: 100%;
 }

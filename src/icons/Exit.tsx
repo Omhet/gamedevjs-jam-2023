@@ -11,7 +11,7 @@ export const Exit: FC<WithClassName> = ({ className }) => {
                 clipRule="evenodd"
             />
             <mask
-                id="a"
+                id="Exit"
                 width="24"
                 height="22"
                 x="5"
@@ -26,7 +26,7 @@ export const Exit: FC<WithClassName> = ({ className }) => {
                     clipRule="evenodd"
                 />
             </mask>
-            <g mask="url(#a)">
+            <g mask="url(#Exit)">
                 <path fill="#D6CEEA" d="M0 0h32v32H0z" />
             </g>
         </svg>

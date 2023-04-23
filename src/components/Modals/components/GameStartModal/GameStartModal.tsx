@@ -1,16 +1,19 @@
 import { Button } from '@components/Button/Button'
+import { WidthContainer } from '@components/WidthContainer/WidthContainer'
 import { Exit } from '@icons/Exit'
 import { levelDataManager } from '@lib/levels/LevelDataManager'
 import { startGame } from '@store/game/gameStore'
 import { closeModal } from '@store/modals/modalsStore'
-import classnames from 'classnames'
+import cx from 'classnames'
 import { motion, useAnimation } from 'framer-motion'
 import { FC, useEffect } from 'react'
+import { useMedia } from 'react-use'
 import { LevelModalHeader } from '../LevelModalHeader/LevelModalHeader'
 import s from './GameStartModal.module.scss'
 
 export const GameStartModal: FC = () => {
     const { startOnboarding, title, imgUrls } = levelDataManager.getCurrentLevelData()
+    const isSmall = useMedia('(max-width: 1150px)')
 
     const controls = useAnimation()
 
@@ -36,14 +39,14 @@ export const GameStartModal: FC = () => {
             transition={{ duration: 0.5 }}
         >
             <LevelModalHeader title={title} />
-            <div className={s.content}>
-                <div>
+            <WidthContainer className={s.content}>
+                <div className={s.left}>
                     <div className={s.onboarding}>
                         <div className={s.name}>Sage</div>
                         <div>{startOnboarding}</div>
                     </div>
                     <div className={s.buttonsContainer}>
-                        <Button className={classnames(s.button, s.playBtn)} onClick={() => start()}>
+                        <Button className={cx(s.button, s.playBtn)} onClick={() => start()}>
                             Let&apos;s try
                         </Button>
                         <Button onClick={() => closeModal()} to="/levels" type="tertiary">
@@ -52,8 +55,8 @@ export const GameStartModal: FC = () => {
                         </Button>
                     </div>
                 </div>
-                <img className={s.character} src={imgUrls.character} alt="Level Character" />
-            </div>
+                {!isSmall && <img className={s.character} src={imgUrls.character} alt="Level Character" />}
+            </WidthContainer>
         </motion.div>
     )
 }
