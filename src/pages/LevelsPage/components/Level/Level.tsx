@@ -12,7 +12,7 @@ export type LevelProps = {
 
 export const Level: FC<LevelProps> = ({ data }) => {
     const { levels } = useLevels()
-    const { isOpen, score, completed } = levels.find((lvl) => lvl.number === data.number) ?? {}
+    const { isOpen, score } = levels.find((lvl) => lvl.number === data.number) ?? {}
 
     const history = useHistory()
 
@@ -44,7 +44,7 @@ export const Level: FC<LevelProps> = ({ data }) => {
                     <div className={s.levelScore}>
                         {score} / {data.maxScore}
                     </div>
-                    <div style={{ width: `${Math.floor(score / data.maxScore) * 100}%` }} className={s.progress} />
+                    <div style={{ width: `${Math.floor((score / data.maxScore) * 100)}%` }} className={s.progress} />
                 </div>
             ) : null}
             {isOpen && (
