@@ -1,2 +1,36 @@
 .root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+}
+
+.titleImg {
+    margin-top: 132rem;
+    max-width: 792rem;
+}
+
+.menu {
+    margin-top: 124rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 24rem;
+    font-weight: 300;
+    gap: 16rem;
+}
+
+.playSection {
+    margin-top: 48rem;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 12rem;
+}
+
+.line {
+    flex: 1;
+    height: 8rem;
+    background-color: var(--accent1-color);
 }

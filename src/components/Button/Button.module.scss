@@ -1,0 +1,18 @@
+.root {
+    line-height: 1;
+    padding: 8rem 32rem;
+    border: 1px solid var(--accent1-color);
+    font-size: 24rem;
+    font-weight: 500;
+    background-color: var(--back-color);
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+        background-color: var(--back-lighter-color);
+    }
+
+    &.big {
+        padding: 16rem 40rem;
+        font-size: 48rem;
+    }
+}
