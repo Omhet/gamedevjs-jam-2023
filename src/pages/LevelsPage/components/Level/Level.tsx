@@ -48,7 +48,7 @@ export const Level: FC<LevelProps> = ({ data }) => {
                 </div>
             ) : null}
             {isOpen && (
-                <Button className={s.playBtn} type="secondary" disabled={!isOpen} onClick={() => handlePlayClick()}>
+                <Button type="secondary" disabled={!isOpen} onClick={() => handlePlayClick()}>
                     {hasScore ? 'Play Again' : 'Play'}
                 </Button>
             )}
