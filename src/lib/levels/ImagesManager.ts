@@ -1,5 +1,6 @@
 type LevelImageTypes<T> = {
     back: T
+    character: T
 }
 
 export type LevelImageUrls = LevelImageTypes<string>
@@ -18,11 +19,12 @@ export class ImagesManager {
             throw Error('No images url for this level')
         }
 
-        const { back } = levelImageUrls
-        const [backImg] = await Promise.all([this.loadImage(back)])
+        const { back, character } = levelImageUrls
+        const [backImg, characterImg] = await Promise.all([this.loadImage(back), this.loadImage(character)])
 
         return {
             back: backImg,
+            character: characterImg,
         }
     }
 

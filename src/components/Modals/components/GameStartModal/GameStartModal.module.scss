@@ -1,96 +1,42 @@
 .root {
-    padding: 32rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     height: 100%;
-    gap: 48rem;
-    font-size: 18rem;
-    background-color: var(--back-color);
-    @media (max-width: 1024px) {
-        font-size: 18rem;
-        gap: 32rem;
-    }
-    @media (max-width: 480px) {
-        padding: 24rem;
-        gap: 18rem;
-    }
+    background: url('/main-back.jpg');
 }
-.masterContainer {
-    width: fit-content;
-    height: fit-content;
+
+.content {
+    margin: 80rem auto 0;
     display: flex;
-    gap: 32rem;
-    flex-direction: column;
-    align-items: center;
 }
-.masterWords {
-    max-width: 450rem;
-    height: fit-content;
-    padding: 48rem;
-    position: relative;
-    background-color: var(--back-color);
-    border-radius: 100%;
-    @media (max-width: 1024px) {
-        padding: 32rem;
-    }
-    @media (max-width: 480px) {
-        padding: 24rem;
-    }
-}
-.master {
-    height: 55vh;
-    // width: 250rem;
-    // @media (max-width: 1024px) {
-    //   width: 200rem;
-    // }
-}
+
 .buttonsContainer {
     display: flex;
-    gap: 36rem;
-    flex-wrap: wrap;
-    @media (max-width: 1024px) {
-        gap: 24rem;
-    }
-    @media (max-width: 480px) {
-        flex-direction: column;
-    }
+    gap: 40rem;
 }
-.button {
-    padding: 8rem 24rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12rem;
-    cursor: pointer;
-    @media (max-width: 1024px) {
-        padding: 12rem 24rem;
-    }
-    @media (max-width: 480px) {
-        padding: 8rem 16rem;
-    }
-}
-.playBtn {
-    font-weight: 800;
-    background-color: var(--accent2-color);
-    border-radius: 16rem;
-    white-space: nowrap;
-}
-.exitBtn {
-    font-weight: 500;
-    background-color: var(--back-color);
-    border: 3rem solid var(--accent1-color);
-    border-radius: 16rem;
-    white-space: nowrap;
-}
-.icon {
+
+.exit {
     width: 32rem;
     height: 32rem;
-    fill: none;
-    flex-shrink: 0;
-    @media (max-width: 480px) {
-        width: 24rem;
-        height: 24rem;
-    }
+}
+
+.onboarding {
+    max-width: 820rem;
+    display: flex;
+    flex-direction: column;
+    padding: 32rem 32rem 40rem;
+    gap: 12rem;
+    background-color: var(--back-color);
+    border: 1px solid var(--accent1-border-color);
+    margin-bottom: 64rem;
+}
+
+.name {
+    color: var(--accent1-color);
+    font-weight: 500;
+}
+
+.character {
+    margin-top: 160rem;
+    margin-left: -120rem;
 }

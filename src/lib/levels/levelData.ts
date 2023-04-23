@@ -96,7 +96,7 @@ const WoodsRegion: Region = {
         {
             title: 'Whispers of Time',
             startOnboarding:
-                'The player must navigate the dense foliage and stabilize the first time anomaly found in the woods.',
+                'Young ChronoGuardian, welcome to the ChronoWoods. The mystical energies of these ancient trees have attracted time anomalies, disrupting the harmony of this once peaceful land. Our journey begins here, in the whispers of time. Stabilize the first time anomaly found in the woods and restore order to the forest. Remember, focus on the clock hand and tap with precision. Good luck!',
             endOnboarding: 'End onboarding',
             minNumberOfRounds: 1,
             maxNumberOfRounds: 1,
@@ -236,6 +236,7 @@ export const LEVELS = LEVELS_DATA.regions.flatMap((region, regionIndex) =>
         const imgPath = `/levels-assets/pics/${number}`
         const imgUrls = {
             back: `${imgPath}/back.jpg`,
+            character: rest.miniBoss ? `${imgPath}/character.png` : '/sage.png',
         }
 
         return {

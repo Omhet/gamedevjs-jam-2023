@@ -104,7 +104,7 @@ const musicUrls = LEVELS.map(({ musicUrl }) => musicUrl)
 const audioManager = new AudioManager([])
 
 const imageUrls = LEVELS.map(({ imgUrls }) => imgUrls)
-const imagesManager = new ImagesManager([])
+const imagesManager = new ImagesManager(imageUrls)
 
 export const levelDataManager = new LevelDataManager(audioManager, imagesManager)
 // @ts-ignore

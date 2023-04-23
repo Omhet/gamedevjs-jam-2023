@@ -1,16 +1,16 @@
+import { Button } from '@components/Button/Button'
 import { Exit } from '@icons/Exit'
 import { levelDataManager } from '@lib/levels/LevelDataManager'
 import { startGame } from '@store/game/gameStore'
 import { closeModal } from '@store/modals/modalsStore'
 import classnames from 'classnames'
 import { motion, useAnimation } from 'framer-motion'
-import { buttonVariants } from 'motions/motions'
 import { FC, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { LevelModalHeader } from '../LevelModalHeader/LevelModalHeader'
 import s from './GameStartModal.module.scss'
 
 export const GameStartModal: FC = () => {
-    const { startOnboarding, title } = levelDataManager.getCurrentLevelData()
+    const { startOnboarding, title, imgUrls } = levelDataManager.getCurrentLevelData()
 
     const controls = useAnimation()
 
@@ -35,25 +35,24 @@ export const GameStartModal: FC = () => {
             initial={{ opacity: 1, scale: 1, originX: 0.5, originY: 0.5 }}
             transition={{ duration: 0.5 }}
         >
-            <div className={s.masterContainer}>
-                <h1>{title}</h1>
-                <span className={s.masterWords}>{startOnboarding}</span>
-            </div>
-            <div className={s.buttonsContainer}>
-                <motion.button
-                    className={classnames(s.button, s.playBtn)}
-                    onClick={() => start()}
-                    whileHover="hover"
-                    variants={buttonVariants}
-                >
-                    Let&apos;s try
-                </motion.button>
-                <motion.button whileHover="hover" variants={buttonVariants}>
-                    <Link className={classnames(s.button, s.exitBtn)} onClick={() => closeModal()} to="/#levels">
-                        <Exit className={s.icon} />
-                        Menu
-                    </Link>
-                </motion.button>
+            <LevelModalHeader title={title} />
+            <div className={s.content}>
+                <div>
+                    <div className={s.onboarding}>
+                        <div className={s.name}>Sage</div>
+                        <div>{startOnboarding}</div>
+                    </div>
+                    <div className={s.buttonsContainer}>
+                        <Button className={classnames(s.button, s.playBtn)} onClick={() => start()}>
+                            Let&apos;s try
+                        </Button>
+                        <Button onClick={() => closeModal()} to="/levels" type="tertiary">
+                            <Exit className={s.exit} />
+                            <span>Back To Levels</span>
+                        </Button>
+                    </div>
+                </div>
+                <img className={s.character} src={imgUrls.character} alt="Level Character" />
             </div>
         </motion.div>
     )

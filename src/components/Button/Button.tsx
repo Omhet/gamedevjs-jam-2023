@@ -8,14 +8,14 @@ type ButtonProps = WithClassName & {
     children: ReactNode
     isBig?: boolean
     to?: string
-    type?: 'primary' | 'secondary'
+    type?: 'primary' | 'secondary' | 'tertiary'
     disabled?: boolean
     onClick?: () => void
 }
 
 export const Button: FC<ButtonProps> = ({ className, children, isBig, to, disabled, type = 'primary', onClick }) => {
     return to ? (
-        <Link to={to} className={cx(s.root, className, { [s.big]: isBig })}>
+        <Link to={to} className={cx(s.root, className, s[type], { [s.big]: isBig })} onClick={onClick}>
             {children}
         </Link>
     ) : (

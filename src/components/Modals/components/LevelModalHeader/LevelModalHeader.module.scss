@@ -1,0 +1,18 @@
+.root {
+    padding: 24rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12rem;
+}
+
+.titleText {
+    font-size: 24rem;
+    font-weight: 400;
+}
+
+.line {
+    flex: 1;
+    height: 4rem;
+    background-color: var(--accent1-color);
+}

@@ -1,5 +1,9 @@
 .root {
-    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8rem;
+    min-width: 240rem;
     padding: 8rem 32rem;
     border: 1px solid var(--accent1-color);
     font-size: 24rem;
@@ -14,6 +18,8 @@
     &.big {
         padding: 16rem 40rem;
         font-size: 48rem;
+        line-height: 1;
+        min-width: auto;
     }
 }
 
@@ -25,4 +31,10 @@
     &:hover {
         background-color: var(--accent1-border-color);
     }
+}
+
+.tertiary {
+    border: none;
+    padding: 24rem 0;
+    background-color: transparent;
 }
