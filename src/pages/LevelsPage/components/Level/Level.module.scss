@@ -1,60 +1,49 @@
-.levelCard {
-    width: 100%;
-    min-height: 360rem;
-    padding: 32rem;
+.root {
+    border: 1px solid var(--accent1-border-color);
+    min-height: 500rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 12rem;
-    font-size: 18rem;
-    border-radius: 16rem;
-    background-repeat: no-repeat;
+    justify-content: space-between;
     background-size: cover;
     background-position: center;
-    border: 1px solid var(--accent2-color);
+    background-repeat: no-repeat;
+    background-position-y: 1px;
+    background-clip: content-box;
 }
 
-.closedLevel {
-    opacity: 0.5;
-}
-
-.infoContainer {
-    width: 90%;
-    height: 80%;
-    padding: 12rem;
+.title {
+    padding: 24rem 0;
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    align-items: center;
     gap: 12rem;
-    font-size: 18rem;
-    border-radius: 16rem;
-    background-color: #fffdf988;
+    background-color: var(--back-lighter-color);
 }
 
-.levelTitle {
-    text-align: center;
-    font-family: var(--header-font);
-}
-
-.levelScore {
-    display: flex;
-    align-items: center;
-    gap: 8rem;
-    font-family: var(--header-font);
-}
-
-.playBtn {
-    padding: 12rem 48rem;
+.titleText {
     font-size: 24rem;
-    font-weight: 800;
-    background-color: var(--accent2-color);
-    border-radius: 16rem;
-    cursor: pointer;
+    font-weight: 400;
+}
+
+.line {
+    flex: 1;
+    height: 4rem;
+    background-color: var(--accent1-color);
 }
 
 .boss {
     grid-column: 1 / -1;
     min-height: 560rem;
+}
+
+.blockedContainer {
+    text-align: center;
+    font-size: 24rem;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.219);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
 }

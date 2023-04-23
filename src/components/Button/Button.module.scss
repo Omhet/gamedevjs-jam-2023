@@ -16,3 +16,13 @@
         font-size: 48rem;
     }
 }
+
+.secondary {
+    padding: 24rem 0;
+    border: none;
+    background-color: var(--back-lighter-color);
+
+    &:hover {
+        background-color: var(---back-light-color);
+    }
+}

@@ -6,7 +6,7 @@ import { Hero } from './components/Hero/Hero'
 export const MainPage: FC = () => {
     return (
         <main className={s.root}>
-            <MainHeader withLink={false} />
+            <MainHeader withLink={false} isBlured={false} />
             <Hero />
         </main>
     )

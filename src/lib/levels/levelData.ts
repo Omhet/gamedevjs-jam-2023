@@ -91,7 +91,7 @@ const Powerups = {
 const WoodsRegion: Region = {
     name: 'ChronoWoods',
     description:
-        'A lush, magical forest filled with ancient trees and mysterious creatures. Time anomalies are more common here due to the mystical energies of the woods.',
+        'A lush, magical forest filled with ancient trees and mysterious creatures.<br/>Time anomalies are more common here due to the mystical energies of the woods.',
     levels: [
         {
             title: 'Whispers of Time',
@@ -122,7 +122,7 @@ const WoodsRegion: Region = {
             powerups: [Powerups.TimeSlowdown, Powerups.TimeFreeze],
         },
         {
-            title: 'Beware ChronoCreeper',
+            title: 'Chrono Creeper',
             startOnboarding: 'First miniboss level',
             endOnboarding: 'End onboarding',
             minNumberOfRounds: 4,
@@ -338,8 +338,10 @@ export const LEVELS = LEVELS_DATA.regions.flatMap((region, regionIndex) =>
             }
         }
 
-        const imgPath = `pics/levels/${number}`
-        const imgUrls = {}
+        const imgPath = `/levels-assets/pics/${number}`
+        const imgUrls = {
+            back: `${imgPath}/back.jpg`,
+        }
 
         return {
             ...rest,

@@ -4,11 +4,16 @@
     top: 0;
     z-index: 2;
     border-top: 8rem solid var(--accent1-border-color);
+
+    &.blur {
+        backdrop-filter: blur(10px);
+    }
 }
 
 .container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     &.center {
         justify-content: center;

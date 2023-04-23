@@ -1,22 +1,8 @@
-.title {
-    font-size: 48rem;
-    font-weight: 900;
-    font-family: var(--header-font);
-    white-space: nowrap;
-    margin-bottom: 32rem;
-
-    @media (max-width: 1024px) {
-        font-size: 32rem;
-    }
-    @media (max-width: 480px) {
-        font-size: 24rem;
-    }
-}
-
 .regions {
     display: flex;
     flex-direction: column;
     gap: 80rem;
+    padding: 160rem 0 80rem;
 }
 
 .regionTitle {
@@ -28,18 +14,18 @@
 }
 
 .levels {
-    margin-top: 24rem;
+    margin-top: 40rem;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     justify-content: center;
-    gap: 16rem;
+    gap: 40rem;
 }
 
 .lockedNote {
     display: block;
-    background: black;
+    background: var(--back-lighter-color);
     color: white;
     margin: 16rem 0;
-    padding: 12rem;
+    padding: 24rem 16rem;
 }

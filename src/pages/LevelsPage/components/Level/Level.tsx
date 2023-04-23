@@ -1,8 +1,7 @@
+import { Button } from '@components/Button/Button'
 import { LevelType } from '@lib/levels/LevelDataManager'
 import { useLevels } from '@store/levels/levelsStore'
 import classnames from 'classnames'
-import { motion } from 'framer-motion'
-import { button2Variants, levelContainerVariants, levelVariants } from 'motions/motions'
 import { FC } from 'react'
 import { useHistory } from 'react-router-dom'
 import s from './Level.module.scss'
@@ -20,38 +19,33 @@ export const Level: FC<LevelProps> = ({ data }) => {
     const handlePlayClick = () => {
         history.push(`/game?level=${data.number}`)
     }
-    const imgSrc = ''
+
+    const imgSrc = data.imgUrls.back
 
     return (
-        <motion.div
+        <div
             style={{
                 backgroundImage: `url(${imgSrc})`,
             }}
-            className={classnames(s.levelCard, { [s.closedLevel]: !isOpen, [s.boss]: Boolean(data.miniBoss) })}
-            variants={levelContainerVariants}
-            whileHover="hover"
+            className={classnames(s.root, { [s.closedLevel]: !isOpen, [s.boss]: Boolean(data.miniBoss) })}
         >
-            <motion.div className={s.infoContainer} variants={levelVariants} whileHover="hover">
-                <div className={s.levelTitle}>{data.title}</div>
-                {completed && <div>Completed</div>}
-                {isOpen && (
-                    <div className={s.levelScore}>
-                        {score} / {data.maxScore}
-                    </div>
-                )}
-                {isOpen && (
-                    <motion.button
-                        whileHover="hover"
-                        variants={button2Variants}
-                        className={s.playBtn}
-                        disabled={!isOpen}
-                        onClick={() => handlePlayClick()}
-                    >
-                        Play
-                    </motion.button>
-                )}
-                {!isOpen && <div>Play previous levels till the end to unblock</div>}
-            </motion.div>
-        </motion.div>
+            <div className={s.title}>
+                <div className={s.line} />
+                <h3 className={s.titleText}>{data.title}</h3>
+                <div className={s.line} />
+            </div>
+            {completed && <div>Completed</div>}
+            {isOpen && score && score > 0 ? (
+                <div className={s.levelScore}>
+                    {score} / {data.maxScore}
+                </div>
+            ) : null}
+            {isOpen && (
+                <Button className={s.playBtn} type="secondary" disabled={!isOpen} onClick={() => handlePlayClick()}>
+                    Play
+                </Button>
+            )}
+            {!isOpen && <div className={s.blockedContainer}>Play previous levels to unblock</div>}
+        </div>
     )
 }

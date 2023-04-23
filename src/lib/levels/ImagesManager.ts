@@ -1,4 +1,6 @@
-type LevelImageTypes<T> = {}
+type LevelImageTypes<T> = {
+    back: T
+}
 
 export type LevelImageUrls = LevelImageTypes<string>
 export type LevelImages = LevelImageTypes<HTMLImageElement>
@@ -16,19 +18,12 @@ export class ImagesManager {
             throw Error('No images url for this level')
         }
 
-        // const {} = levelImageUrl
-        // const [] = await Promise.all([
-        //     this.loadImage(back.horizontal),
-        //     this.loadImage(back.vertical),
-        //     this.loadImages(food),
-        //     this.loadImage(master),
-        //     this.loadImage(ingredient),
-        //     this.loadImage(table),
-        //     this.loadImage(zone),
-        //     this.loadImages(particles),
-        // ])
+        const { back } = levelImageUrl
+        const [backImg] = await Promise.all([this.loadImage(back)])
 
-        return {}
+        return {
+            back: backImg,
+        }
     }
 
     async loadImages(urls: string[]): Promise<HTMLImageElement[]> {
@@ -40,6 +35,8 @@ export class ImagesManager {
     }
 
     async loadImage(url: string): Promise<HTMLImageElement> {
+        console.log(url)
+
         return new Promise((resolve, reject) => {
             const img = new Image()
             img.src = url

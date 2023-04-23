@@ -7,14 +7,15 @@ import s from './MainHeader.module.scss'
 
 export interface MainHeaderProps {
     withLink?: boolean
+    isBlured?: boolean
 }
 
-export const MainHeader: FC<MainHeaderProps> = ({ withLink = true }) => {
+export const MainHeader: FC<MainHeaderProps> = ({ withLink = true, isBlured = true }) => {
     const { globalScore } = useLevels()
 
     return (
-        <header className={s.root}>
-            <WidthContainer className={cx(s.container, { [s.center]: !withLink })}>
+        <header className={cx(s.root, { [s.blur]: isBlured })}>
+            <WidthContainer className={cx(s.container, { [s.center]: !withLink, [s.blur]: isBlured })}>
                 {withLink && (
                     <Link to="/" className={s.link}>
                         Back To Menu

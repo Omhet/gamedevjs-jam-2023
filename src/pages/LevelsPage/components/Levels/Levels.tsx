@@ -1,3 +1,4 @@
+import { Title } from '@components/Title/Title'
 import { WidthContainer } from '@components/WidthContainer/WidthContainer'
 import { levelDataManager } from '@lib/levels/LevelDataManager'
 import { Region } from '@lib/levels/levelData'
@@ -11,7 +12,6 @@ export const Levels: FC = () => {
 
     return (
         <WidthContainer>
-            <h2 className={s.title}>Levels</h2>
             <div className={s.regions}>
                 {regions.map((region, index) => (
                     <RegionComponent key={index} region={region} isFirst={index === 0} />
@@ -33,8 +33,8 @@ const RegionComponent: FC<{ region: Region; isFirst: boolean }> = ({ region, isF
 
     return (
         <div key={region.name}>
-            <h3 className={s.regionTitle}>{region.name}</h3>
-            <p className={s.regionDescription}>{region.description}</p>
+            <Title className={s.regionTitle}>{region.name}</Title>
+            <p className={s.regionDescription} dangerouslySetInnerHTML={{ __html: region.description }}></p>
             {isAllLevelsLocked && !isFirst && (
                 <strong className={s.lockedNote}>Defeat the previous region miniboss to unlock this region</strong>
             )}
