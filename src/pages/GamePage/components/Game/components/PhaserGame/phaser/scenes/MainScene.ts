@@ -17,7 +17,7 @@ export class MainScene extends Phaser.Scene {
     private powerupManager!: PowerupManager
     private onLevelEnds!: OnLevelEndsCallback
     private onTap!: OnTapCallback
-    isGameInProgress: boolean = true
+    isGameInProgress: boolean = false
 
     constructor() {
         super('MainScene')
