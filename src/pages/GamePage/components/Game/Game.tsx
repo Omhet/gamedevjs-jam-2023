@@ -9,8 +9,8 @@ export const Game: FC = () => {
     return (
         <>
             <Background />
-            <PhaserGame />
             <GameHeader />
+            <PhaserGame />
             <GameUI />
             <GamePowerups />
         </>

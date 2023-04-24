@@ -1,13 +1,12 @@
 .main {
-  flex-direction: column;
-  position: relative;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  font-size: 24rem;
-  user-select: none;
+    flex-direction: column;
+    position: relative;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    user-select: none;
 }

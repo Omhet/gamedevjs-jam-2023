@@ -1,10 +1,46 @@
 .root {
-    position: fixed;
-    top: 16rem;
-    left: 64rem;
-    width: 100%;
     z-index: 2;
-    color: white;
+    width: 100%;
+    padding: 24rem 0;
+    border-top: 8rem solid var(--accent1-border-color);
+}
+
+.container {
     display: flex;
-    gap: 64rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.score {
+    font-size: 24rem;
+}
+
+.scoreNumber {
+    font-weight: 700;
+    color: var(--accent1-color);
+}
+
+.lives {
+    display: flex;
+    align-items: center;
+    gap: 8rem;
+}
+
+.live {
+    width: 28rem;
+    height: 28rem;
+}
+
+.exitBtn {
+    padding: 0 !important;
+    min-width: auto !important;
+
+    &:hover {
+        background: none !important;
+    }
+}
+
+.exit {
+    width: 32rem;
+    height: 32rem;
 }
