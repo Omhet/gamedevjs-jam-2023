@@ -54,15 +54,17 @@ export const AboutPage: FC = () => {
                                     </TextLink>
                                     , Interoperability
                                 </div>
-                                This game whole story (read below) is inspired by Arcadia and Overlord lore. Also it
-                                integrates Arcadia leaderboards API TODO
+                                This game whole story (read below) is inspired by Arcadia and Overlord lore.
+                                <br />
+                                Also it integrates Arcadia leaderboards API
+                                <br />
+                                TODO
                             </li>
                         </ul>
                     </p>
                 </div>
                 <div className={s.story}>
                     <h3 className={s.secondaryTitle}>Game Story</h3>
-                    <br />
                     <p>
                         Arcadia, a world where time flows harmoniously, faces a grave threat from the Creepz,
                         cold-blooded lizard beings led by the ruthless Overlord. To conquer Arcadia, the Creepz unleash
@@ -81,7 +83,6 @@ export const AboutPage: FC = () => {
                 </div>
                 <div>
                     <h3 className={s.secondaryTitle}>Tech Side</h3>
-                    <br />
                     <p>
                         <div className={s.accentTitle}>Code</div>
                         Phaser 3 - Core game

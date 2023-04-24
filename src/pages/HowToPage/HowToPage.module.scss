@@ -1,2 +1,36 @@
 .root {
+    background: url('/main-back.jpg');
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 56rem;
+    padding: 160rem 0 80rem;
+    line-height: 1.5;
+    max-width: 756rem;
+}
+
+.title {
+    margin-bottom: 8rem;
+}
+
+.secondaryTitle {
+    font-size: 28rem;
+    font-weight: 500;
+    margin-bottom: 8rem;
+}
+
+.accentTitle {
+    font-weight: 600;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 24rem;
+}
+
+.creepz {
+    color: var(--accent2-color) !important;
 }
