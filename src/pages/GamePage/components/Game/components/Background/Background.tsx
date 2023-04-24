@@ -1,9 +1,9 @@
+import { levelDataManager } from '@lib/levels/LevelDataManager'
 import { FC } from 'react'
 import s from './Background.module.scss'
 
 export const Background: FC = () => {
-    // const { horizontal, vertical } = levelDataManager.getCurrentLevelData().images?.back ?? {}
-    // const image = innerWidth > innerHeight ? horizontal : vertical
+    const back = levelDataManager.getCurrentLevelData().imgUrls.back
 
-    return <div className={s.main} />
+    return <div className={s.root} style={{ backgroundImage: `url(${back})` }} />
 }
