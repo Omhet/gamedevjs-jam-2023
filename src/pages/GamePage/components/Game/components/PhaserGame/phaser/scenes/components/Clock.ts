@@ -2,12 +2,8 @@ import { LevelConfig } from '@app-types/game'
 import { SLOWEST_HAND_SPEED } from '@lib/levels/levelData'
 import Phaser from 'phaser'
 
-const clockFaceColor = 0xcccccc
-const handColor = 0x0000ff
-
-function lerp(a: number, b: number, t: number): number {
-    return a + (b - a) * t
-}
+const clockFaceColor = 0x190d33
+const handColor = 0x7e42ff
 
 export class Clock {
     private scene: Phaser.Scene
@@ -78,7 +74,7 @@ export class Clock {
 
         const drawArc = (startAngle: number, endAngle: number) => {
             const subzonePercentages = [0.3, 0.15, 0.1]
-            const subzoneColors = [0x888888, 0x444444, 0x000000]
+            const subzoneColors = [0x64b918, 0x75dd18, 0x85f91e]
 
             let currentAngle = startAngle
 
