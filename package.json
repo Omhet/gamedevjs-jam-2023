@@ -16,6 +16,7 @@
         "framer-motion": "6.3.1",
         "phaser": "3.60.0",
         "react": "18.2.0",
+        "react-circular-progressbar": "^2.1.0",
         "react-dom": "18.2.0",
         "react-router-dom": "5.2.0",
         "react-use": "17.3.2"
@@ -44,7 +45,7 @@
         "stylelint-config-standard": "21.0.0",
         "typescript": "4.9.3",
         "vite": "4.2.0",
-        "vite-tsconfig-paths": "4.2.0",
-        "vite-plugin-react-svg": "0.2.0"
+        "vite-plugin-react-svg": "0.2.0",
+        "vite-tsconfig-paths": "4.2.0"
     }
 }

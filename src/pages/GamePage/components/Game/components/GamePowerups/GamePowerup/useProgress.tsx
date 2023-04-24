@@ -1,14 +1,14 @@
-import { FC, useEffect, useState } from 'react'
-import s from './ProgressBar.module.scss'
+import { useEffect, useState } from 'react'
 
 interface ProgressBar {
     duration: number
     onComplete?: () => void
     isReversed?: boolean
-    color: string
 }
 
-export const ProgressBar: FC<ProgressBar> = ({ duration, color, onComplete, isReversed = false }) => {
+export const useProgress = (props: ProgressBar) => {
+    const { duration, onComplete, isReversed = false } = props
+
     const [progress, setProgress] = useState(isReversed ? 100 : 0)
 
     useEffect(() => {
@@ -27,9 +27,5 @@ export const ProgressBar: FC<ProgressBar> = ({ duration, color, onComplete, isRe
         return () => clearInterval(interval)
     }, [duration, onComplete, isReversed])
 
-    return (
-        <div className={s.root}>
-            <div className={s.bar} style={{ width: `${progress}%`, backgroundColor: color }}></div>
-        </div>
-    )
+    return progress
 }

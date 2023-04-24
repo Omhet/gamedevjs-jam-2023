@@ -2,22 +2,26 @@ import { WithClassName } from '@app-types/common'
 import { Powerup } from '@lib/levels/levelData'
 import cx from 'classnames'
 import { FC, useEffect, useState } from 'react'
+import { CircularProgressbar } from 'react-circular-progressbar'
+import 'react-circular-progressbar/dist/styles.css'
 import s from './GamePowerup.module.scss'
 
 type GamePowerupProps = WithClassName & {
-    powerup: Powerup
-    keyToActivate: string
-    img: string
-    isEmpty: boolean
+    powerup?: Powerup
+    keyToActivate?: string
+    img?: string
+    isEmpty?: boolean
 }
 
-export const GamePowerup: FC<GamePowerupProps> = ({ className, powerup, keyToActivate, img, isEmpty }) => {
+export const GamePowerup: FC<GamePowerupProps> = (props) => {
+    const { className, powerup, keyToActivate, img, isEmpty } = props
+
     const [isEnabled, setIsEnabled] = useState(true)
     const [isActivated, setIsActivated] = useState(false)
     const [isCooldownShown, setIsCooldownShown] = useState(false)
 
     const activate = () => {
-        if (isEmpty || !isEnabled || isActivated) {
+        if (isEmpty || !isEnabled || isActivated || !powerup) {
             return
         }
 
@@ -59,6 +63,16 @@ export const GamePowerup: FC<GamePowerupProps> = ({ className, powerup, keyToAct
             style={{ backgroundImage: isEmpty ? '' : `url(${img})` }}
             disabled={!isEnabled}
             onClick={activate}
-        ></button>
+        >
+            <CircularProgressbar
+                className={s.progress}
+                value={animatedValue.get()}
+                strokeWidth={4}
+                styles={{
+                    path: { strokeLinecap: 'butt', stroke: isEmpty ? '#2e175ccc' : '#7e42ff' },
+                    trail: { stroke: 'transparent' },
+                }}
+            />
+        </button>
     )
 }
