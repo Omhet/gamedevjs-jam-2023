@@ -1,15 +1,17 @@
 .root {
-    display: flex;
-    flex-direction: column;
-}
-
-.button {
-    color: white;
-    background-color: #111;
-    border: white 1px solid;
-    padding: 12px;
+    width: 88rem;
+    height: 88rem;
+    border-radius: 50%;
+    border: 3px solid var(--accent1-color);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 
     &.disabled {
         opacity: 0.5;
+    }
+
+    &.empty {
+        background: var(--back-lighter-color);
     }
 }

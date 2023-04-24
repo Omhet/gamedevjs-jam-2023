@@ -33,6 +33,8 @@ export type Powerup =
           cooldown: number
       }
 
+export type PowerupType = Powerup['type']
+
 type Level = {
     title: string
     startOnboarding: string
@@ -238,6 +240,10 @@ export const LEVELS = LEVELS_DATA.regions.flatMap((region, regionIndex) =>
         const imgUrls = {
             back: `${imgPath}/back.jpg`,
             character: rest.miniBoss ? `${imgPath}/character.png` : '/sage.png',
+            powerups: {
+                TimeSlowdown: '/powerups/TimeSlowdown.jpg',
+                TimeFreeze: '/powerups/TimeFreeze.jpg',
+            },
         }
 
         return {

@@ -1,20 +1,26 @@
+import { WithClassName } from '@app-types/common'
 import { Powerup } from '@lib/levels/levelData'
-import cs from 'classnames'
+import cx from 'classnames'
 import { FC, useEffect, useState } from 'react'
-import { ProgressBar } from '../ProgressBar/ProgressBar'
 import s from './GamePowerup.module.scss'
 
-interface GamePowerupProps {
+type GamePowerupProps = WithClassName & {
     powerup: Powerup
     keyToActivate: string
+    img: string
+    isEmpty: boolean
 }
 
-export const GamePowerup: FC<GamePowerupProps> = ({ powerup, keyToActivate }) => {
+export const GamePowerup: FC<GamePowerupProps> = ({ className, powerup, keyToActivate, img, isEmpty }) => {
     const [isEnabled, setIsEnabled] = useState(true)
     const [isActivated, setIsActivated] = useState(false)
     const [isCooldownShown, setIsCooldownShown] = useState(false)
 
     const activate = () => {
+        if (isEmpty || !isEnabled || isActivated) {
+            return
+        }
+
         const powerupEvent = new CustomEvent('powerupActivated', { detail: powerup })
         window.dispatchEvent(powerupEvent)
         setIsEnabled(false)
@@ -48,12 +54,11 @@ export const GamePowerup: FC<GamePowerupProps> = ({ powerup, keyToActivate }) =>
     }, [keyToActivate, isEnabled])
 
     return (
-        <div className={s.root}>
-            {isActivated && <ProgressBar duration={powerup.duration} color="aqua" isReversed />}
-            <button className={cs(s.button, { [s.disabled]: !isEnabled })} disabled={!isEnabled} onClick={activate}>
-                {powerup.type}
-            </button>
-            {isCooldownShown && <ProgressBar duration={powerup.cooldown} color="white" />}
-        </div>
+        <button
+            className={cx(className, s.root, { [s.disabled]: !isEnabled, [s.empty]: isEmpty })}
+            style={{ backgroundImage: isEmpty ? '' : `url(${img})` }}
+            disabled={!isEnabled}
+            onClick={activate}
+        ></button>
     )
 }
