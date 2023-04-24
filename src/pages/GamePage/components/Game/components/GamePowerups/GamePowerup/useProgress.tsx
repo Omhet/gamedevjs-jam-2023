@@ -1,31 +1,40 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 
-interface ProgressBar {
-    duration: number
-    onComplete?: () => void
-    isReversed?: boolean
+interface ProgressHook {
+    progress: number
+    start: () => void
+    reset: () => void
 }
 
-export const useProgress = (props: ProgressBar) => {
-    const { duration, onComplete, isReversed = false } = props
+const useProgress = (duration: number, isReverse: boolean = false): ProgressHook => {
+    const [progress, setProgress] = useState<number>(isReverse ? 100 : 0)
+    const animationRef = useRef<number | null>(null)
 
-    const [progress, setProgress] = useState(isReversed ? 100 : 0)
+    const updateProgress = useCallback(
+        (start: number, elapsed: number) => {
+            const newProgress = isReverse ? 100 - (elapsed / duration) * 100 : (elapsed / duration) * 100
+            setProgress(Math.min(newProgress, 100))
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setProgress((prevProgress) => {
-                if (isReversed ? prevProgress === 0 : prevProgress === 100) {
-                    clearInterval(interval)
-                    onComplete && onComplete()
-                    return prevProgress
-                } else {
-                    return isReversed ? prevProgress - 1 : prevProgress + 1
-                }
-            })
-        }, duration / 100)
+            if (elapsed < duration) {
+                animationRef.current = requestAnimationFrame((timestamp) => updateProgress(start, timestamp - start))
+            } else {
+                cancelAnimationFrame(animationRef.current!)
+            }
+        },
+        [duration, isReverse]
+    )
 
-        return () => clearInterval(interval)
-    }, [duration, onComplete, isReversed])
+    const start = useCallback(() => {
+        const startTime = performance.now()
+        animationRef.current = requestAnimationFrame((timestamp) => updateProgress(startTime, timestamp - startTime))
+    }, [updateProgress])
 
-    return progress
+    const reset = useCallback(() => {
+        cancelAnimationFrame(animationRef.current!)
+        setProgress(isReverse ? 100 : 0)
+    }, [isReverse])
+
+    return { progress, start, reset }
 }
+
+export default useProgress

@@ -6,10 +6,6 @@
     background-position: center;
     background-size: cover;
 
-    &.disabled {
-        opacity: 0.5;
-    }
-
     &.empty {
         background: var(--back-lighter-color);
     }

@@ -2,9 +2,10 @@ import { WithClassName } from '@app-types/common'
 import { Powerup } from '@lib/levels/levelData'
 import cx from 'classnames'
 import { FC, useEffect, useState } from 'react'
-import { CircularProgressbar } from 'react-circular-progressbar'
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
 import s from './GamePowerup.module.scss'
+import useProgress from './useProgress'
 
 type GamePowerupProps = WithClassName & {
     powerup?: Powerup
@@ -20,6 +21,9 @@ export const GamePowerup: FC<GamePowerupProps> = (props) => {
     const [isActivated, setIsActivated] = useState(false)
     const [isCooldownShown, setIsCooldownShown] = useState(false)
 
+    const activeProgress = useProgress(powerup?.duration ?? 1000, true)
+    const cooldownProgress = useProgress(powerup?.cooldown ?? 1000, false)
+
     const activate = () => {
         if (isEmpty || !isEnabled || isActivated || !powerup) {
             return
@@ -29,16 +33,20 @@ export const GamePowerup: FC<GamePowerupProps> = (props) => {
         window.dispatchEvent(powerupEvent)
         setIsEnabled(false)
         setIsActivated(true)
+        activeProgress.start()
 
         setTimeout(() => {
             const powerupEvent = new CustomEvent('powerupDeactivated', { detail: powerup })
             window.dispatchEvent(powerupEvent)
             setIsActivated(false)
             setIsCooldownShown(true)
+            activeProgress.reset()
+            cooldownProgress.start()
 
             setTimeout(() => {
                 setIsEnabled(true)
                 setIsCooldownShown(false)
+                cooldownProgress.reset()
             }, powerup.cooldown)
         }, powerup.duration)
     }
@@ -66,11 +74,15 @@ export const GamePowerup: FC<GamePowerupProps> = (props) => {
         >
             <CircularProgressbar
                 className={s.progress}
-                value={animatedValue.get()}
+                value={isCooldownShown ? cooldownProgress.progress : activeProgress.progress}
                 strokeWidth={4}
                 styles={{
-                    path: { strokeLinecap: 'butt', stroke: isEmpty ? '#2e175ccc' : '#7e42ff' },
-                    trail: { stroke: 'transparent' },
+                    ...buildStyles({
+                        pathTransition: 'none',
+                        pathColor: isCooldownShown ? '#333' : isEmpty ? '#2e175ccc' : '#7e42ff',
+                        trailColor: 'transparent',
+                        strokeLinecap: 'butt',
+                    }),
                 }}
             />
         </button>
