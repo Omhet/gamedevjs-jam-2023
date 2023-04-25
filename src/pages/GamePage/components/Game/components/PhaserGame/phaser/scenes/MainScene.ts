@@ -84,11 +84,12 @@ export class MainScene extends Phaser.Scene {
         let isMiss = false
         let isBonusRound = false
         let pointsTaken = 0
+        let pointsEarned = 0
 
         if (accuracy !== null) {
             this.comboCounter++
             const rawPoints = Math.round(accuracy * MAX_POINTS_PER_ROUND)
-            let pointsEarned = rawPoints * this.comboCounter
+            pointsEarned = rawPoints * this.comboCounter
 
             const handCrossedZone = this.clock.handCrossedZoneTimes > 0
             isSuperCombo = !handCrossedZone && this.comboCounter > 1
@@ -146,6 +147,7 @@ export class MainScene extends Phaser.Scene {
             missCounter: this.missCounter,
             lives: this.lives,
             pointsTaken,
+            pointsEarned,
             roundsCompleted: this.roundsCompleted,
         })
     }

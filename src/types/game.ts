@@ -13,6 +13,7 @@ export type OnLevelEndsCallback = (params: LevelEndParams) => void
 
 type TapParams = {
     points: number
+    pointsEarned: number
     pointsTaken: number
     roundsCompleted: number
     comboCounter: number

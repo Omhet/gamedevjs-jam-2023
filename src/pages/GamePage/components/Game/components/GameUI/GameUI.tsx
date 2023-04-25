@@ -23,15 +23,15 @@ function getRandomWord(): string {
 
 export const GameUI: FC = () => {
     const {
-        gameUI: { comboCounter, isSuperCombo, isMiss, missCounter, points, pointsTaken },
+        gameUI: { comboCounter, isSuperCombo, isMiss, missCounter, points, pointsEarned, pointsTaken },
         countdown,
     } = useGame()
 
     return (
         <div className={s.root}>
-            {points > 0 && !isMiss && (
+            {pointsEarned > 0 && !isMiss && (
                 <RandomPositionWrapper key={points} className={s.fadeInOut}>
-                    <div className={s.points}>+{points}</div>
+                    <div className={s.points}>+{pointsEarned}</div>
                     {comboCounter > 1 && (
                         <div key={comboCounter} className={s.fadeInOut}>
                             X{comboCounter} {isSuperCombo && <span>{getRandomWord()}</span>}
