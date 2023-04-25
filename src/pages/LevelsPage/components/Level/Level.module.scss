@@ -33,7 +33,12 @@
 
 .boss {
     grid-column: 1 / -1;
-    min-height: 560rem;
+    min-height: 790rem;
+
+    @media (max-width: 650px) {
+        min-height: 500rem;
+        background-position-x: 60%;
+    }
 }
 
 .blockedContainer {
