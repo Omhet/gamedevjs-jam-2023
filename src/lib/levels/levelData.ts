@@ -116,8 +116,9 @@ const WoodsRegion: Region = {
         {
             title: 'Ticking Thicket',
             startOnboarding:
-                'The player encounters an area where the trees themselves have become affected by the time anomalies, causing the entire thicket to move in strange ways.',
-            endOnboarding: 'End onboarding',
+                'ChronoGuardian, you have ventured deeper into the ChronoWoods and entered the Ticking Thicket. In this mysterious part of the forest, the trees have been warped by time anomalies, their movements distorted by these strange forces. As you face this new challenge, I bestow upon you a new ability: Time Slowdown. Use it wisely to navigate through the thicket and stabilize the time anomaly hidden within. To activate Time Slowdown, focus your energy and click the button on screen or press "1" key on your numpad. Remember, timing is crucial. Good luck on your journey!',
+            endOnboarding:
+                'Congratulations, ChronoGuardian! You have triumphed over the Ticking Thicket and stabilized the time anomaly, restoring the natural flow of time to this enchanted grove. Your mastery of the Time Slowdown ability has proven invaluable in this endeavor. As you continue your quest through the lands of Arcadia, stay vigilant, for the Creepz forces grow stronger and more cunning with each challenge. Trust in your abilities, and the balance of time shall be preserved.',
             minNumberOfRounds: 20,
             maxNumberOfRounds: 30,
             challenges: [
@@ -130,24 +131,31 @@ const WoodsRegion: Region = {
         {
             title: 'Temporal Glade',
             startOnboarding:
-                'In a serene glade, the player discovers a massive, ancient tree at the center of multiple time anomalies, requiring them to act quickly to save the tree.',
-            endOnboarding: 'End onboarding',
+                'ChronoGuardian, your journey has led you to the Temporal Glade, a place of serenity and age-old wisdom. At its heart lies a magnificent ancient tree, a beacon of life and stability in the forest. Alas, the tree has become ensnared by multiple time anomalies, threatening its very existence. You must act swiftly and with great precision to save this symbol of timeless strength. In this challenge, the target zone will decrease in size with every successful tap, demanding even greater focus from you. Trust in your skills and restore harmony to the Temporal Glade!',
+            endOnboarding:
+                'Well done, ChronoGuardian! Your swift actions and unwavering focus have saved the ancient tree and stabilized the time anomalies in the Temporal Glade. The tree stands tall once again, a testament to your growing mastery over time itself. As you venture further into the lands of Arcadia, remember the lessons of the glade and face the ever-increasing challenges with courage and determination. The Creepz forces will not rest, and neither shall you, guardian of time!',
             minNumberOfRounds: 4,
             maxNumberOfRounds: 7,
         },
         {
             title: 'Enchanted Canopy',
             startOnboarding:
-                'The player climbs to the treetops and faces a series of anomalies high above the forest floor, where the magical energies are even more concentrated.',
-            endOnboarding: 'End onboarding',
+                'ChronoGuardian, your journey takes you to the Enchanted Canopy, where the treetops brim with concentrated magical energies. These energies have given rise to a series of anomalies, high above the forest floor, that you must now face. The challenge grows more difficult as you climb higher, but I am confident in your ability to stabilize these anomalies and protect the enchanted forest.',
+            endOnboarding:
+                'Splendid work, ChronoGuardian! Your unwavering determination has brought stability to the Enchanted Canopy. As you continue your journey, the challenges will become increasingly difficult, and I sense the presence of a formidable foe ahead: the Chrono Creeper. Be prepared for this confrontation, and let your skill and perseverance carry you through. Remember, your duty as a guardian of time is to restore harmony to the lands of Arcadia. Keep pressing forward, and let the wisdom of the ChronoWoods guide you.',
+            endOnboardingLoose:
+                'ChronoGuardian, it appears that the time anomalies in the Enchanted Canopy have proven to be quite challenging, and you were not able to fully stabilize them this time. Remember, the path of a guardian is filled with trials and tribulations, and as the Chrono Creeper looms closer, it is crucial that you gather your strength and hone your skills. Do not lose heart, for your journey must continue. Face the challenges that lie ahead, and soon you will be ready to confront the formidable Chrono Creeper. I have faith in your abilities.',
             minNumberOfRounds: 4,
             maxNumberOfRounds: 7,
         },
         {
             title: 'Chrono Creeper',
-            startOnboarding: 'First miniboss level',
-            endOnboarding: 'End onboarding',
-            endOnboardingLoose: 'HAHAHA YOU LOST',
+            startOnboarding:
+                "Hahaha, puny ChronoGuardian! You think you can just waltz into my lair and mess with my plans? The Creepz created me, the ChronoCreeper, the biggest, baddest, time-twisted serpent around! You're just a tiny little bug waiting to be squashed. Get ready for a world of pain! And remember, even if you defeat me, the Creepz won't stop until they conquer all of Arcadia!",
+            endOnboarding:
+                "Argh! No way! How could a puny little Guardian like you beat the amazing ChronoCreeper? The Creepz may have created me, but they won't stop coming. There are bigger, badder, and meaner Creepz out there just waiting to get their hands on you. Enjoy your victory while you can, because Arcadia is still far from safe!",
+            endOnboardingLoose:
+                "Hahaha! I told you that you were no match for me, the mighty ChronoCreeper! The Creepz will continue their conquest of Arcadia, and there's nothing you can do about it. Enjoy your failure, little Guardian. Maybe next time, you'll learn not to mess with the big boys!",
             minNumberOfRounds: 4,
             maxNumberOfRounds: 7,
             challenges: [
@@ -173,8 +181,9 @@ const CanyonsRegion: Region = {
         {
             title: 'Sands of Time',
             startOnboarding:
-                'The player enters the Clockwork Canyons, facing time anomalies within a vast desert landscape filled with buried clockwork relics.',
-            endOnboarding: 'End onboarding',
+                "Congratulations, ChronoGuardian! You've successfully defeated the ChronoCreeper and foiled the Creepz's plans in the ChronoWoods. However, your journey is far from over. The Creepz have spread their influence to the Clockwork Canyons, a desolate region filled with mechanical contraptions and clockwork devices built by an ancient civilization. Our next destination is the Sands of Time, a vast desert landscape where time anomalies lie hidden among the buried clockwork relics. In this level, you will face a new challenge: the target zone will move and increase its speed with every successful tap. Stay focused and adapt to the changing environment. Good luck, ChronoGuardian!",
+            endOnboarding:
+                'Well done, ChronoGuardian! Your swift and precise actions have brought stability back to the Sands of Time. As we continue our journey through the Clockwork Canyons, more challenges and mysteries await. Remember to stay vigilant and adaptable, as the Creepz will not rest until they conquer all of Arcadia. I have faith in your abilities and trust that you will protect the land from their nefarious schemes.',
             minNumberOfRounds: 4,
             maxNumberOfRounds: 7,
         },
