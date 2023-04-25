@@ -126,17 +126,22 @@ export class Clock {
             const targetZoneSize = Phaser.Math.FloatBetween(this.targetZoneSizeRange[0], this.targetZoneSizeRange[1])
             this.targetZoneEndAngle = Phaser.Math.Wrap(this.targetZoneStartAngle + targetZoneSize, 0, Math.PI * 2)
 
-            // Ensure the angles are always positive
-            this.targetZoneStartAngle = Phaser.Math.Wrap(this.targetZoneStartAngle, 0, Math.PI * 2)
-            this.targetZoneEndAngle = Phaser.Math.Wrap(this.targetZoneEndAngle, 0, Math.PI * 2)
-
             if (this.targetZoneStartAngle > this.targetZoneEndAngle) {
                 console.log('SWAP')
-                this.targetZoneEndAngle += this.targetZoneStartAngle
+                continue
             }
 
             const minDistanceStart = Phaser.Math.Angle.ShortestBetween(handAngleRad, this.targetZoneStartAngle)
             const minDistanceEnd = Phaser.Math.Angle.ShortestBetween(handAngleRad, this.targetZoneEndAngle)
+
+            if (handAngleRad === 0 && minDistanceEnd >= Math.PI * 2) {
+                console.log(
+                    'CROSSED ZONE AND HAND',
+                    Phaser.Math.RadToDeg(minDistanceStart),
+                    Phaser.Math.RadToDeg(minDistanceEnd)
+                )
+                continue
+            }
 
             validTargetZone =
                 (minDistanceStart >= minDistanceRad && minDistanceEnd >= minDistanceRad) ||
@@ -145,15 +150,6 @@ export class Clock {
 
         this.drawTargetZone()
     }
-
-    // if (Phaser.Math.RadToDeg(this.targetZoneStartAngle) >= Phaser.Math.RadToDeg(this.targetZoneEndAngle)) {
-    //     this.targetZoneEndAngle += this.targetZoneStartAngle
-    //     console.log(
-    //         'MORE',
-    //         Phaser.Math.RadToDeg(this.targetZoneStartAngle),
-    //         Phaser.Math.RadToDeg(this.targetZoneEndAngle)
-    //     )
-    // }
 
     hideTargetZone() {
         this.targetZoneStartAngle = 0

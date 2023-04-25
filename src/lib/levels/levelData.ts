@@ -122,7 +122,7 @@ const WoodsRegion: Region = {
             maxNumberOfRounds: 30,
             challenges: [
                 Challenges.HandSpeedIncrease,
-                // Challenges.TargetZonePositionMove,
+                Challenges.TargetZonePositionMove,
                 Challenges.TargetZoneSizeDecrease,
             ],
             powerups: [Powerups.TimeSlowdown, Powerups.TimeFreeze],
