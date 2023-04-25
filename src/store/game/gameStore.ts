@@ -5,6 +5,7 @@ import { useStore } from 'effector-react'
 type GameUI = {
     points: number
     pointsTaken: number
+    roundsCompleted: number
     comboCounter: number
     missCounter: number
     lives?: number
@@ -27,6 +28,7 @@ export const gameStoreInitial = {
         points: 0,
         pointsTaken: 0,
         comboCounter: 0,
+        roundsCompleted: 0,
         missCounter: 0,
         isSuperCombo: false,
         isMiss: false,

@@ -146,6 +146,7 @@ export class MainScene extends Phaser.Scene {
             missCounter: this.missCounter,
             lives: this.lives,
             pointsTaken,
+            roundsCompleted: this.roundsCompleted,
         })
     }
 

@@ -1,6 +1,7 @@
 import { levelDataManager } from '@lib/levels/LevelDataManager'
 import { LIVES_PER_ROUND } from '@lib/levels/levelData'
 import { useGame } from '@store/game/gameStore'
+import cx from 'classnames'
 import { FC } from 'react'
 import s from './Background.module.scss'
 
@@ -10,7 +11,7 @@ function mapRange(value: number, inputMin: number, inputMax: number, outputMin: 
 
 export const Background: FC = () => {
     const {
-        gameUI: { lives = LIVES_PER_ROUND },
+        gameUI: { lives = LIVES_PER_ROUND, isMiss, roundsCompleted },
         isGameEnd,
     } = useGame()
 
@@ -35,7 +36,9 @@ export const Background: FC = () => {
                         opacity: isGameEnd && !isDead ? 0 : 1,
                     }}
                 >
-                    <img src={boss} />
+                    <div key={roundsCompleted} className={cx(s.inner, { [s.shake]: !isMiss })}>
+                        <img src={boss} className={s.bossImg} />
+                    </div>
                 </div>
             )}
         </>
