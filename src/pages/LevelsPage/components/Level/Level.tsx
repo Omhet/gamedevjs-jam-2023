@@ -40,9 +40,6 @@ export const Level: FC<LevelProps> = ({ data, isFullyBlocked }) => {
             </div>
             {isOpen && (completed || isBossLevel) ? (
                 <div className={cx(s.levelScoreContainer, { [s.left]: isBossLevel && !completed })}>
-                    {/* <div className={s.accuracy}>
-                        <span className={s.accuracyPercent}>todo% </span>Accuracy
-                    </div> */}
                     <div className={s.levelScore}>
                         <div>
                             {' '}
