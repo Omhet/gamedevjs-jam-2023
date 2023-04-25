@@ -67,8 +67,15 @@ export const GamePowerup: FC<GamePowerupProps> = (props) => {
 
     return (
         <button
-            className={cx(className, s.root, { [s.disabled]: !isEnabled, [s.empty]: isEmpty })}
-            style={{ backgroundImage: isEmpty ? '' : `url(${img})` }}
+            className={cx(className, s.root, {
+                [s.disabled]: !isEnabled,
+                [s.empty]: isEmpty,
+                [s.activated]: isActivated,
+            })}
+            style={{
+                backgroundImage: isEmpty ? '' : `url(${img})`,
+                opacity: isCooldownShown ? cooldownProgress.progress / 100 : 1,
+            }}
             disabled={!isEnabled}
             onClick={activate}
         >
@@ -76,10 +83,15 @@ export const GamePowerup: FC<GamePowerupProps> = (props) => {
                 className={s.progress}
                 value={isCooldownShown ? cooldownProgress.progress : activeProgress.progress}
                 strokeWidth={4}
+                counterClockwise
                 styles={{
                     ...buildStyles({
                         pathTransition: 'none',
-                        pathColor: isCooldownShown ? '#333' : isEmpty ? '#2e175ccc' : '#7e42ff',
+                        pathColor: isCooldownShown
+                            ? `rgba(126, 66, 255, ${cooldownProgress.progress / 100})`
+                            : isEmpty
+                            ? 'rgba(126, 66, 255, 0.8)'
+                            : 'rgba(126, 66, 255, 1)',
                         trailColor: 'transparent',
                         strokeLinecap: 'butt',
                     }),
