@@ -58,11 +58,18 @@ setGameScore.watch((newScore) => {
 })
 
 // Do end game stuff
-endGame.watch((isCompleted) => {
-    setCurrentLevelCompleted(isCompleted)
+endGame.watch(({ isLevelCompleted, withModal, isGiveUp = false }) => {
+    if (isGiveUp) {
+        setCurrentLevelScore(0)
+        rewriteCurrentLevelScore(0)
+    }
+
+    setCurrentLevelCompleted(isLevelCompleted)
     setGameStatus(GameStatus.End)
 
-    setTimeout(() => {
-        openGameEndModal()
-    }, 1000)
+    if (withModal) {
+        setTimeout(() => {
+            openGameEndModal()
+        }, 1000)
+    }
 })

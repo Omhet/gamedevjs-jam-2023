@@ -49,7 +49,13 @@ export const GameStartModal: FC = () => {
                         <Button className={cx(s.button, s.playBtn)} onClick={() => start()}>
                             Let&apos;s try
                         </Button>
-                        <Button onClick={() => closeModal()} to="/levels" type="tertiary">
+                        <Button
+                            onClick={() => {
+                                closeModal()
+                            }}
+                            to="/levels"
+                            type="tertiary"
+                        >
                             <Exit className={s.exit} />
                             <span>Back To Levels</span>
                         </Button>

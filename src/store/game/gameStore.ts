@@ -48,7 +48,7 @@ export const setGameUI = createEvent<GameUI>()
 export const resetGameData = createEvent()
 
 export const startGame = createEvent()
-export const endGame = createEvent<boolean>()
+export const endGame = createEvent<{ isLevelCompleted: boolean; withModal: boolean; isGiveUp?: boolean }>()
 
 export const loadGame = createEffect<number, void, void>()
 

@@ -1,5 +1,5 @@
 import { LIVES_PER_ROUND } from '@lib/levels/levelData'
-import { useGame } from '@store/game/gameStore'
+import { endGame, useGame } from '@store/game/gameStore'
 import { useLevels } from '@store/levels/levelsStore'
 import cx from 'classnames'
 import { FC } from 'react'
@@ -27,7 +27,14 @@ export const GameHeader: FC = () => {
                         <Timer className={s.live} key={index} />
                     ))}
                 </div>
-                <Button className={s.exitBtn} to="/levels" type="tertiary">
+                <Button
+                    onClick={() => {
+                        endGame({ isLevelCompleted: false, withModal: false, isGiveUp: true })
+                    }}
+                    className={s.exitBtn}
+                    to="/levels"
+                    type="tertiary"
+                >
                     <Exit className={s.exit} />
                     <span>Quit</span>
                 </Button>
