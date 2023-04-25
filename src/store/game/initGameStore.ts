@@ -60,8 +60,16 @@ setGameScore.watch((newScore) => {
 // Do end game stuff
 endGame.watch(({ isLevelCompleted, withModal, isGiveUp = false }) => {
     if (isGiveUp) {
-        setCurrentLevelScore(0)
-        rewriteCurrentLevelScore(0)
+        const { completed: oldCompleted } = currentLevelStore.getState()
+        if (!oldCompleted) {
+            setCurrentLevelCompleted(false)
+            setCurrentLevelScore(0)
+            rewriteCurrentLevelScore(0)
+        }
+
+        setGameStatus(GameStatus.End)
+
+        return
     }
 
     setCurrentLevelCompleted(isLevelCompleted)
