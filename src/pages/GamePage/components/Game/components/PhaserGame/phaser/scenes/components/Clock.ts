@@ -73,56 +73,34 @@ export class Clock {
     drawTargetZone(): void {
         const adjustedStartAngle = this.targetZoneStartAngle - Math.PI / 2
         const adjustedEndAngle = this.targetZoneEndAngle - Math.PI / 2
-        const angleDifference = Phaser.Math.Angle.Wrap(adjustedEndAngle - adjustedStartAngle)
 
         this.targetZoneGraphics.clear()
 
-        const drawArc = (startAngle: number, endAngle: number) => {
-            const subzonePercentages = [0.3, 0.15, 0.1]
-            const subzoneColors = [0x0e5a41, 0x168963, 0x0dab76]
+        const subzonePercentages = [0.3, 0.15, 0.1]
+        const subzoneColors = [0x0e5a41, 0x168963, 0x0dab76]
 
-            let currentAngle = startAngle
+        let currentAngle = adjustedStartAngle
 
-            const drawSubzone = (color: number, percentage: number) => {
-                const subzoneAngleDifference = (endAngle - startAngle) * percentage
-                const nextAngle = currentAngle + subzoneAngleDifference
+        const drawSubzone = (color: number, percentage: number) => {
+            const subzoneAngleDifference = (adjustedEndAngle - adjustedStartAngle) * percentage
+            const nextAngle = currentAngle + subzoneAngleDifference
 
-                this.targetZoneGraphics.fillStyle(color, 1)
-                this.targetZoneGraphics.beginPath()
-                this.targetZoneGraphics.moveTo(this.centerX, this.centerY)
-                this.targetZoneGraphics.arc(
-                    this.centerX,
-                    this.centerY,
-                    this.radius,
-                    currentAngle,
-                    nextAngle,
-                    false,
-                    0.01
-                )
-                this.targetZoneGraphics.closePath()
-                this.targetZoneGraphics.fillPath()
+            this.targetZoneGraphics.fillStyle(color, 1)
+            this.targetZoneGraphics.beginPath()
+            this.targetZoneGraphics.moveTo(this.centerX, this.centerY)
+            this.targetZoneGraphics.arc(this.centerX, this.centerY, this.radius, currentAngle, nextAngle, false, 0.01)
+            this.targetZoneGraphics.closePath()
+            this.targetZoneGraphics.fillPath()
 
-                currentAngle = nextAngle
-            }
-
-            for (let i = 0; i < subzonePercentages.length; i++) {
-                drawSubzone(subzoneColors[i], subzonePercentages[i])
-            }
-
-            for (let i = subzonePercentages.length - 2; i >= 0; i--) {
-                drawSubzone(subzoneColors[i], subzonePercentages[i])
-            }
+            currentAngle = nextAngle
         }
 
-        if (angleDifference <= Math.PI) {
-            drawArc(adjustedStartAngle, adjustedEndAngle)
-        } else {
-            const firstEndAngle = adjustedStartAngle + Math.PI
-            drawArc(adjustedStartAngle, firstEndAngle)
+        for (let i = 0; i < subzonePercentages.length; i++) {
+            drawSubzone(subzoneColors[i], subzonePercentages[i])
+        }
 
-            const secondStartAngle = firstEndAngle
-            const secondEndAngle = adjustedEndAngle
-            drawArc(secondStartAngle, secondEndAngle)
+        for (let i = subzonePercentages.length - 2; i >= 0; i--) {
+            drawSubzone(subzoneColors[i], subzonePercentages[i])
         }
     }
 
