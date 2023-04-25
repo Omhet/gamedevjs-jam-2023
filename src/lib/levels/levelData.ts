@@ -39,6 +39,7 @@ type Level = {
     title: string
     startOnboarding: string
     endOnboarding: string
+    endOnboardingLoose?: string
     initialHandSpeed?: number
     minNumberOfRounds: number
     maxNumberOfRounds: number
@@ -145,6 +146,7 @@ const WoodsRegion: Region = {
             title: 'Chrono Creeper',
             startOnboarding: 'First miniboss level',
             endOnboarding: 'End onboarding',
+            endOnboardingLoose: 'HAHAHA YOU LOST',
             minNumberOfRounds: 4,
             maxNumberOfRounds: 7,
             challenges: [

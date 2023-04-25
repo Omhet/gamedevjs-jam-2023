@@ -14,7 +14,7 @@ import { useMedia } from 'react-use'
 import { LevelModalHeader } from '../LevelModalHeader/LevelModalHeader'
 import s from './GameEndModal.module.scss'
 
-const looseLivesText =
+const endOnboardingLooseDefault =
     'ChronoGuardian, it seems the time anomaly was not fully stabilized this time. However, do not be disheartened, for the path of a guardian is filled with trials and tribulations. Your journey must continue, and as you face more challenges, your skills will grow. Keep persevering, and soon you will master the art of restoring balance to the lands of Arcadia. I believe in you.'
 
 export const GameEndModal: FC = () => {
@@ -24,7 +24,7 @@ export const GameEndModal: FC = () => {
     } = useGame()
     const { currentLevelScore, currentLevelNumber, globalScore } = useLevels()
     const nextLevel = useNextLevel()
-    const { title, endOnboarding, imgUrls, maxScore } = levelDataManager.getCurrentLevelData()
+    const { title, endOnboarding, endOnboardingLoose, imgUrls, maxScore } = levelDataManager.getCurrentLevelData()
 
     const isSmall = useMedia('(max-width: 1150px)')
     const isNextLevelButtonShown = nextLevel && nextLevel.isOpen
@@ -56,7 +56,7 @@ export const GameEndModal: FC = () => {
 
                     <div className={s.onboarding}>
                         <div className={s.name}>Sage</div>
-                        <div>{isLostLives ? looseLivesText : endOnboarding}</div>
+                        <div>{isLostLives ? endOnboardingLoose ?? endOnboardingLooseDefault : endOnboarding}</div>
                     </div>
 
                     <div className={s.buttonsContainer}>

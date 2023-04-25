@@ -13,6 +13,7 @@ export type LevelType = {
     initialHandSpeed?: number
     startOnboarding: string
     endOnboarding: string
+    endOnboardingLoose?: string
     minNumberOfRounds: number
     maxNumberOfRounds: number
     audio: HTMLAudioElement
