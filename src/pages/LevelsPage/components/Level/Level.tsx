@@ -13,19 +13,18 @@ export type LevelProps = {
 
 export const Level: FC<LevelProps> = ({ data, isFullyBlocked }) => {
     const { levels } = useLevels()
-    const { isOpen, score } = levels.find((lvl) => lvl.number === data.number) ?? {}
+    const { isOpen, score, completed } = levels.find((lvl) => lvl.number === data.number) ?? {}
 
     const history = useHistory()
 
     const handlePlayClick = () => {
         history.push(`/game?level=${data.number}`)
     }
+    const isBossLevel = Boolean(data.miniBoss)
 
-    const imgSrc = data.imgUrls.back
+    const imgSrc = completed && isBossLevel ? data.imgUrls.backEmpty : data.imgUrls.back
 
     const hasScore = score && score > 0
-
-    const isBossLevel = Boolean(data.miniBoss)
 
     return (
         <div
@@ -39,15 +38,22 @@ export const Level: FC<LevelProps> = ({ data, isFullyBlocked }) => {
                 <h3 className={s.titleText}>{data.title}</h3>
                 <div className={s.line} />
             </div>
-            {isOpen && hasScore ? (
-                <div className={s.levelScoreContainer}>
-                    <div className={s.accuracy}>
+            {isOpen && (completed || isBossLevel) ? (
+                <div className={cx(s.levelScoreContainer, { [s.left]: isBossLevel && !completed })}>
+                    {/* <div className={s.accuracy}>
                         <span className={s.accuracyPercent}>todo% </span>Accuracy
-                    </div>
+                    </div> */}
                     <div className={s.levelScore}>
-                        {score} / {data.maxScore}
+                        <div>
+                            {' '}
+                            {score} / {data.maxScore}
+                        </div>
+                        {isBossLevel && completed && <b className={s.defeated}>Boss Defeated</b>}
                     </div>
-                    <div style={{ width: `${Math.floor((score / data.maxScore) * 100)}%` }} className={s.progress} />
+                    <div
+                        style={{ width: `${Math.floor(((score ?? 0) / data.maxScore) * 100)}%` }}
+                        className={s.progress}
+                    />
                 </div>
             ) : null}
             {isOpen && (

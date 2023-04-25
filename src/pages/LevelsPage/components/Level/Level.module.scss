@@ -58,22 +58,37 @@
 }
 
 .levelScoreContainer {
-    margin: 0 auto;
-    background-color: var(--back-lighter-color);
-    width: 240rem;
+    margin: auto;
+    height: 100%;
+    width: 30%;
+    min-width: 240rem;
+    flex: 1;
+    background-color: rgba(25, 13, 51, 0.8);
+    backdrop-filter: blur(5px);
     min-height: 240rem;
     padding: 8rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+
+    &.left {
+        margin: 0 auto 0 0;
+    }
 }
 
 .levelScore {
+    text-align: center;
     margin: auto 0;
     font-size: 48rem;
     font-weight: 700;
     color: var(--accent1-color);
+}
+
+.defeated {
+    font-size: 24rem;
+    margin-bottom: auto;
+    color: var(--text-color);
 }
 
 .progress {
