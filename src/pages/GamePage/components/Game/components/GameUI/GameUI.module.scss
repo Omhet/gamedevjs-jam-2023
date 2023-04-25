@@ -10,6 +10,7 @@
     pointer-events: none;
     font-size: clamp(18rem, 0.75rem + 2vw, 48rem);
     font-weight: 500;
+    text-shadow: 0.1em 0.1em 0.2em var(--back-color);
 }
 
 .center {
@@ -17,7 +18,12 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    font-size: 80rem;
+    font-size: clamp(80rem, 10vw, 120rem);
+    font-weight: 400;
+}
+
+.points {
+    font-size: clamp(22rem, 5vw, 56rem);
 }
 
 .fadeInOut {

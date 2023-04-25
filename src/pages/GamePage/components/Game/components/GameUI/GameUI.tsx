@@ -31,7 +31,7 @@ export const GameUI: FC = () => {
         <div className={s.root}>
             {points > 0 && !isMiss && (
                 <RandomPositionWrapper key={points} className={s.fadeInOut}>
-                    <div>+{points}</div>
+                    <div className={s.points}>+{points}</div>
                     {comboCounter > 1 && (
                         <div key={comboCounter} className={s.fadeInOut}>
                             X{comboCounter} {isSuperCombo && <span>{getRandomWord()}</span>}
