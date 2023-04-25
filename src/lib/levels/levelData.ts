@@ -80,13 +80,13 @@ const Powerups = {
     TimeSlowdown: {
         type: 'TimeSlowdown',
         slowdownFactor: 0.5,
-        duration: 2000,
-        cooldown: 2000,
+        duration: 5000,
+        cooldown: 5000,
     },
     TimeFreeze: {
         type: 'TimeFreeze',
-        duration: 5000,
-        cooldown: 5000,
+        duration: 2000,
+        cooldown: 2000,
     },
 } as const
 
