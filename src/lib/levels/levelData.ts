@@ -55,6 +55,7 @@ type LevelsData = {
 }
 
 export const MAX_POINTS_PER_ROUND = 3
+export const MISS_POINTS_PER_ROUND = 3
 export const LIVES_PER_ROUND = 3
 export const SUPER_COMBO_MULTIPLIER = 2
 export const SLOWEST_HAND_SPEED = 0.001

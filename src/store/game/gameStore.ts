@@ -4,6 +4,7 @@ import { useStore } from 'effector-react'
 
 type GameUI = {
     points: number
+    pointsTaken: number
     comboCounter: number
     missCounter: number
     lives?: number
@@ -24,6 +25,7 @@ export const gameStoreInitial = {
     status: GameStatus.NotStarted,
     gameUI: {
         points: 0,
+        pointsTaken: 0,
         comboCounter: 0,
         missCounter: 0,
         isSuperCombo: false,

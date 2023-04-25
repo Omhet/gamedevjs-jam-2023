@@ -1,5 +1,10 @@
 import { LevelConfig, OnLevelEndsCallback, OnTapCallback } from '@app-types/game'
-import { LIVES_PER_ROUND, MAX_POINTS_PER_ROUND, SUPER_COMBO_MULTIPLIER } from '@lib/levels/levelData'
+import {
+    LIVES_PER_ROUND,
+    MAX_POINTS_PER_ROUND,
+    MISS_POINTS_PER_ROUND,
+    SUPER_COMBO_MULTIPLIER,
+} from '@lib/levels/levelData'
 import Phaser from 'phaser'
 import { ChallengeManager } from './components/ChallengeManager'
 import { Clock } from './components/Clock'
@@ -78,6 +83,7 @@ export class MainScene extends Phaser.Scene {
         let isSuperCombo = false
         let isMiss = false
         let isBonusRound = false
+        let pointsTaken = 0
 
         if (accuracy !== null) {
             this.comboCounter++
@@ -112,7 +118,8 @@ export class MainScene extends Phaser.Scene {
             }
         } else {
             console.log('Miss')
-            this.points = Math.max(0, this.points - MAX_POINTS_PER_ROUND)
+            pointsTaken = Math.min(MISS_POINTS_PER_ROUND, this.points)
+            this.points = Math.max(0, this.points - pointsTaken)
             this.comboCounter = 0
             this.missCounter++
             this.lives = Math.max(0, this.lives - 1)
@@ -138,6 +145,7 @@ export class MainScene extends Phaser.Scene {
             isBonusRound,
             missCounter: this.missCounter,
             lives: this.lives,
+            pointsTaken,
         })
     }
 

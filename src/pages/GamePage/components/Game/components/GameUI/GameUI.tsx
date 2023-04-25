@@ -23,7 +23,7 @@ function getRandomWord(): string {
 
 export const GameUI: FC = () => {
     const {
-        gameUI: { comboCounter, isSuperCombo, isMiss, missCounter, points },
+        gameUI: { comboCounter, isSuperCombo, isMiss, missCounter, points, pointsTaken },
         countdown,
     } = useGame()
 
@@ -42,7 +42,8 @@ export const GameUI: FC = () => {
 
             {isMiss && (
                 <RandomPositionWrapper key={missCounter} className={s.fadeInOut}>
-                    MISS
+                    <div>MISS</div>
+                    {pointsTaken > 0 && <div>-{pointsTaken}</div>}
                 </RandomPositionWrapper>
             )}
 
