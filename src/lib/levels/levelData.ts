@@ -103,15 +103,8 @@ const WoodsRegion: Region = {
                 'Young ChronoGuardian, welcome to the ChronoWoods. The mystical energies of these ancient trees have attracted time anomalies, disrupting the harmony of this once peaceful land. Our journey begins here, in the whispers of time. Stabilize the first time anomaly found in the woods and restore order to the forest. Remember, focus on the clock hand and tap with precision. Good luck!',
             endOnboarding:
                 'Well done, ChronoGuardian! You have successfully stabilized the time anomaly and brought tranquility back to this part of the woods. Your journey has only just begun, and many more challenges lie ahead. Continue to hone your skills and protect the lands of Arcadia from the Creepz forces. I have faith in your abilities.',
-            minNumberOfRounds: 1,
-            maxNumberOfRounds: 1,
-            initialHandSpeed: 0.004,
-            challenges: [
-                // Challenges.HandSpeedIncrease,
-                // Challenges.TargetZonePositionMove,
-                // Challenges.TargetZoneSizeDecrease,
-            ],
-            powerups: [Powerups.TimeSlowdown],
+            minNumberOfRounds: 3,
+            maxNumberOfRounds: 3,
         },
         {
             title: 'Ticking Thicket',
@@ -119,14 +112,9 @@ const WoodsRegion: Region = {
                 'ChronoGuardian, you have ventured deeper into the ChronoWoods and entered the Ticking Thicket. In this mysterious part of the forest, the trees have been warped by time anomalies, their movements distorted by these strange forces. As you face this new challenge, I bestow upon you a new ability: Time Slowdown. Use it wisely to navigate through the thicket and stabilize the time anomaly hidden within. To activate Time Slowdown, focus your energy and click the button on screen or press "1" key on your numpad. Remember, timing is crucial. Good luck on your journey!',
             endOnboarding:
                 'Congratulations, ChronoGuardian! You have triumphed over the Ticking Thicket and stabilized the time anomaly, restoring the natural flow of time to this enchanted grove. Your mastery of the Time Slowdown ability has proven invaluable in this endeavor. As you continue your quest through the lands of Arcadia, stay vigilant, for the Creepz forces grow stronger and more cunning with each challenge. Trust in your abilities, and the balance of time shall be preserved.',
-            minNumberOfRounds: 20,
-            maxNumberOfRounds: 30,
-            challenges: [
-                Challenges.HandSpeedIncrease,
-                Challenges.TargetZonePositionMove,
-                Challenges.TargetZoneSizeDecrease,
-            ],
-            powerups: [Powerups.TimeSlowdown, Powerups.TimeFreeze],
+            minNumberOfRounds: 3,
+            maxNumberOfRounds: 6,
+            powerups: [Powerups.TimeSlowdown],
         },
         {
             title: 'Temporal Glade',
@@ -136,6 +124,13 @@ const WoodsRegion: Region = {
                 'Well done, ChronoGuardian! Your swift actions and unwavering focus have saved the ancient tree and stabilized the time anomalies in the Temporal Glade. The tree stands tall once again, a testament to your growing mastery over time itself. As you venture further into the lands of Arcadia, remember the lessons of the glade and face the ever-increasing challenges with courage and determination. The Creepz forces will not rest, and neither shall you, guardian of time!',
             minNumberOfRounds: 4,
             maxNumberOfRounds: 7,
+            challenges: [
+                {
+                    type: 'TargetZoneSizeDecrease',
+                    minTargetZoneSize: Math.PI / 8,
+                },
+            ],
+            powerups: [Powerups.TimeSlowdown],
         },
         {
             title: 'Enchanted Canopy',
@@ -145,8 +140,15 @@ const WoodsRegion: Region = {
                 'Splendid work, ChronoGuardian! Your unwavering determination has brought stability to the Enchanted Canopy. As you continue your journey, the challenges will become increasingly difficult, and I sense the presence of a formidable foe ahead: the Chrono Creeper. Be prepared for this confrontation, and let your skill and perseverance carry you through. Remember, your duty as a guardian of time is to restore harmony to the lands of Arcadia. Keep pressing forward, and let the wisdom of the ChronoWoods guide you.',
             endOnboardingLoose:
                 'ChronoGuardian, it appears that the time anomalies in the Enchanted Canopy have proven to be quite challenging, and you were not able to fully stabilize them this time. Remember, the path of a guardian is filled with trials and tribulations, and as the Chrono Creeper looms closer, it is crucial that you gather your strength and hone your skills. Do not lose heart, for your journey must continue. Face the challenges that lie ahead, and soon you will be ready to confront the formidable Chrono Creeper. I have faith in your abilities.',
-            minNumberOfRounds: 4,
-            maxNumberOfRounds: 7,
+            minNumberOfRounds: 3,
+            maxNumberOfRounds: 8,
+            challenges: [
+                {
+                    type: 'TargetZoneSizeDecrease',
+                    minTargetZoneSize: Math.PI / 10,
+                },
+            ],
+            powerups: [Powerups.TimeSlowdown],
         },
         {
             title: 'Chrono Creeper',
@@ -156,12 +158,14 @@ const WoodsRegion: Region = {
                 "Argh! No way! How could a puny little Guardian like you beat the amazing ChronoCreeper? The Creepz may have created me, but they won't stop coming. There are bigger, badder, and meaner Creepz out there just waiting to get their hands on you. Enjoy your victory while you can, because Arcadia is still far from safe!",
             endOnboardingLoose:
                 "Hahaha! I told you that you were no match for me, the mighty ChronoCreeper! The Creepz will continue their conquest of Arcadia, and there's nothing you can do about it. Enjoy your failure, little Guardian. Maybe next time, you'll learn not to mess with the big boys!",
-            minNumberOfRounds: 4,
-            maxNumberOfRounds: 7,
+            minNumberOfRounds: 7,
+            maxNumberOfRounds: 10,
+            initialHandSpeed: SLOWEST_HAND_SPEED * 1.2,
             challenges: [
-                // Challenges.HandSpeedIncrease,
-                // Challenges.TargetZonePositionMove,
-                // Challenges.TargetZoneSizeDecrease,
+                {
+                    type: 'TargetZoneSizeDecrease',
+                    minTargetZoneSize: Math.PI / 12,
+                },
             ],
             powerups: [Powerups.TimeSlowdown],
             miniBoss: {
@@ -185,38 +189,114 @@ const CanyonsRegion: Region = {
             endOnboarding:
                 'Well done, ChronoGuardian! Your swift and precise actions have brought stability back to the Sands of Time. As we continue our journey through the Clockwork Canyons, more challenges and mysteries await. Remember to stay vigilant and adaptable, as the Creepz will not rest until they conquer all of Arcadia. I have faith in your abilities and trust that you will protect the land from their nefarious schemes.',
             minNumberOfRounds: 4,
-            maxNumberOfRounds: 7,
+            maxNumberOfRounds: 6,
+            challenges: [
+                {
+                    type: 'TargetZoneSizeDecrease',
+                    minTargetZoneSize: Math.PI / 12,
+                },
+                {
+                    type: 'TargetZonePositionMove',
+                    minTargetZoneSpeed: 0.0002,
+                    maxTargetZoneSpeed: 0.0005,
+                },
+            ],
+            powerups: [Powerups.TimeSlowdown],
         },
         {
             title: 'Gear Gorge',
             startOnboarding:
                 'The player traverses a deep gorge lined with functioning clockwork mechanisms, some of which trigger additional time anomalies.',
             endOnboarding: 'End onboarding',
-            minNumberOfRounds: 4,
-            maxNumberOfRounds: 7,
+            minNumberOfRounds: 6,
+            maxNumberOfRounds: 8,
+            initialHandSpeed: SLOWEST_HAND_SPEED * 1.2,
+            challenges: [
+                {
+                    type: 'TargetZoneSizeDecrease',
+                    minTargetZoneSize: Math.PI / 12,
+                },
+                {
+                    type: 'TargetZonePositionMove',
+                    minTargetZoneSpeed: 0.0002,
+                    maxTargetZoneSpeed: 0.0005,
+                },
+            ],
+            powerups: [Powerups.TimeSlowdown, Powerups.TimeFreeze],
         },
         {
             title: 'Winding Ravine',
             startOnboarding:
                 'In a serene glade, the player discovers a massive, ancient tree at the center of multiple time anomalies, requiring them to act quickly to save the tree.',
             endOnboarding: 'End onboarding',
-            minNumberOfRounds: 4,
+            minNumberOfRounds: 5,
             maxNumberOfRounds: 7,
+            challenges: [
+                {
+                    type: 'TargetZoneSizeDecrease',
+                    minTargetZoneSize: Math.PI / 12,
+                },
+                {
+                    type: 'TargetZonePositionMove',
+                    minTargetZoneSpeed: 0.0003,
+                    maxTargetZoneSpeed: 0.0007,
+                },
+                {
+                    type: 'HandSpeedIncrease',
+                    minHandSpeed: SLOWEST_HAND_SPEED,
+                    maxHandSpeed: SLOWEST_HAND_SPEED * 1.5,
+                },
+            ],
+            powerups: [Powerups.TimeSlowdown, Powerups.TimeFreeze],
         },
         {
             title: 'Cog Citadel',
             startOnboarding:
                 'The player climbs to the treetops and faces a series of anomalies high above the forest floor, where the magical energies are even more concentrated.',
             endOnboarding: 'End onboarding',
-            minNumberOfRounds: 4,
-            maxNumberOfRounds: 7,
+            minNumberOfRounds: 3,
+            maxNumberOfRounds: 8,
+            challenges: [
+                {
+                    type: 'TargetZoneSizeDecrease',
+                    minTargetZoneSize: Math.PI / 12,
+                },
+                {
+                    type: 'TargetZonePositionMove',
+                    minTargetZoneSpeed: 0.0002,
+                    maxTargetZoneSpeed: 0.0007,
+                },
+                {
+                    type: 'HandSpeedIncrease',
+                    minHandSpeed: SLOWEST_HAND_SPEED * 1.1,
+                    maxHandSpeed: SLOWEST_HAND_SPEED * 1.5,
+                },
+            ],
+            powerups: [Powerups.TimeSlowdown, Powerups.TimeFreeze],
         },
         {
             title: 'Clockroach',
             startOnboarding: 'Second miniboss level',
             endOnboarding: 'End onboarding',
-            minNumberOfRounds: 4,
-            maxNumberOfRounds: 7,
+            minNumberOfRounds: 10,
+            maxNumberOfRounds: 15,
+            challenges: [
+                {
+                    type: 'TargetZoneSizeDecrease',
+                    minTargetZoneSize: Math.PI / 14,
+                },
+                {
+                    type: 'TargetZonePositionMove',
+                    minTargetZoneSpeed: 0.0005,
+                    maxTargetZoneSpeed: 0.001,
+                },
+                {
+                    type: 'HandSpeedIncrease',
+                    minHandSpeed: SLOWEST_HAND_SPEED * 1.5,
+                    maxHandSpeed: SLOWEST_HAND_SPEED * 2,
+                },
+            ],
+            powerups: [Powerups.TimeSlowdown, Powerups.TimeFreeze],
             miniBoss: {
                 name: 'Clockroach',
                 description:
