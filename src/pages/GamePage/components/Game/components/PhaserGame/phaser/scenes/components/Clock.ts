@@ -2,12 +2,10 @@ import { LevelConfig } from '@app-types/game'
 import { SLOWEST_HAND_SPEED } from '@lib/levels/levelData'
 import Phaser from 'phaser'
 
-const clockFaceColor = 0x190d33
 const handColor = 0x7e42ff
 
 export class Clock {
     private scene: Phaser.Scene
-    private clockFace: Phaser.GameObjects.Arc
     private hand: Phaser.GameObjects.Rectangle
     private handRotationSpeed: number = 0
     private handRotationDirection: number = 1
@@ -36,7 +34,7 @@ export class Clock {
         this.radius = radius
         this.levelConfig = levelConfig
         this.scene = scene
-        this.clockFace = this.createClockFace()
+        this.createClockFace()
         this.hand = this.createHand()
 
         this.targetZoneGraphics = scene.add.graphics({
@@ -45,9 +43,12 @@ export class Clock {
         })
     }
 
-    private createClockFace(): Phaser.GameObjects.Arc {
-        const clockFace = this.scene.add.circle(this.centerX, this.centerY, this.radius, clockFaceColor)
-        return clockFace
+    private createClockFace(): void {
+        this.scene.add.circle(this.centerX, this.centerY, this.radius * 1.04, 0x150c26)
+        this.scene.add.circle(this.centerX, this.centerY, this.radius * 1.02, 0x5629b5)
+        this.scene.add.circle(this.centerX, this.centerY, this.radius, 0x130929)
+        this.scene.add.circle(this.centerX, this.centerY, this.radius * 0.96, 0x190d33)
+        this.scene.add.circle(this.centerX, this.centerY, this.radius * 0.3, 0x1d1038)
     }
 
     private calculateHandDimensions(): { width: number; height: number } {
@@ -61,6 +62,10 @@ export class Clock {
         const hand = this.scene.add.rectangle(this.centerX, this.centerY, width, height, handColor)
         hand.setOrigin(0.5, 1)
         hand.setDepth(1)
+
+        const circle = this.scene.add.circle(this.centerX, this.centerY, this.radius * 0.1, 0x7e42ff)
+        circle.setDepth(2)
+
         this.handRotationSpeed = this.levelConfig.initialHandSpeed ?? SLOWEST_HAND_SPEED
         return hand
     }
@@ -74,7 +79,7 @@ export class Clock {
 
         const drawArc = (startAngle: number, endAngle: number) => {
             const subzonePercentages = [0.3, 0.15, 0.1]
-            const subzoneColors = [0x64b918, 0x75dd18, 0x85f91e]
+            const subzoneColors = [0x0e5a41, 0x168963, 0x0dab76]
 
             let currentAngle = startAngle
 
