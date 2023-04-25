@@ -105,6 +105,7 @@ const WoodsRegion: Region = {
                 'Well done, ChronoGuardian! You have successfully stabilized the time anomaly and brought tranquility back to this part of the woods. Your journey has only just begun, and many more challenges lie ahead. Continue to hone your skills and protect the lands of Arcadia from the Creepz forces. I have faith in your abilities.',
             minNumberOfRounds: 1,
             maxNumberOfRounds: 1,
+            initialHandSpeed: 0.004,
             challenges: [
                 // Challenges.HandSpeedIncrease,
                 // Challenges.TargetZonePositionMove,
@@ -117,11 +118,11 @@ const WoodsRegion: Region = {
             startOnboarding:
                 'The player encounters an area where the trees themselves have become affected by the time anomalies, causing the entire thicket to move in strange ways.',
             endOnboarding: 'End onboarding',
-            minNumberOfRounds: 4,
-            maxNumberOfRounds: 7,
+            minNumberOfRounds: 20,
+            maxNumberOfRounds: 30,
             challenges: [
                 Challenges.HandSpeedIncrease,
-                Challenges.TargetZonePositionMove,
+                // Challenges.TargetZonePositionMove,
                 Challenges.TargetZoneSizeDecrease,
             ],
             powerups: [Powerups.TimeSlowdown, Powerups.TimeFreeze],

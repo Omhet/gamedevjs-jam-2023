@@ -71,37 +71,44 @@ export class Clock {
     }
 
     drawTargetZone(): void {
+        // const start = Math.PI * 1.5
+        // const end = Math.PI * 2.5
+        // const adjustedStartAngle = start - Math.PI / 2
+        // const adjustedEndAngle = end - Math.PI / 2
+
+        // console.log(Phaser.Math.RadToDeg(this.targetZoneStartAngle), Phaser.Math.RadToDeg(this.targetZoneEndAngle))
+        const subzoneColors = [0x0e5a41, 0x168963, 0x0dab76]
+
         const adjustedStartAngle = this.targetZoneStartAngle - Math.PI / 2
         const adjustedEndAngle = this.targetZoneEndAngle - Math.PI / 2
 
         this.targetZoneGraphics.clear()
 
-        const subzonePercentages = [0.3, 0.15, 0.1]
-        const subzoneColors = [0x0e5a41, 0x168963, 0x0dab76]
+        this.targetZoneGraphics.fillStyle(subzoneColors[0])
+        this.targetZoneGraphics.slice(
+            this.centerX,
+            this.centerY,
+            this.radius,
+            adjustedStartAngle,
+            adjustedEndAngle,
+            false
+        )
+        this.targetZoneGraphics.fillPath()
 
-        let currentAngle = adjustedStartAngle
+        const angleDifference = adjustedEndAngle - adjustedStartAngle
+        const newStartAngle = adjustedStartAngle + angleDifference * 0.3
+        const newEndAngle = adjustedEndAngle - angleDifference * 0.3
 
-        const drawSubzone = (color: number, percentage: number) => {
-            const subzoneAngleDifference = (adjustedEndAngle - adjustedStartAngle) * percentage
-            const nextAngle = currentAngle + subzoneAngleDifference
+        this.targetZoneGraphics.fillStyle(subzoneColors[1])
+        this.targetZoneGraphics.slice(this.centerX, this.centerY, this.radius, newStartAngle, newEndAngle, false)
+        this.targetZoneGraphics.fillPath()
 
-            this.targetZoneGraphics.fillStyle(color, 1)
-            this.targetZoneGraphics.beginPath()
-            this.targetZoneGraphics.moveTo(this.centerX, this.centerY)
-            this.targetZoneGraphics.arc(this.centerX, this.centerY, this.radius, currentAngle, nextAngle, false, 0.01)
-            this.targetZoneGraphics.closePath()
-            this.targetZoneGraphics.fillPath()
+        const newStartAngles = adjustedStartAngle + angleDifference * 0.45
+        const newEndAngles = adjustedEndAngle - angleDifference * 0.45
 
-            currentAngle = nextAngle
-        }
-
-        for (let i = 0; i < subzonePercentages.length; i++) {
-            drawSubzone(subzoneColors[i], subzonePercentages[i])
-        }
-
-        for (let i = subzonePercentages.length - 2; i >= 0; i--) {
-            drawSubzone(subzoneColors[i], subzonePercentages[i])
-        }
+        this.targetZoneGraphics.fillStyle(subzoneColors[2])
+        this.targetZoneGraphics.slice(this.centerX, this.centerY, this.radius, newStartAngles, newEndAngles, false)
+        this.targetZoneGraphics.fillPath()
     }
 
     generateNewTargetZone() {
@@ -119,6 +126,15 @@ export class Clock {
             const targetZoneSize = Phaser.Math.FloatBetween(this.targetZoneSizeRange[0], this.targetZoneSizeRange[1])
             this.targetZoneEndAngle = Phaser.Math.Wrap(this.targetZoneStartAngle + targetZoneSize, 0, Math.PI * 2)
 
+            // Ensure the angles are always positive
+            this.targetZoneStartAngle = Phaser.Math.Wrap(this.targetZoneStartAngle, 0, Math.PI * 2)
+            this.targetZoneEndAngle = Phaser.Math.Wrap(this.targetZoneEndAngle, 0, Math.PI * 2)
+
+            if (this.targetZoneStartAngle > this.targetZoneEndAngle) {
+                console.log('SWAP')
+                this.targetZoneEndAngle += this.targetZoneStartAngle
+            }
+
             const minDistanceStart = Phaser.Math.Angle.ShortestBetween(handAngleRad, this.targetZoneStartAngle)
             const minDistanceEnd = Phaser.Math.Angle.ShortestBetween(handAngleRad, this.targetZoneEndAngle)
 
@@ -129,6 +145,15 @@ export class Clock {
 
         this.drawTargetZone()
     }
+
+    // if (Phaser.Math.RadToDeg(this.targetZoneStartAngle) >= Phaser.Math.RadToDeg(this.targetZoneEndAngle)) {
+    //     this.targetZoneEndAngle += this.targetZoneStartAngle
+    //     console.log(
+    //         'MORE',
+    //         Phaser.Math.RadToDeg(this.targetZoneStartAngle),
+    //         Phaser.Math.RadToDeg(this.targetZoneEndAngle)
+    //     )
+    // }
 
     hideTargetZone() {
         this.targetZoneStartAngle = 0
@@ -226,6 +251,11 @@ export class Clock {
 
         this.targetZoneStartAngle = Phaser.Math.Wrap(targetZoneCenter - halfNewSize, 0, 2 * Math.PI)
         this.targetZoneEndAngle = Phaser.Math.Wrap(targetZoneCenter + halfNewSize, 0, 2 * Math.PI)
+
+        // Ensure the end angle is always greater than the start angle
+        if (this.targetZoneEndAngle < this.targetZoneStartAngle) {
+            this.targetZoneEndAngle += 2 * Math.PI
+        }
 
         this.drawTargetZone()
     }
