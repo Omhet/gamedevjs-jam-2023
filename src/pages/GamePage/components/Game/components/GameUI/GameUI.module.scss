@@ -1,15 +1,15 @@
 .root {
     position: fixed;
-    padding: 64rem;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
     width: 100%;
     z-index: 2;
-    font-size: 48rem;
-    color: white;
+    color: var(--text-color);
     pointer-events: none;
+    font-size: clamp(18rem, 0.75rem + 2vw, 48rem);
+    font-weight: 500;
 }
 
 .center {
@@ -22,31 +22,20 @@
 
 .fadeInOut {
     opacity: 0;
-    animation: fadeInOut 0.8s ease-in-out forwards;
+    animation: fadeInOut 1.5s ease-out forwards;
 }
 
 @keyframes fadeInOut {
     0% {
         opacity: 0;
+        transform: scale(1);
     }
     50% {
         opacity: 1;
+        transform: scale(1.5);
     }
     100% {
         opacity: 0;
-    }
-}
-
-.fadeIn {
-    opacity: 0;
-    animation: fadeIn 0.8s ease-in forwards;
-}
-
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
+        transform: scale(1);
     }
 }

@@ -1,7 +1,25 @@
 import { useGame } from '@store/game/gameStore'
-import cs from 'classnames'
 import { FC } from 'react'
 import s from './GameUI.module.scss'
+import RandomPositionWrapper from './RandomPosition'
+
+function getRandomWord(): string {
+    const words: string[] = [
+        'Awesome',
+        'Splendid',
+        'Incredible',
+        'Fantastic',
+        'Amazing',
+        'Marvelous',
+        'Stunning',
+        'Impressive',
+        'Superb',
+        'Astounding',
+    ]
+
+    const randomIndex: number = Math.floor(Math.random() * words.length)
+    return words[randomIndex]
+}
 
 export const GameUI: FC = () => {
     const {
@@ -12,23 +30,25 @@ export const GameUI: FC = () => {
     return (
         <div className={s.root}>
             {points > 0 && !isMiss && (
-                <div key={points}>
-                    <span className={s.fadeInOut}>+{points}</span>
-                </div>
+                <RandomPositionWrapper key={points} className={s.fadeInOut}>
+                    <div>+{points}</div>
+                    {comboCounter > 1 && (
+                        <div key={comboCounter} className={s.fadeInOut}>
+                            X{comboCounter} {isSuperCombo && <span>{getRandomWord()}</span>}
+                        </div>
+                    )}
+                </RandomPositionWrapper>
             )}
-            {comboCounter > 1 && (
-                <div key={comboCounter} className={s.fadeInOut}>
-                    X{comboCounter} {isSuperCombo && <span>SUPER COMBO</span>}
-                </div>
-            )}
+
             {isMiss && (
-                <div key={missCounter} className={s.fadeInOut}>
+                <RandomPositionWrapper key={missCounter} className={s.fadeInOut}>
                     MISS
-                </div>
+                </RandomPositionWrapper>
             )}
+
             {countdown && (
-                <div key={countdown} className={cs(s.fadeInOut, s.center)}>
-                    {countdown}
+                <div key={countdown} className={s.center}>
+                    <div className={s.fadeInOut}>{countdown}</div>
                 </div>
             )}
         </div>
