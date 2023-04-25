@@ -242,6 +242,7 @@ export const LEVELS = LEVELS_DATA.regions.flatMap((region, regionIndex) =>
         const imgPath = `/levels-assets/pics/${number}`
         const imgUrls = {
             back: `${imgPath}/back.jpg`,
+            backEmpty: rest.miniBoss ? `${imgPath}/back-empty.jpg` : undefined,
             character: rest.miniBoss ? `${imgPath}/character.png` : '/sage.png',
             powerups: {
                 TimeSlowdown: '/powerups/TimeSlowdown.jpg',

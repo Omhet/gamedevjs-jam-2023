@@ -2,6 +2,7 @@ import { PowerupType } from './levelData'
 
 type LevelImageTypes<T> = {
     back: T
+    backEmpty: T
     character: T
     powerups: Record<PowerupType, T>
 }
@@ -22,9 +23,10 @@ export class ImagesManager {
             throw Error('No images url for this level')
         }
 
-        const { back, character, powerups } = levelImageUrls
-        const [backImg, characterImg, TimeSlowdownImg, TimeFreezeImg] = await Promise.all([
+        const { back, backEmpty, character, powerups } = levelImageUrls
+        const [backImg, backEmptyImg, characterImg, TimeSlowdownImg, TimeFreezeImg] = await Promise.all([
             this.loadImage(back),
+            this.loadImage(backEmpty),
             this.loadImage(character),
             this.loadImage(powerups.TimeSlowdown),
             this.loadImage(powerups.TimeFreeze),
@@ -33,6 +35,7 @@ export class ImagesManager {
         return {
             back: backImg,
             character: characterImg,
+            backEmpty: backEmptyImg,
             powerups: {
                 TimeSlowdown: TimeSlowdownImg,
                 TimeFreeze: TimeFreezeImg,
@@ -51,6 +54,11 @@ export class ImagesManager {
     async loadImage(url: string): Promise<HTMLImageElement> {
         return new Promise((resolve, reject) => {
             const img = new Image()
+
+            if (!url) {
+                resolve(img)
+            }
+
             img.src = url
 
             img.onload = () => {

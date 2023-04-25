@@ -5,7 +5,7 @@
     bottom: 0;
     right: 0;
     width: 100%;
-    z-index: 2;
+    z-index: 100;
     color: var(--text-color);
     pointer-events: none;
     font-size: clamp(18rem, 0.75rem + 2vw, 48rem);
