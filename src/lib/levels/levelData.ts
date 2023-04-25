@@ -202,7 +202,7 @@ const CanyonsRegion: Region = {
             maxNumberOfRounds: 7,
         },
         {
-            title: 'Mighty Clockroach',
+            title: 'Clockroach',
             startOnboarding: 'Second miniboss level',
             endOnboarding: 'End onboarding',
             minNumberOfRounds: 4,
