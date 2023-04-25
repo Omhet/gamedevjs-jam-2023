@@ -9,5 +9,14 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    filter: blur(5px);
+    animation: blur 4s ease-out forwards;
+}
+
+@keyframes blur {
+    0% {
+        filter: blur(0px);
+    }
+    100% {
+        filter: blur(2px);
+    }
 }
