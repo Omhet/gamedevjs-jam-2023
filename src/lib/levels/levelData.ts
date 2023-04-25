@@ -185,7 +185,7 @@ const CanyonsRegion: Region = {
         {
             title: 'Sands of Time',
             startOnboarding:
-                "Congratulations, ChronoGuardian! You've successfully defeated the ChronoCreeper and foiled the Creepz's plans in the ChronoWoods. However, your journey is far from over. The Creepz have spread their influence to the Clockwork Canyons, a desolate region filled with mechanical contraptions and clockwork devices built by an ancient civilization. Our next destination is the Sands of Time, a vast desert landscape where time anomalies lie hidden among the buried clockwork relics. In this level, you will face a new challenge: the target zone will move and increase its speed with every successful tap. Stay focused and adapt to the changing environment. Good luck, ChronoGuardian!",
+                "ChronoGuardian, you've defeated the ChronoCreeper and halted the Creepz in the ChronoWoods. Yet, they've reached the Clockwork Canyons, an area filled with ancient clockwork relics. We now venture to the Sands of Time, where you'll face a new challenge: the moving target zone, which increases its speed with each successful tap. Stay focused and adaptable. Good luck!",
             endOnboarding:
                 'Well done, ChronoGuardian! Your swift and precise actions have brought stability back to the Sands of Time. As we continue our journey through the Clockwork Canyons, more challenges and mysteries await. Remember to stay vigilant and adaptable, as the Creepz will not rest until they conquer all of Arcadia. I have faith in your abilities and trust that you will protect the land from their nefarious schemes.',
             minNumberOfRounds: 4,
@@ -206,8 +206,9 @@ const CanyonsRegion: Region = {
         {
             title: 'Gear Gorge',
             startOnboarding:
-                'The player traverses a deep gorge lined with functioning clockwork mechanisms, some of which trigger additional time anomalies.',
-            endOnboarding: 'End onboarding',
+                'Brace yourself, ChronoGuardian, as we journey into Gear Gorge, where functional clockwork mechanisms line the walls. These gears, while impressive, may trigger additional time anomalies. But fear not, for you have gained a new power: Time Freeze. Activate with "2" key or click the button. This ability will briefly halt time, allowing you to better navigate the challenges ahead. Use it wisely and continue your mission to protect Arcadia.',
+            endOnboarding:
+                'Excellent work, ChronoGuardian! Your mastery of Time Freeze has proven invaluable in stabilizing the time anomalies within Gear Gorge. Your journey through the Clockwork Canyons continues, and the Creepz shall not prevail. With your growing skills and determination, I have no doubt that you will succeed in safeguarding Arcadia from their grasp.',
             minNumberOfRounds: 6,
             maxNumberOfRounds: 8,
             initialHandSpeed: SLOWEST_HAND_SPEED * 1.2,
@@ -227,8 +228,9 @@ const CanyonsRegion: Region = {
         {
             title: 'Winding Ravine',
             startOnboarding:
-                'In a serene glade, the player discovers a massive, ancient tree at the center of multiple time anomalies, requiring them to act quickly to save the tree.',
-            endOnboarding: 'End onboarding',
+                'ChronoGuardian, you now face the Winding Ravine, a narrow passage filled with wind-up creatures unleashed by the Creepz, causing chaos and time disruptions. As you progress, be aware of a new challenge: the clock hand speed will increase. Stay focused and adapt to this change to continue restoring balance to the Clockwork Canyons.',
+            endOnboarding:
+                "Well done, ChronoGuardian! You have skillfully navigated the Winding Ravine and adapted to the increasing clock hand speed. Your unwavering determination brings us closer to restoring peace in the Clockwork Canyons. Remember, the Creepz' plans will not succeed as long as you stand in their way. Keep pushing forward, and protect the lands of Arcadia.",
             minNumberOfRounds: 5,
             maxNumberOfRounds: 7,
             challenges: [
@@ -252,8 +254,9 @@ const CanyonsRegion: Region = {
         {
             title: 'Cog Citadel',
             startOnboarding:
-                'The player climbs to the treetops and faces a series of anomalies high above the forest floor, where the magical energies are even more concentrated.',
-            endOnboarding: 'End onboarding',
+                "ChronoGuardian, you now approach the Cog Citadel, an ancient clockwork fortress that the Creepz have overtaken. This fortress has become a major source of time anomalies in the region. Infiltrate the citadel and neutralize the time disruptions to weaken the Creepz' grip on the Clockwork Canyons. Stay vigilant and trust in your abilities.",
+            endOnboarding:
+                'Impressive work, ChronoGuardian! By neutralizing the time anomalies within the Cog Citadel, you have struck a significant blow against the Creepz in this region. However, be prepared for an even greater challenge ahead. The Creepz have reanimated a giant, mechanical insect called the Clockroach to protect their stronghold. You must defeat this fearsome adversary to secure the region and push the Creepz forces back. Your actions continue to protect the lands of Arcadia and keep them from falling into darkness. Be proud of your accomplishments and remember that your journey is far from over. I have faith in your abilities.',
             minNumberOfRounds: 3,
             maxNumberOfRounds: 8,
             challenges: [
@@ -276,8 +279,10 @@ const CanyonsRegion: Region = {
         },
         {
             title: 'Clockroach',
-            startOnboarding: 'Second miniboss level',
-            endOnboarding: 'End onboarding',
+            startOnboarding:
+                'ChronoGuardian... me protect... Creepz stronghold. You... no pass. Me... Clockroach. You... fight me... now.',
+            endOnboarding: 'Me... defeated. You... strong, ChronoGuardian... Me... go now.',
+            endOnboardingLoose: 'You... weak. Me... Clockroach... win. You... try again.',
             minNumberOfRounds: 10,
             maxNumberOfRounds: 15,
             challenges: [
