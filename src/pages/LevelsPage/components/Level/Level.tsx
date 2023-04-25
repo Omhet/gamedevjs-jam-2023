@@ -8,9 +8,10 @@ import s from './Level.module.scss'
 
 export type LevelProps = {
     data: LevelType
+    isFullyBlocked: boolean
 }
 
-export const Level: FC<LevelProps> = ({ data }) => {
+export const Level: FC<LevelProps> = ({ data, isFullyBlocked }) => {
     const { levels } = useLevels()
     const { isOpen, score } = levels.find((lvl) => lvl.number === data.number) ?? {}
 
@@ -24,12 +25,14 @@ export const Level: FC<LevelProps> = ({ data }) => {
 
     const hasScore = score && score > 0
 
+    const isBossLevel = Boolean(data.miniBoss)
+
     return (
         <div
             style={{
                 backgroundImage: `url(${imgSrc})`,
             }}
-            className={cx(s.root, { [s.closedLevel]: !isOpen, [s.boss]: Boolean(data.miniBoss) })}
+            className={cx(s.root, { [s.closedLevel]: !isOpen, [s.boss]: isBossLevel })}
         >
             <div className={s.title}>
                 <div className={s.line} />
@@ -52,7 +55,11 @@ export const Level: FC<LevelProps> = ({ data }) => {
                     {hasScore ? 'Play Again' : 'Play'}
                 </Button>
             )}
-            {!isOpen && <div className={s.blockedContainer}>Play previous levels to unblock</div>}
+            {!isOpen && (
+                <div className={cx(s.blockedContainer, { [s.full]: isBossLevel || isFullyBlocked })}>
+                    Play previous levels to unblock
+                </div>
+            )}
         </div>
     )
 }

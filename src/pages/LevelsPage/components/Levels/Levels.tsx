@@ -40,7 +40,7 @@ const RegionComponent: FC<{ region: Region; isFirst: boolean }> = ({ region, isF
             )}
             <div className={s.levels}>
                 {levels.map((levelData) => (
-                    <Level key={levelData.number} data={levelData} />
+                    <Level key={levelData.number} data={levelData} isFullyBlocked={isAllLevelsLocked} />
                 ))}
             </div>
         </div>

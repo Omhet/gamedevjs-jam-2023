@@ -50,8 +50,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex: 1;
-    padding: 8rem;
+    padding: 24rem;
+
+    &.full {
+        flex: 1;
+    }
 }
 
 .levelScoreContainer {
