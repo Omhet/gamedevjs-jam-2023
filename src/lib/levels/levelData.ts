@@ -114,6 +114,7 @@ const WoodsRegion: Region = {
                 'Congratulations, ChronoGuardian! You have triumphed over the Ticking Thicket and stabilized the time anomaly, restoring the natural flow of time to this enchanted grove. Your mastery of the Time Slowdown ability has proven invaluable in this endeavor. As you continue your quest through the lands of Arcadia, stay vigilant, for the Creepz forces grow stronger and more cunning with each challenge. Trust in your abilities, and the balance of time shall be preserved.',
             minNumberOfRounds: 3,
             maxNumberOfRounds: 6,
+            initialHandSpeed: SLOWEST_HAND_SPEED * 1.2,
             powerups: [Powerups.TimeSlowdown],
         },
         {
@@ -124,6 +125,7 @@ const WoodsRegion: Region = {
                 'Well done, ChronoGuardian! Your swift actions and unwavering focus have saved the ancient tree and stabilized the time anomalies in the Temporal Glade. The tree stands tall once again, a testament to your growing mastery over time itself. As you venture further into the lands of Arcadia, remember the lessons of the glade and face the ever-increasing challenges with courage and determination. The Creepz forces will not rest, and neither shall you, guardian of time!',
             minNumberOfRounds: 4,
             maxNumberOfRounds: 7,
+            initialHandSpeed: SLOWEST_HAND_SPEED * 1.2,
             challenges: [
                 {
                     type: 'TargetZoneSizeDecrease',
@@ -142,6 +144,7 @@ const WoodsRegion: Region = {
                 'ChronoGuardian, it appears that the time anomalies in the Enchanted Canopy have proven to be quite challenging, and you were not able to fully stabilize them this time. Remember, the path of a guardian is filled with trials and tribulations, and as the Chrono Creeper looms closer, it is crucial that you gather your strength and hone your skills. Do not lose heart, for your journey must continue. Face the challenges that lie ahead, and soon you will be ready to confront the formidable Chrono Creeper. I have faith in your abilities.',
             minNumberOfRounds: 3,
             maxNumberOfRounds: 8,
+            initialHandSpeed: SLOWEST_HAND_SPEED * 1.5,
             challenges: [
                 {
                     type: 'TargetZoneSizeDecrease',
@@ -160,11 +163,11 @@ const WoodsRegion: Region = {
                 "Hahaha! I told you that you were no match for me, the mighty ChronoCreeper! The Creepz will continue their conquest of Arcadia, and there's nothing you can do about it. Enjoy your failure, little Guardian. Maybe next time, you'll learn not to mess with the big boys!",
             minNumberOfRounds: 7,
             maxNumberOfRounds: 10,
-            initialHandSpeed: SLOWEST_HAND_SPEED * 1.2,
+            initialHandSpeed: SLOWEST_HAND_SPEED * 2,
             challenges: [
                 {
                     type: 'TargetZoneSizeDecrease',
-                    minTargetZoneSize: Math.PI / 12,
+                    minTargetZoneSize: Math.PI / 14,
                 },
             ],
             powerups: [Powerups.TimeSlowdown],
@@ -190,6 +193,7 @@ const CanyonsRegion: Region = {
                 'Well done, ChronoGuardian! Your swift and precise actions have brought stability back to the Sands of Time. As we continue our journey through the Clockwork Canyons, more challenges and mysteries await. Remember to stay vigilant and adaptable, as the Creepz will not rest until they conquer all of Arcadia. I have faith in your abilities and trust that you will protect the land from their nefarious schemes.',
             minNumberOfRounds: 4,
             maxNumberOfRounds: 6,
+            initialHandSpeed: SLOWEST_HAND_SPEED * 1.5,
             challenges: [
                 {
                     type: 'TargetZoneSizeDecrease',
@@ -197,8 +201,8 @@ const CanyonsRegion: Region = {
                 },
                 {
                     type: 'TargetZonePositionMove',
-                    minTargetZoneSpeed: 0.0002,
-                    maxTargetZoneSpeed: 0.0005,
+                    minTargetZoneSpeed: 0.0004,
+                    maxTargetZoneSpeed: 0.0007,
                 },
             ],
             powerups: [Powerups.TimeSlowdown],
@@ -211,16 +215,16 @@ const CanyonsRegion: Region = {
                 'Excellent work, ChronoGuardian! Your mastery of Time Freeze has proven invaluable in stabilizing the time anomalies within Gear Gorge. Your journey through the Clockwork Canyons continues, and the Creepz shall not prevail. With your growing skills and determination, I have no doubt that you will succeed in safeguarding Arcadia from their grasp.',
             minNumberOfRounds: 6,
             maxNumberOfRounds: 8,
-            initialHandSpeed: SLOWEST_HAND_SPEED * 1.2,
+            initialHandSpeed: SLOWEST_HAND_SPEED * 1.5,
             challenges: [
                 {
                     type: 'TargetZoneSizeDecrease',
-                    minTargetZoneSize: Math.PI / 12,
+                    minTargetZoneSize: Math.PI / 14,
                 },
                 {
                     type: 'TargetZonePositionMove',
-                    minTargetZoneSpeed: 0.0002,
-                    maxTargetZoneSpeed: 0.0005,
+                    minTargetZoneSpeed: 0.0005,
+                    maxTargetZoneSpeed: 0.0008,
                 },
             ],
             powerups: [Powerups.TimeSlowdown, Powerups.TimeFreeze],
@@ -236,17 +240,17 @@ const CanyonsRegion: Region = {
             challenges: [
                 {
                     type: 'TargetZoneSizeDecrease',
-                    minTargetZoneSize: Math.PI / 12,
+                    minTargetZoneSize: Math.PI / 14,
                 },
                 {
                     type: 'TargetZonePositionMove',
-                    minTargetZoneSpeed: 0.0003,
-                    maxTargetZoneSpeed: 0.0007,
+                    minTargetZoneSpeed: 0.0005,
+                    maxTargetZoneSpeed: 0.0008,
                 },
                 {
                     type: 'HandSpeedIncrease',
-                    minHandSpeed: SLOWEST_HAND_SPEED,
-                    maxHandSpeed: SLOWEST_HAND_SPEED * 1.5,
+                    minHandSpeed: SLOWEST_HAND_SPEED * 1.5,
+                    maxHandSpeed: SLOWEST_HAND_SPEED * 2,
                 },
             ],
             powerups: [Powerups.TimeSlowdown, Powerups.TimeFreeze],
@@ -262,17 +266,17 @@ const CanyonsRegion: Region = {
             challenges: [
                 {
                     type: 'TargetZoneSizeDecrease',
-                    minTargetZoneSize: Math.PI / 12,
+                    minTargetZoneSize: Math.PI / 14,
                 },
                 {
                     type: 'TargetZonePositionMove',
-                    minTargetZoneSpeed: 0.0002,
-                    maxTargetZoneSpeed: 0.0007,
+                    minTargetZoneSpeed: 0.0007,
+                    maxTargetZoneSpeed: 0.001,
                 },
                 {
                     type: 'HandSpeedIncrease',
-                    minHandSpeed: SLOWEST_HAND_SPEED * 1.1,
-                    maxHandSpeed: SLOWEST_HAND_SPEED * 1.5,
+                    minHandSpeed: SLOWEST_HAND_SPEED * 1.3,
+                    maxHandSpeed: SLOWEST_HAND_SPEED * 1.7,
                 },
             ],
             powerups: [Powerups.TimeSlowdown, Powerups.TimeFreeze],
@@ -288,17 +292,17 @@ const CanyonsRegion: Region = {
             challenges: [
                 {
                     type: 'TargetZoneSizeDecrease',
-                    minTargetZoneSize: Math.PI / 14,
+                    minTargetZoneSize: Math.PI / 16,
                 },
                 {
                     type: 'TargetZonePositionMove',
-                    minTargetZoneSpeed: 0.0005,
-                    maxTargetZoneSpeed: 0.001,
+                    minTargetZoneSpeed: 0.0008,
+                    maxTargetZoneSpeed: 0.003,
                 },
                 {
                     type: 'HandSpeedIncrease',
-                    minHandSpeed: SLOWEST_HAND_SPEED * 1.5,
-                    maxHandSpeed: SLOWEST_HAND_SPEED * 2,
+                    minHandSpeed: SLOWEST_HAND_SPEED * 1.8,
+                    maxHandSpeed: SLOWEST_HAND_SPEED * 2.2,
                 },
             ],
             powerups: [Powerups.TimeSlowdown, Powerups.TimeFreeze],
