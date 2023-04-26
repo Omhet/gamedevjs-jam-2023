@@ -1,6 +1,5 @@
 import { Loader } from '@components/Loader/Loader'
 import { useQuery } from '@hooks/index'
-import { levelDataManager } from '@lib/levels/LevelDataManager'
 import { Game } from '@pages/GamePage/components/Game/Game'
 import { closeModal } from '@store/modals/modalsStore'
 import { FC, useEffect } from 'react'
@@ -17,7 +16,7 @@ export const GamePage: FC = () => {
 
         return () => {
             closeModal()
-            levelDataManager.stopLevelMusic()
+            // levelDataManager.stopLevelMusic()
         }
     }, [level])
 

@@ -1,7 +1,7 @@
 import { groupBy } from 'utils/groupBy'
 import { uniqueByField } from 'utils/unique'
-import { AudioManager } from './AudioManager'
-import { ImagesManager, LevelImages, LevelImageUrls } from './ImagesManager'
+import { AudioManager, LevelSounds } from './AudioManager'
+import { ImagesManager, LevelImageUrls, LevelImages } from './ImagesManager'
 import { Challenge, LEVELS, Powerup, Region } from './levelData'
 
 export type LevelType = {
@@ -16,7 +16,7 @@ export type LevelType = {
     endOnboardingLoose?: string
     minNumberOfRounds: number
     maxNumberOfRounds: number
-    audio: HTMLAudioElement
+    audio: LevelSounds
     images: LevelImages
     imgUrls: LevelImageUrls
     region: Region
@@ -41,8 +41,8 @@ class LevelDataManager {
     async loadLevelData(levelNumber: number) {
         this.currentLevel = levelNumber
 
-        const requests: [Promise<HTMLAudioElement>, Promise<LevelImages>] = [
-            this.audioManager.loadLevelTrack(levelNumber),
+        const requests: [Promise<LevelSounds>, Promise<LevelImages>] = [
+            this.audioManager.loadGameSounds(),
             this.imagesManager.loadLevelImages(levelNumber),
         ]
 
@@ -65,17 +65,17 @@ class LevelDataManager {
         }
     }
 
-    getLevelMusic() {
-        return this.audioManager.getLevelTrack(this.currentLevel)
-    }
+    // getLevelMusic() {
+    //     return this.audioManager.getLevelTrack(this.currentLevel)
+    // }
 
-    playLevelMusic() {
-        this.audioManager.playLevelTrack(this.currentLevel)
-    }
+    // playLevelMusic() {
+    //     this.audioManager.playLevelTrack(this.currentLevel)
+    // }
 
-    stopLevelMusic() {
-        this.audioManager.stopLevelTrack(this.currentLevel)
-    }
+    // stopLevelMusic() {
+    //     this.audioManager.stopLevelTrack(this.currentLevel)
+    // }
 
     getAllLevels() {
         return this.levels

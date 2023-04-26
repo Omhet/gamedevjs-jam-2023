@@ -20,6 +20,9 @@ export const PhaserGame: FC<PhaserGameProps> = ({}) => {
     }
 
     const handleTap: OnTapCallback = ({ points, ...gameUI }) => {
+        if (gameUI.isSuccess) {
+            levelData.audio.success.play()
+        }
         setGameScore(points)
         setGameUI({ ...gameUI, points })
     }

@@ -21,6 +21,7 @@ type TapParams = {
     lives: number
     isSuperCombo: boolean
     isMiss: boolean
+    isSuccess: boolean
     isBonusRound: boolean
 }
 export type OnTapCallback = (params: TapParams) => void

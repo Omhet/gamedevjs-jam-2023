@@ -12,6 +12,7 @@ type GameUI = {
     lives?: number
     isSuperCombo: boolean
     isMiss: boolean
+    isSuccess: boolean
     isBonusRound: boolean
 }
 
@@ -34,6 +35,7 @@ export const gameStoreInitial = {
         missCounter: 0,
         isSuperCombo: false,
         isMiss: false,
+        isSuccess: false,
         isBonusRound: false,
     },
 }
