@@ -22,6 +22,12 @@ export const PhaserGame: FC<PhaserGameProps> = ({}) => {
     const handleTap: OnTapCallback = ({ points, ...gameUI }) => {
         if (gameUI.isSuccess) {
             levelData.audio.success?.play()
+            if (gameUI.comboCounter > 1) {
+                levelData.audio.combo?.play()
+                if (gameUI.isSuperCombo) {
+                    levelData.audio.superCombo?.play()
+                }
+            }
         } else if (gameUI.isMiss) {
             levelData.audio.miss?.play()
         }
