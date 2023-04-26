@@ -1,0 +1,13 @@
+.root {
+    background: url('/main-back.jpg');
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}

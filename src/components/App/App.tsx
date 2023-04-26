@@ -2,6 +2,7 @@ import { Modals } from '@components/Modals/Modals'
 import { AboutPage } from '@pages/AboutPage/AboutPage'
 import { GamePage } from '@pages/GamePage/GamePage'
 import { HowToPage } from '@pages/HowToPage/HowToPage'
+import { LeaderboardPage } from '@pages/LeaderboardPage/LeaderboardPage'
 import { LevelsPage } from '@pages/LevelsPage/LevelsPage'
 import { MainPage } from '@pages/MainPage/MainPage'
 import { NotFoundPage } from '@pages/NotFoundPage/NotFoundPage'
@@ -32,7 +33,7 @@ export const App: FC = () => {
                             <AboutPage />
                         </Route>
                         <Route exact path="/leaderboard">
-                            <GamePage />
+                            <LeaderboardPage />
                         </Route>
                         <Route>
                             <NotFoundPage />
