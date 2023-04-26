@@ -11,6 +11,7 @@ type LevelSoundTypes<T> = {
     startGame: T
     superCombo: T
     win: T
+    ost: T
 }
 
 export type LevelSoundUrls = LevelSoundTypes<string>
@@ -27,6 +28,7 @@ const soundUrls: LevelSoundUrls = {
     startGame: '/sounds/start-game.mp3',
     superCombo: '/sounds/super-combo.mp3',
     win: '/sounds/win.mp3',
+    ost: '/sounds/ost.mp3',
 }
 
 export class AudioManager {
@@ -41,6 +43,7 @@ export class AudioManager {
         startGame: null,
         superCombo: null,
         win: null,
+        ost: null,
     }
 
     constructor(public urls: string[]) {}
@@ -64,6 +67,7 @@ export class AudioManager {
             startGame,
             superCombo,
             win,
+            ost,
         ] = await this.loadSounds([
             soundUrls.success,
             soundUrls.miss,
@@ -75,6 +79,7 @@ export class AudioManager {
             soundUrls.startGame,
             soundUrls.superCombo,
             soundUrls.win,
+            soundUrls.ost,
         ])
 
         console.log('Audio loaded', soundUrls, success)
@@ -90,6 +95,7 @@ export class AudioManager {
             startGame,
             superCombo,
             win,
+            ost,
         }
     }
 

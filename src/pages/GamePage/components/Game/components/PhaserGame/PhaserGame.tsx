@@ -15,8 +15,9 @@ export const PhaserGame: FC<PhaserGameProps> = ({}) => {
     const gameRef = useRef<Phaser.Game>()
 
     const handleLevelEnds: OnLevelEndsCallback = ({ isDead }) => {
-        const isBoss = Boolean(levelData.miniBoss)
+        levelData.audio.ost?.stop()
 
+        const isBoss = Boolean(levelData.miniBoss)
         if (isDead) {
             levelData.audio.missDeath?.play()
             if (isBoss) {
@@ -82,6 +83,9 @@ export const PhaserGame: FC<PhaserGameProps> = ({}) => {
                 ;(gameRef.current.scene.getScene('MainScene') as MainScene).start()
                 clearInterval(timeout)
                 setGameCountdown(undefined)
+                levelData.audio.ost?.volume(0.75)
+                levelData.audio.ost?.play()
+
                 return
             }
             counter--
@@ -91,6 +95,13 @@ export const PhaserGame: FC<PhaserGameProps> = ({}) => {
             clearInterval(timeout)
         }
     }, [isGameInProgress])
+
+    useEffect(() => {
+        return () => {
+            levelData.audio.ost?.stop()
+            levelData.audio.countdown?.stop()
+        }
+    }, [])
 
     if (!levelData) {
         return <Redirect to="/" />
