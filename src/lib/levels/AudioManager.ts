@@ -2,6 +2,15 @@ import { Howl } from 'howler'
 
 type LevelSoundTypes<T> = {
     success: T
+    miss: T
+    missDeath: T
+    bossDeath: T
+    click: T
+    combo: T
+    countdown: T
+    startGame: T
+    superCombo: T
+    win: T
 }
 
 export type LevelSoundUrls = LevelSoundTypes<string>
@@ -9,11 +18,29 @@ export type LevelSounds = LevelSoundTypes<Howl>
 
 const soundUrls: LevelSoundUrls = {
     success: '/sounds/success.mp3',
+    miss: '/sounds/miss.mp3',
+    missDeath: '/sounds/miss-death.mp3',
+    bossDeath: '/sounds/boss-death.mp3',
+    click: '/sounds/click.mp3',
+    combo: '/sounds/combo.mp3',
+    countdown: '/sounds/countdown.mp3',
+    startGame: '/sounds/start-game.mp3',
+    superCombo: '/sounds/super-combo.mp3',
+    win: '/sounds/win.mp3',
 }
 
 export class AudioManager {
     sounds: LevelSoundTypes<null> = {
         success: null,
+        miss: null,
+        missDeath: null,
+        bossDeath: null,
+        click: null,
+        combo: null,
+        countdown: null,
+        startGame: null,
+        superCombo: null,
+        win: null,
     }
 
     constructor(public urls: string[]) {}
@@ -26,12 +53,43 @@ export class AudioManager {
     }
 
     async loadGameSounds(): Promise<LevelSounds> {
-        const [success] = await this.loadSounds([soundUrls.success])
+        const [
+            success,
+            miss,
+            missDeath,
+            bossDeath,
+            click,
+            combo,
+            countdown,
+            startGame,
+            superCombo,
+            win,
+        ] = await this.loadSounds([
+            soundUrls.success,
+            soundUrls.miss,
+            soundUrls.missDeath,
+            soundUrls.bossDeath,
+            soundUrls.click,
+            soundUrls.combo,
+            soundUrls.countdown,
+            soundUrls.startGame,
+            soundUrls.superCombo,
+            soundUrls.win,
+        ])
 
         console.log('Audio loaded', soundUrls, success)
 
         return {
             success,
+            miss,
+            missDeath,
+            bossDeath,
+            click,
+            combo,
+            countdown,
+            startGame,
+            superCombo,
+            win,
         }
     }
 
