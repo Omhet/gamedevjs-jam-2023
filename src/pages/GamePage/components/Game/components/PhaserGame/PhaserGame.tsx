@@ -15,7 +15,18 @@ export const PhaserGame: FC<PhaserGameProps> = ({}) => {
     const gameRef = useRef<Phaser.Game>()
 
     const handleLevelEnds: OnLevelEndsCallback = ({ isDead }) => {
-        const isCompleted = Boolean(levelData.miniBoss) ? !isDead : true
+        const isBoss = Boolean(levelData.miniBoss)
+
+        if (isDead) {
+            levelData.audio.missDeath?.play()
+            if (isBoss) {
+                levelData.audio.bossDeath?.play()
+            }
+        } else {
+            levelData.audio.win?.play()
+        }
+
+        const isCompleted = isBoss ? !isDead : true
         endGame({ isLevelCompleted: isCompleted, withModal: true })
     }
 
@@ -60,6 +71,9 @@ export const PhaserGame: FC<PhaserGameProps> = ({}) => {
         if (!isGameInProgress) {
             return
         }
+
+        levelData.audio.startGame?.play()
+        levelData.audio.countdown?.play()
 
         let counter = 3
         let timeout = setInterval(() => {
