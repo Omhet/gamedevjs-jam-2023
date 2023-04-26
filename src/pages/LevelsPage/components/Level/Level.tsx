@@ -19,6 +19,7 @@ export const Level: FC<LevelProps> = ({ data, isFullyBlocked }) => {
 
     const handlePlayClick = () => {
         history.push(`/game?level=${data.number}`)
+        window.location.reload()
     }
     const isBossLevel = Boolean(data.miniBoss)
 
