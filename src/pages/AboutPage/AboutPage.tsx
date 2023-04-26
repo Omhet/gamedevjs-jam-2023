@@ -40,13 +40,6 @@ export const AboutPage: FC = () => {
 
                             <li>
                                 <div className={s.accentTitle}>
-                                    Web3 by <TextLink to="https://game7.io/">Game7</TextLink>
-                                </div>
-                                TODO
-                            </li>
-
-                            <li>
-                                <div className={s.accentTitle}>
                                     Arcadians by <TextLink to="https://www.opgames.org/">OP Games</TextLink>, Overlord's
                                     Arena by{' '}
                                     <TextLink className={s.creepz} to="https://overlord.xyz/">
@@ -55,10 +48,6 @@ export const AboutPage: FC = () => {
                                     , Interoperability
                                 </div>
                                 This game whole story (read below) is inspired by Arcadia and Overlord lore.
-                                <br />
-                                Also it integrates Arcadia leaderboards API
-                                <br />
-                                TODO
                             </li>
                         </ul>
                     </p>
@@ -99,9 +88,9 @@ export const AboutPage: FC = () => {
                         <br />
                         <br />
                         <div className={s.accentTitle}>Music</div>
-                        FL Studio - Soundtracks
+                        AIVA - Soundtrack
                         <br />
-                        TODO - Game sounds
+                        Swish Swoosh, Zapsplat - Game sounds
                     </p>
                 </div>
             </WidthContainer>
